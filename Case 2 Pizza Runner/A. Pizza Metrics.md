@@ -171,6 +171,7 @@ GROUP BY FORMAT(DATEADD(DAY, 2, order_time) ,'dddd')
 
 
 Friday had a volume of 5 pizzas
+
 Monday had a volume of 8 pizzas
 Saturday had a volume of 3 pizzas
 Sunday had a volume of 2 pizzas
