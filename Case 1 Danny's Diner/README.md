@@ -148,7 +148,7 @@ WHERE Rn.rank = 1;
 | C           | ramen        |  3   |
 
 - Customer A and C's favourite item is ramen.
-- Customer B enjoys all items on the menu. He/she is a true foodie, sounds like me
+- Customer B enjoys all items on the menu.
 
 ***
 
