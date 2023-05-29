@@ -40,37 +40,29 @@ WHERE p.[Pickup Minutes] > 1
 ### 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
 
 ````sql
-WITH prep_time_cte AS
-(
-  SELECT 
-    c.order_id, 
-    COUNT(c.order_id) AS pizza_order, 
-    c.order_time, 
-    r.pickup_time, 
-    DATEDIFF(MINUTE, c.order_time, r.pickup_time) AS prep_time_minutes
-  FROM #customer_orders AS c
-  JOIN #runner_orders AS r
-    ON c.order_id = r.order_id
-  WHERE r.distance != 0
-  GROUP BY c.order_id, c.order_time, r.pickup_time
-)
+--Relationship between number of pizzas and how long the order takes to prepare
 
-SELECT 
-  pizza_order, 
-  AVG(prep_time_minutes) AS avg_prep_time_minutes
-FROM prep_time_cte
-WHERE prep_time_minutes > 1
-GROUP BY pizza_order;
+SELECT --R.order_id, 
+R.[Number of Pizzas Per Order], AVG(R.prep_time_minutes) AS [Average Prep time Minutes]
+FROM  
+(
+SELECT c.order_id, COUNT(c.order_id) AS [Number of Pizzas Per Order], c.order_time,
+r.pickup_time, DATEDIFF(MINUTE, c.order_time, r.pickup_time) AS prep_time_minutes
+FROM customer_orders AS c
+FULL JOIN runner_orders as r  
+ON c.order_id = r.order_id
+WHERE r.[distance in km] != 0
+GROUP BY c.order_id, c.order_time, r.pickup_time
+)R
+GROUP BY R.[Number of Pizzas Per Order]--, R.order_id
 ````
 
 **Answer:**
 
-![image](https://user-images.githubusercontent.com/81607668/129739816-05e3ba03-d3fe-4206-8557-869930a897d1.png)
-
-- On average, a single pizza order takes 12 minutes to prepare.
-- An order with 3 pizzas takes 30 minutes at an average of 10 minutes per pizza.
-- It takes 16 minutes to prepare an order with 2 pizzas which is 8 minutes per pizza — making 2 pizzas in a single order the ultimate efficiency rate.
-
+-  On Average an order with 1 pizza takes 12 minutes to prepare
+-  An order with 2 pizzas takes 21 minutes to prepare
+-  An order with 3 pizzas will take 30 minutes to prepare
+-  
 ### 4. Is there any relationship between the number of pizzas and how long the order takes to prepare?
 
 ````sql
