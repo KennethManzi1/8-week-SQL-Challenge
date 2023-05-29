@@ -20,31 +20,22 @@ GROUP BY DATEPART(WEEK, registration_date)
 ### 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 
 ````sql
-WITH time_taken_cte AS
+--Average Pick up time
+SELECT AVG(p.[Pickup Minutes]) AS [Average Pickup Minutes]
+FROM
 (
-  SELECT 
-    c.order_id, 
-    c.order_time, 
-    r.pickup_time, 
-    DATEDIFF(MINUTE, c.order_time, r.pickup_time) AS pickup_minutes
-  FROM #customer_orders AS c
-  JOIN #runner_orders AS r
-    ON c.order_id = r.order_id
-  WHERE r.distance != 0
-  GROUP BY c.order_id, c.order_time, r.pickup_time
-)
-
-SELECT 
-  AVG(pickup_minutes) AS avg_pickup_minutes
-FROM time_taken_cte
-WHERE pickup_minutes > 1;
+SELECT ro.runner_id, C.order_id, C.order_time, ro.pickup_time, DATEDIFF(MINUTE, c.order_time, ro.pickup_time) AS [Pickup Minutes]
+FROM runner_orders AS ro
+INNER JOIN customer_orders AS C ON  ro.order_id = c.order_id --We want to get the runners who picked up their orders in order to figure out how long it took them to get those orders on average in minutes.
+WHERE ro.[distance in km] != 0
+--GROUP BY ro.runner_id, ro.pickup_time, C.order_id, C.order_time
+)p
+WHERE p.[Pickup Minutes] > 1
 ````
 
 **Answer:**
 
-![image](https://user-images.githubusercontent.com/81607668/129739701-e94b75e9-7193-4cf3-8e77-3c76be8b638d.png)
-
-- The average time taken in minutes by runners to arrive at Pizza Runner HQ to pick up the order is 15 minutes.
+- The average time taken in minutes by runners to arrive at Pizza Runner HQ to pick up the order is 18 minutes.
 
 ### 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
 
