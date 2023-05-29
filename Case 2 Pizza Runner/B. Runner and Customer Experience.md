@@ -108,24 +108,22 @@ WHERE [duration in minutes] != 0
 ### 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
 
 ````sql
-SELECT 
-  r.runner_id, 
-  c.customer_id, 
-  c.order_id, 
-  COUNT(c.order_id) AS pizza_count, 
-  r.distance, (r.duration / 60) AS duration_hr , 
-  ROUND((r.distance/r.duration * 60), 2) AS avg_speed
-FROM #runner_orders AS r
-JOIN #customer_orders AS c
-  ON r.order_id = c.order_id
-WHERE distance != 0
-GROUP BY r.runner_id, c.customer_id, c.order_id, r.distance, r.duration
-ORDER BY c.order_id;
+SELECT d.*, ROUND((d.[distance in km]/d.[Duration in minutes]*60), 2) AS [Average Speed]
+FROM 
+(
+SELECT r.runner_id, c.customer_id, c.order_id, COUNT(c.order_id) AS [Number of Pizzas], r.[duration in minutes],
+r.[distance in km], (r.[duration in minutes]/60) AS [Duration Per Hour]
+FROM runner_orders AS r 
+INNER JOIN customer_orders as c 
+ON r.order_id = c.order_id
+WHERE r.[distance in km] ! = 0
+Group BY r.runner_id, c.customer_id, c.order_id, r.[distance in km], r.[duration in minutes]
+)d
+WHERE d.[distance in km] != 0 
+ORDER BY d.order_id
 ````
 
 **Answer:**
-
-![image](https://user-images.githubusercontent.com/81607668/129739931-54127037-0879-43bf-b53f-e4a1a6ebffeb.png)
 
 _(Average speed = Distance in km / Duration in hour)_
 - Runner 1’s average speed runs from 37.5km/h to 60km/h.
@@ -135,23 +133,18 @@ _(Average speed = Distance in km / Duration in hour)_
 ### 7. What is the successful delivery percentage for each runner?
 
 ````sql
-SELECT 
-  runner_id, 
-  ROUND(100 * SUM(
-    CASE WHEN distance = 0 THEN 0
-    ELSE 1 END) / COUNT(*), 0) AS success_perc
-FROM #runner_orders
-GROUP BY runner_id;
+SELECT runner_id,  ROUND(100 * SUM(
+  CASE WHEN [distance in km] = 0 THEN 0 ELSE 1 END)/COUNT(*), 0) AS success_perc
+FROM dbo.runner_orders
+--WHERE [distance in km] != 0
+GROUP BY runner_id
 ````
 
 **Answer:**
-
-![image](https://user-images.githubusercontent.com/81607668/129740007-021d78fb-ec32-46c0-98f2-9e8f1891baed.png)
 
 - Runner 1 has 100% successful delivery.
 - Runner 2 has 75% successful delivery.
 - Runner 3 has 50% successful delivery
 
-_(It’s not right to attribute successful delivery to runners as order cancellations are out of the runner’s control.)_
-
+-One issue is cancelled deliveries which the runner can't do anything about
 ***
