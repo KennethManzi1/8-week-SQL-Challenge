@@ -5,6 +5,7 @@
 ### 1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
 
 ````sql
+--Runner Sign ups 
 SELECT COUNT(runner_id) AS [Number of Runners signed up], DATEPART(WEEK, registration_date) AS [Registration Week]
 FROM dbo.runners
 GROUP BY DATEPART(WEEK, registration_date) 
