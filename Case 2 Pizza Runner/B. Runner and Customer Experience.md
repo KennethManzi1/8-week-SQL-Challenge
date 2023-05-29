@@ -5,19 +5,16 @@
 ### 1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
 
 ````sql
-SELECT 
-  DATEPART(WEEK, registration_date) AS registration_week,
-  COUNT(runner_id) AS runner_signup
-FROM runners
-GROUP BY DATEPART(WEEK, registration_date);
+SELECT COUNT(runner_id) AS [Number of Runners signed up], DATEPART(WEEK, registration_date) AS [Registration Week]
+FROM dbo.runners
+GROUP BY DATEPART(WEEK, registration_date) 
 ````
 
 **Answer:**
 
-![image](https://user-images.githubusercontent.com/81607668/129739658-a233932a-9f79-4280-a618-8bab6d3bd1f2.png)
-
-- On Week 1 of Jan 2021, 2 new runners signed up.
-- On Week 2 and 3 of Jan 2021, 1 new runner signed up.
+- Week 1: 1 runner registered
+- Week 2: 2 runners registered
+- Week 3: 1 Runner Registered
 
 ### 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
 
