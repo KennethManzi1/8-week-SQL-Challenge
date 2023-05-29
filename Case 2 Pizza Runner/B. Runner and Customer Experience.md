@@ -87,28 +87,21 @@ _ Customer 104 had an average distance of 10 km.
 
 ### 5. What was the difference between the longest and shortest delivery times for all orders?
 
-_Edit 08/10/21: Thanks to my reader, Ankush Taneja on Medium who caught my mistake. I've amended to the correct solution. Also, I was doing this case study using SQL Server few months ago, but I'm using PostgreSQL on SQLpad now so there could be a slight difference to the syntax._
 
-Firstly, I'm going to filter results with non-null duration first just to have a feel. You can skip this step and go straight to the answer.
 
 ````sql
-SELECT 
-  order_id, duration
-FROM #runner_orders
-WHERE duration not like ' ';
+--difference between the longest and shortest delivery times for all orders
+SELECT order_id, [duration in minutes]
+FROM runner_orders
+
+SELECT CAST(MAX([duration in minutes]) AS Numeric) - CAST(MIN([duration in minutes]) AS numeric) AS [Difference between Longest and Shortest Delivery Times]
+FROM runner_orders
+WHERE [duration in minutes] != 0
 ````
 
-<img width="269" alt="image" src="https://user-images.githubusercontent.com/81607668/136523519-98efb655-d144-496b-a946-42c1c5415403.png">
 
-```sql
-SELECT MAX(duration::NUMERIC) - MIN(duration::NUMERIC) AS delivery_time_difference
-FROM runner_orders2
-where duration not like ' ';
-```
 
 **Answer:**
-
-<img width="196" alt="image" src="https://user-images.githubusercontent.com/81607668/136523820-c4504a25-83f8-4236-b08e-37bf542caad0.png">
 
 - The difference between longest (40 minutes) and shortest (10 minutes) delivery time for all orders is 30 minutes.
 
