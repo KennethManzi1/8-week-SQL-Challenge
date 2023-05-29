@@ -146,5 +146,5 @@ GROUP BY runner_id
 - Runner 2 has 75% successful delivery.
 - Runner 3 has 50% successful delivery
 
--One issue is cancelled deliveries which the runner can't do anything about that as a runner may have a lower successful delivery but this could be because he/she may have had a cancelled delivery which is out of their control.
+One issue is cancelled deliveries which the runner can't do anything about that as a runner may have a lower successful delivery but this could be because he/she may have had a cancelled delivery which is out of their control.
 ***
