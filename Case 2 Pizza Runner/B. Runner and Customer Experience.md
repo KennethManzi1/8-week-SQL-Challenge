@@ -62,27 +62,28 @@ GROUP BY R.[Number of Pizzas Per Order]--, R.order_id
 -  On Average an order with 1 pizza takes 12 minutes to prepare
 -  An order with 2 pizzas takes 21 minutes to prepare
 -  An order with 3 pizzas will take 30 minutes to prepare
--  
-### 4. Is there any relationship between the number of pizzas and how long the order takes to prepare?
+
+
+### 4. What was the average distance travelled for each customer?
 
 ````sql
-SELECT 
-  c.customer_id, 
-  AVG(r.distance) AS avg_distance
-FROM #customer_orders AS c
-JOIN #runner_orders AS r
-  ON c.order_id = r.order_id
-WHERE r.duration != 0
-GROUP BY c.customer_id;
+--Average Distance 
+SELECT c.customer_id, AVG(r.[distance in km]) AS [Average Distance per customer]--, r.[duration in minutes]
+FROM customer_orders AS C
+LEFT JOIN runner_orders as r  
+ON c.order_id = r.order_id
+WHERE r.[distance in km] != 0
+GROUP BY c.customer_id--, r.[duration in minutes]
 ````
 
 **Answer:**
 
-![image](https://user-images.githubusercontent.com/81607668/129739847-5e338f4f-b42c-4531-9685-e2e822063183.png)
 
-_(Assuming that distance is calculated from Pizza Runner HQ to customer’s place)_
+_ Customer 104 had an average distance of 10 km.
+- Customer 102 had an average distance of 16.73 km.
+- Customer 105 had an average distance of 25 km.
+- Customer 103 had an average distance of 23.39 km.
 
-- Customer 104 stays the nearest to Pizza Runner HQ at average distance of 10km, whereas Customer 105 stays the furthest at 25km.
 
 ### 5. What was the difference between the longest and shortest delivery times for all orders?
 
