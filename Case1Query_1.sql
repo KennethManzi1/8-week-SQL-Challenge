@@ -192,7 +192,7 @@ ORDER BY sl.customer_id, sl.order_date
 
 --Bonus: Ranking the members
 
-SELECT R.* , CASE WHEN R.member = 'Y' THEN RANK() OVER(Partition BY R.customer_id ORDER BY R.order_date) 
+SELECT R.* , CASE WHEN R.member = 'Y' THEN RANK() OVER(Partition BY R.customer_id, R.member ORDER BY R.order_date) 
 WHEN R.Member = 'N' THEN NULL
 END AS ranking
 FROM
