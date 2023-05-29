@@ -7,6 +7,7 @@
 - [Entity Relationship Diagram](#entity-relationship-diagram)
 - [Case Study Questions](#case-study-questions)
 - Solution
+    - [A. Pizza Metrics](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/A.%20Pizza%20Metrics.md)
 
 
 
