@@ -251,6 +251,25 @@ LEFT JOIN menu AS mm
 WHERE s.order_date < m.join_date
 GROUP BY s.customer_id;
 
+
+--Question 9 SQL Query
+SELECT sales.customer_id, SUM(sales.Points)
+FROM 
+(
+SELECT sl.customer_id,mn.product_name, mn.price, sl.order_date, mb.join_date, 
+CASE WHEN product_name = 'sushi' THEN (price * (10*2))
+ELSE (Price * 10)
+END AS Points
+FROM dbo.sales AS sl
+LEFT JOIN dbo.menu AS mn ON sl.product_id = mn.product_id
+LEFT JOIN dbo.members mb ON sl.customer_id = mb.customer_id
+--WHERE sl.customer_id = 'C'
+--WHERE order_date < join_date
+--GROUP BY sl.customer_id, mn.product_name, mn.price, sl.order_date, mn.product_id
+)sales
+GROUP BY sales.customer_id
+ORDER BY sales.customer_id
+
 --Question 10 SQL query
 SELECT ss.customer_id, SUM(ss.points) AS [Total Points]
 FROM
