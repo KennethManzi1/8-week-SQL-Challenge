@@ -114,10 +114,14 @@ VALUES
    Customer C has a total of 360 points
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
     Customer A has a total of 1520 points
-    Customer B has a total of 940 points
+    Customer B has a total of 740 points
 */
 --SQL Queries to answer the Case study questions
-SELECT sl.customer_id, mn.product_name, mn.price, sl.order_date, mb.join_date, 
+--Question 9 SQL query
+SELECT sales.customer_id, SUM(sales.Points)
+FROM 
+(
+SELECT sl.customer_id,mn.product_name, mn.price, sl.order_date, mb.join_date, 
 CASE WHEN product_name = 'sushi' THEN (price * (10*2))
 ELSE (Price * 10)
 END AS Points
@@ -127,7 +131,9 @@ LEFT JOIN dbo.members mb ON sl.customer_id = mb.customer_id
 --WHERE sl.customer_id = 'C'
 --WHERE order_date < join_date
 --GROUP BY sl.customer_id, mn.product_name, mn.price, sl.order_date, mn.product_id
-ORDER BY sl.customer_id, sl.order_date
+)sales
+GROUP BY sales.customer_id
+ORDER BY sales.customer_id
 
 --Customer A total Amount
 SELECT SUM(mn.price)
@@ -162,7 +168,93 @@ WHERE sl.customer_id = 'A'
 --GROUP BY sl.customer_id, mn.product_name, mn.price, sl.order_date, mn.product_id
 --ORDER BY sl.customer_id, mn.product_id
 
+--Question 3 SQL Query
+SELECT c.customer_id, c.product_name
+FROM
+(
+SELECT customer_id, order_date, product_name,
+      ROW_NUMBER() OVER(PARTITION BY s.customer_id
+      ORDER BY s.order_date) AS rownum
+   FROM dbo.sales AS s
+   JOIN dbo.menu AS m
+      ON s.product_id = m.product_id
+)c
+WHERE c.rownum= 1
+GROUP BY c.customer_id, c.product_name;
+
+--Question 4 SQL query
+
+SELECT TOP 1 (COUNT(sl.product_id)) AS most_purchased, product_name
+FROM dbo.sales AS sl
+JOIN dbo.menu AS mn
+   ON sl.product_id = mn.product_id
+GROUP BY sl.product_id, product_name
+ORDER BY most_purchased DESC;
+
+--Question 5 SQL Query
+
+
+SELECT Rn.customer_id, Rn.product_name, Rn.order_count
+FROM 
+(
+   SELECT sl.customer_id, mn.product_name, COUNT(mn.product_id) AS order_count,
+      DENSE_RANK() OVER(PARTITION BY sl.customer_id
+      ORDER BY COUNT(sl.customer_id) DESC) AS rank
+   FROM dbo.menu AS mn
+   LEFT JOIN dbo.sales AS sl
+      ON mn.product_id = sl.product_id
+   GROUP BY sl.customer_id, mn.product_name
+)Rn
+WHERE Rn.rank = 1;
+-- Question 6 SQL Query
+SELECT Rr.customer_id, Rr.order_date, m2.product_name 
+FROM 
+(
+   SELECT s.customer_id, m.join_date, s.order_date, s.product_id,
+      DENSE_RANK() OVER(PARTITION BY s.customer_id
+      ORDER BY s.order_date) AS rank
+   FROM sales AS s
+   JOIN members AS m
+      ON s.customer_id = m.customer_id
+   WHERE s.order_date >= m.join_date
+)Rr
+JOIN menu AS m2
+   ON Rr.product_id = m2.product_id
+WHERE Rr.rank = 1;
+
+--Question 7 SQL
+
+SELECT Rr.customer_id, Rr.order_date, m2.product_name 
+FROM 
+(
+   SELECT s.customer_id, m.join_date, s.order_date, s.product_id,
+      DENSE_RANK() OVER(PARTITION BY s.customer_id
+      ORDER BY s.order_date) AS rank
+   FROM sales AS s
+   JOIN members AS m
+      ON s.customer_id = m.customer_id
+   WHERE s.order_date < m.join_date
+)Rr
+LEFT JOIN menu AS m2
+   ON Rr.product_id = m2.product_id
+WHERE Rr.rank = 1;
+
+--Question 8 SQL Query
+
+SELECT s.customer_id, COUNT(DISTINCT s.product_id) AS unique_menu_item, 
+   SUM(mm.price) AS total_sales
+FROM sales AS s
+LEFT JOIN members AS m
+   ON s.customer_id = m.customer_id
+LEFT JOIN menu AS mm
+   ON s.product_id = mm.product_id
+WHERE s.order_date < m.join_date
+GROUP BY s.customer_id;
+
 --Question 10 SQL query
+SELECT ss.customer_id, SUM(ss.points) AS [Total Points]
+FROM
+(
 SELECT sl.customer_id, mn.product_name, mn.price, sl.order_date, mb.join_date, 
 CASE WHEN join_date <= '2021-01-08' THEN (price * (10*2))
 WHEN join_date IS NULL THEN NULL
@@ -174,8 +266,10 @@ LEFT JOIN dbo.members mb ON sl.customer_id = mb.customer_id
 --WHERE sl.customer_id = 'A'
 --WHERE order_date < join_date
 --GROUP BY sl.customer_id, mn.product_name, mn.price, sl.order_date, mn.product_id
-ORDER BY sl.customer_id, sl.order_date
-
+--ORDER BY sl.customer_id, sl.order_date
+)ss
+GROUP BY ss.customer_id
+ORDER BY ss.customer_id
 --BONUS:  Determining Whether the customer is a Member 
 SELECT sl.customer_id, mn.product_name, mn.price, sl.order_date, mb.join_date, 
 CASE WHEN sl.order_date >= mb.join_date THEN 'Y'
