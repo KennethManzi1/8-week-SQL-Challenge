@@ -153,11 +153,17 @@ GROUP BY DATEPART(HOUR, order_time)
 **Answer:**
 
  hour 11 is 2 pizzas
+ 
  hour 13 is 3 pizzas
+ 
  hour 18 is 6 pizzas
+ 
  hour 19 is 1 pizza
+ 
  hour 21 is 3 pizzas
+ 
  hour 23 is 3 pizzas
+ 
 
 ### 10. What was the volume of orders for each day of the week?
 
@@ -173,8 +179,11 @@ GROUP BY FORMAT(DATEADD(DAY, 2, order_time) ,'dddd')
 Friday had a volume of 5 pizzas
 
 Monday had a volume of 8 pizzas
+
 Saturday had a volume of 3 pizzas
+
 Sunday had a volume of 2 pizzas
+
 
 ***Click [here] for solution for B. Runner and Customer Experience!
 
