@@ -3,11 +3,63 @@
 ## Solution - C. Ingredient Optimisation
 
 ### 1. What are the standard ingredients for each pizza?
+```sql
+--standard ingredients for each pizza?
+
+--Recreating the pizza_recipes table so that each table has pizza_id and its topping
+DROP table if exists dbo.pizza_recipes;
+
+CREATE TABLE dbo.pizza_recipes
+(
+  pizza_id int,
+  toppings int,
+  Topping_name nvarchar(150)
+);
+
+INSERT INTO dbo.pizza_recipes
+VALUES
+(1, 1, 'Bacon'),
+(1,2,  'BBQ Sauce'),
+(1,3 , 'Beef'),
+(1,4, 'Cheese'),
+(1,5, 'Chicken'),
+(1, 6, 'Mushrooms'),
+(1,8, 'Pepperoni'),
+(1,10, 'Salami'),
+(2,4, 'Cheese'),
+(2,6, 'Mushrooms'),
+(2,7, 'Onions'),
+(2,9, 'Peppers'),
+(2,11, 'Tomatoes'),
+(2,12, 'Tomato Sauce');
+
+
+
+
+--Code to get the ingredients 
+SELECT pizza.pizza_id, pizza.pizza_name, String_agg(topping_name,',') AS [Standard Ingredients]
+FROM 
+(
+SELECT reci.pizza_id, pname.pizza_name, topp.topping_name
+FROM pizza_recipes as reci
+INNER JOIN pizza_toppings AS topp
+ON reci.toppings = topping_id
+INNER JOIN pizza_names AS pname 
+ON reci.pizza_id = pname.pizza_id
+)pizza
+GROUP BY pizza.pizza_id, pizza.pizza_name
+
+```
+**Answer**
+- Meatlovers: Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami,Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami
+- Vegetarian: Cheese,Mushrooms,Onions,Peppers,Tomatoes,Tomato Sauce,Cheese,Mushrooms,Onions,Peppers,Tomatoes,Tomato Sauce
 
 ### 2. What was the most commonly added extra?
 
 ```sql
+--Most Commonly Added Extra
 
+--Creating an Extra topping CTE where we manipuate the toppings using Substrings For Extras.
 WITH Extra AS
 (
 SELECT pizza_id, topping_type, topping
