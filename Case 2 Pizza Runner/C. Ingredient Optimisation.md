@@ -28,9 +28,9 @@ GROUP BY E.Topping,  P.topping_name
 ```
 
 **Answer**
--The most commonly added topping was Bacon with 5.
--Cheese was next topping with 2.
--Chicken was the least commonly added with 1.
+- The most commonly added topping was Bacon with 5.
+- Cheese was next topping with 2.
+- Chicken was the least commonly added with 1.
 
 
 
