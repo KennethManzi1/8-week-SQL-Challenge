@@ -185,5 +185,5 @@ Saturday had a volume of 3 pizzas
 Sunday had a volume of 2 pizzas
 
 
-***Click [here][https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/B.%20Runner%20and%20Customer%20Experience.md] for solution for B. Runner and Customer Experience!
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/B.%20Runner%20and%20Customer%20Experience.md) for solution for B. Runner and Customer Experience!
 
