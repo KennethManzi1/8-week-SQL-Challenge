@@ -7,25 +7,29 @@
 ### 2. What was the most commonly added extra?
 
 ```sql
-WITH toppings_cte AS (
-SELECT
-  pizza_id,
-  REGEXP_SPLIT_TO_TABLE(toppings, '[,\s]+')::INTEGER AS topping_id
-FROM pizza_runner.pizza_recipes)
 
-SELECT 
-  t.topping_id, pt.topping_name, 
-  COUNT(t.topping_id) AS topping_count
-FROM toppings_cte t
-INNER JOIN pizza_runner.pizza_toppings pt
-  ON t.topping_id = pt.topping_id
-GROUP BY t.topping_id, pt.topping_name
-ORDER BY topping_count DESC;
+WITH Extra AS
+(
+SELECT pizza_id, topping_type, topping
+FROM 
+(
+  SELECT pizza_id, CAST(SUBSTRING(extras, 1, 1) AS INT) as [First Topping], CAST(SUBSTRING(extras,3,3) AS INT) AS [Second Topping]
+  FROM dbo.customer_orders
+  WHERE extras IS NOT NULL
+  )pizza
+  UNPIVOT (topping for topping_type in ([First Topping], [Second Topping])) as unpvt
+)
+
+SELECT E.Topping, p.topping_name, COUNT(E.topping) AS [Extra Topping Time]
+FROM Extra AS E
+INNER JOIN dbo.pizza_toppings p ON E.topping = p.topping_id
+GROUP BY E.Topping,  P.topping_name
+
 ```
 
 **Solution**
 
-<img width="582" alt="image" src="https://user-images.githubusercontent.com/81607668/138807557-08909e2e-8201-4e53-87b8-f927928292fb.png">
+
 
 ### 3. What was the most common exclusion?
 
