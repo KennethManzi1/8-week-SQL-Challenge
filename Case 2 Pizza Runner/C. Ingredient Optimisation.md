@@ -37,7 +37,7 @@ VALUES
 
 
 --Code to get the ingredients 
-SELECT pizza.pizza_id, pizza.pizza_name, String_agg(topping_name,',') AS [Standard Ingredients]
+SELECT pizza.pizza_id, pizza.pizza_name, String_agg(pizza.topping_name,',') AS [Standard Ingredients]
 FROM 
 (
 SELECT reci.pizza_id, pname.pizza_name, topp.topping_name
