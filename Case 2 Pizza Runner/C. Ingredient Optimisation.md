@@ -119,7 +119,6 @@ GROUP BY E.Topping,  p.topping_name
 - Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
 
 ```sql
-
 SELECT cust.customer_id, cust.pizza_id, pizz.pizza_name, cust.exclusions, cust.extras,
 CASE WHEN cust.pizza_id = 1 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers'
 WHEN cust.pizza_id = 1 AND (cust.exclusions = 4) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers - Exclude Cheese'
@@ -134,6 +133,8 @@ END AS [Order Item]
 FROM dbo.customer_orders AS cust 
 INNER JOIN dbo.pizza_names AS pizz 
 ON pizz.pizza_id = cust.pizza_id
+
+![Screen Shot 2023-06-01 at 10 58 29 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/4e586f49-ce6d-4cf4-8a2b-3fd9de7e44f7)
 
 ```
 
