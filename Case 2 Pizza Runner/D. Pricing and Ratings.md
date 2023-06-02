@@ -127,3 +127,33 @@ ORDER BY cus.customer_id
 
 ### 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
 
+
+```SQL
+---If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
+
+WITH total_cost AS (
+SELECT cus.order_id, pz.pizza_name, SUM(
+CASE WHEN pz.pizza_name = 'Meatlovers' THEN $12
+WHEN pz.pizza_name = 'Vegetarian' THEN $10
+END) AS [Cost of Pizza]
+FROM dbo.pizza_names as pz
+INNER JOIN dbo.customer_orders AS cus ON pz.pizza_id = cus.pizza_id
+GROUP BY cus.order_id, pz.pizza_name
+)
+
+
+SELECT prof.revenue, prof.[Total Cost when paid 0.3 per km],   prof.revenue - prof.[Total Cost when paid 0.3 per km] AS [Profit]
+FROM 
+(
+SELECT SUM(rn.[distance in km]) * 0.3 AS [Total Cost when paid 0.3 per km],
+SUM(tc.[Cost of Pizza]) AS revenue
+FROM total_cost AS tc 
+FULL JOIN dbo.runner_orders AS rn ON tc.order_id = rn.order_id
+WHERE rn.cancellation IS NULL
+)prof
+```
+
+**Solution:**
+
+![Screen Shot 2023-06-02 at 3 00 03 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/319e6e6f-b4fa-419a-bded-06aa471ae3f6)
+
