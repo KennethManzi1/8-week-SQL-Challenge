@@ -54,6 +54,12 @@ GROUP BY pizza.pizza_id, pizza.pizza_name
 - Meatlovers: Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami,Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami
 - Vegetarian: Cheese,Mushrooms,Onions,Peppers,Tomatoes,Tomato Sauce,Cheese,Mushrooms,Onions,Peppers,Tomatoes,Tomato Sauce
 
+
+![Screen Shot 2023-06-01 at 11 04 18 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e91df737-606c-44a3-816b-c5cd065d6c91)
+
+
+
+
 ### 2. What was the most commonly added extra?
 
 ```sql
