@@ -1,26 +1,13 @@
-# 🍕 Case Study #2 Pizza Runner
+# Case Study #2 Pizza Runner
 
-## Solution - C. Ingredient Optimisation
+## Solution - D. Pricing and Ratings
 
-### 1. What are the standard ingredients for each pizza?
+### 1. If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
 
 ### 2. What was the most commonly added extra?
 
 ```sql
-WITH toppings_cte AS (
-SELECT
-  pizza_id,
-  REGEXP_SPLIT_TO_TABLE(toppings, '[,\s]+')::INTEGER AS topping_id
-FROM pizza_runner.pizza_recipes)
 
-SELECT 
-  t.topping_id, pt.topping_name, 
-  COUNT(t.topping_id) AS topping_count
-FROM toppings_cte t
-INNER JOIN pizza_runner.pizza_toppings pt
-  ON t.topping_id = pt.topping_id
-GROUP BY t.topping_id, pt.topping_name
-ORDER BY topping_count DESC;
 ```
 
 **Solution**
