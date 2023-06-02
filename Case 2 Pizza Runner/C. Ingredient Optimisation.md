@@ -240,3 +240,7 @@ ORDER by [Total Number of Times a Topping Was Used] DESC
 
 ![Screen Shot 2023-06-01 at 11 22 42 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/44fc2b60-fa0a-4058-bc66-6db05c432dd5)
 
+
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/C.%20Ingredient%20Optimisation.md) for solution for D. Pricing and Ratings!
+
+
