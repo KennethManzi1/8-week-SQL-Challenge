@@ -205,3 +205,35 @@ ORDER BY record_id
 
 
 ### 6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+
+```sql
+WITH Ingredients_Toppings AS(
+SELECT cus.record_id, nm.pizza_name, pz.topping_name,
+CASE WHEN pz.toppings IN(
+    SELECT topping_id 
+    FROM extras 
+    WHERE cus.record_id = extras.record_Id
+)
+THEN 2
+ELSE 1
+END AS [Number of Times A Topping Was Used]
+FROM dbo.customer_orders AS cus
+INNER JOIN pizza_names AS nm on cus.pizza_id = nm.pizza_id
+INNER JOIN pizza_recipes AS pz ON  cus.pizza_id = pz.pizza_id
+INNER JOIN dbo.runner_orders as rn ON cus.order_id = rn.order_id
+WHERE pz.toppings NOT IN(
+  SELECT exclusions.topping_id
+  FROM exclusions
+  WHERE exclusions.record_id = cus.record_id AND rn.cancellation IS NULL
+)
+)
+
+SELECT topping_name, SUM([Number of TImes a Topping Was Used]) AS [Total Number of Times a Topping Was Used]
+FROM Ingredients_Toppings
+GROUP BY topping_name
+ORDER by [Total Number of Times a Topping Was Used] DESC
+
+```
+
+![Screen Shot 2023-06-01 at 11 22 42 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/44fc2b60-fa0a-4058-bc66-6db05c432dd5)
+
