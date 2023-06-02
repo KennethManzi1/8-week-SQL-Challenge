@@ -141,6 +141,7 @@ INNER JOIN dbo.pizza_names AS pizz
 ON pizz.pizza_id = cust.pizza_id
 
 ```
+**Solution**
 
 ![Screen Shot 2023-06-01 at 10 58 29 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/4e586f49-ce6d-4cf4-8a2b-3fd9de7e44f7)
 
@@ -200,6 +201,7 @@ GROUP BY record_id, pizza_name
 ORDER BY record_id
 
 ```
+**Solution**
 
 ![Screen Shot 2023-06-01 at 11 08 52 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/128c3ec4-c3c2-4f5d-a6df-ff071869d4d1)
 
@@ -234,6 +236,7 @@ GROUP BY topping_name
 ORDER by [Total Number of Times a Topping Was Used] DESC
 
 ```
+**Solution**
 
 ![Screen Shot 2023-06-01 at 11 22 42 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/44fc2b60-fa0a-4058-bc66-6db05c432dd5)
 
