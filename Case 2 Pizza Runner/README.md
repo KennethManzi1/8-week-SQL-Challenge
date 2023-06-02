@@ -72,6 +72,8 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 
 ### D. Pricing and Ratings
 
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/D.%20Pricing%20and%20Ratings.md)
+
 1. If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
 2. What if there was an additional $1 charge for any pizza extras?
 - Add cheese is $1 extra
