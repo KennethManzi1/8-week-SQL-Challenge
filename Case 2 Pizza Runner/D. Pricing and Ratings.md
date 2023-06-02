@@ -98,18 +98,32 @@ FROM dbo.ratings
 -  Average speed
 -  Total number of pizzas
 
+```SQL
+
+SELECT cus.customer_id, cus.order_id, rat.rating_value, cus.order_time, run.pickup_time, 
+DATEPART(minute,(run.pickup_time - cus.order_time)) AS [Time between order and pickup],
+run.[duration in minutes], ROUND(AVG((run.[distance in km]/run.[duration in minutes])*60),2) AS [Average Speed],
+COUNT(pizza_id) AS [Number of Pizzas]
+FROM dbo.customer_orders as cus
+LEFT JOIN dbo.ratings AS rat ON cus.order_id = rat.order_id
+LEFT JOIN dbo.runner_orders AS run ON cus.order_id = run.order_id
+WHERE run.cancellation IS NULL
+GROUP BY cus.customer_id, cus.order_id, rat.rating_value, cus.order_time, run.pickup_time, DATEPART(minute,(run.pickup_time - cus.order_time)),
+run.[duration in minutes]
+ORDER BY cus.customer_id
+
+
+
+
+```
+
+
 **Solution:**
 
 ![Screen Shot 2023-06-02 at 1 48 06 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/29996a72-6eb5-424d-99bb-10f107bfa76d)
 
 
 
-```SQL
-
-
-
-
-```
 
 ### 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
 
