@@ -89,11 +89,54 @@ GROUP BY E.Topping,  P.topping_name
 
 ### 3. What was the most common exclusion?
 
+```sql
+WITH Exclu AS
+(
+SELECT pizza_id, topping_type, topping
+FROM 
+(
+  SELECT pizza_id, CAST(SUBSTRING(exclusions, 1, 1) AS INT) as [First Exclusion], CAST(SUBSTRING(exclusions,3,3) AS INT) AS [Second Exclusion]
+  FROM dbo.customer_orders
+  WHERE exclusions IS NOT NULL
+  )pizza
+  UNPIVOT (topping for topping_type in ([First Exclusion], [Second Exclusion])) as unpvt
+)
+
+SELECT E.Topping, p.topping_name, COUNT(E.topping) AS [Exclusions Topping Time]
+FROM Exclu AS E
+INNER JOIN dbo.pizza_toppings p ON E.topping = p.topping_id
+GROUP BY E.Topping,  p.topping_name
+```
+**Answer**
+- The most commonly exclusion topping was cheese at 5.
+
+
+
 ### 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
 - Meat Lovers
 - Meat Lovers - Exclude Beef
 - Meat Lovers - Extra Bacon
 - Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+
+```sql
+
+SELECT cust.customer_id, cust.pizza_id, pizz.pizza_name, cust.exclusions, cust.extras,
+CASE WHEN cust.pizza_id = 1 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers'
+WHEN cust.pizza_id = 1 AND (cust.exclusions = 4) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers - Exclude Cheese'
+WHEN cust.pizza_id = 1 AND (cust.exclusions LIKE '%3%' or cust.exclusions = 3) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers - Exclude Beef'
+WHEN cust.pizza_id = 1 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras LIKE '%1%' or cust.extras = 1) THEN 'Meat Lovers - Extra Bacon'
+WHEN cust.pizza_id = 1 AND (cust.exclusions IN ('1, 4')) AND (cust.extras IN ('6, 9')) THEN ' Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers'
+WHEN cust.pizza_id = 1 AND (cust.exclusions IN ('2, 6')) AND (cust.extras IN ('1, 4')) THEN ' Meat Lovers - Exclude BBQ Sauce, Mushroom - Extra Bacon, Cheese'
+WHEN cust.pizza_id = 1 AND (cust.exclusions = 4 ) AND (cust.extras IN ('1, 5')) THEN ' Meat Lovers - Exclude Cheese - Extra Bacon, Chicken' 
+WHEN cust.pizza_id = 2 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Vegeterian'
+WHEN cust.pizza_id = 2 AND (cust.exclusions = 4) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Vegeterian - Exclude Cheese' 
+END AS [Order Item]
+FROM dbo.customer_orders AS cust 
+INNER JOIN dbo.pizza_names AS pizz 
+ON pizz.pizza_id = cust.pizza_id
+
+```
+
 
 ### 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 
