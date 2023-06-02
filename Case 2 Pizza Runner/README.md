@@ -9,6 +9,7 @@
 - Solution
     - [A. Pizza Metrics](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/A.%20Pizza%20Metrics.md)
     - [B. Runner and Customer Experience](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/B.%20Runner%20and%20Customer%20Experience.md)
+    - [C. Ingredient Optimisation](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/C.%20Ingredient%20Optimisation.md)
 
 
 
@@ -53,6 +54,8 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 7. What is the successful delivery percentage for each runner?
 
 ### C. Ingredient Optimisation
+
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/C.%20Ingredient%20Optimisation.md)
 
 1. What are the standard ingredients for each pizza?
 2. What was the most commonly added extra?
