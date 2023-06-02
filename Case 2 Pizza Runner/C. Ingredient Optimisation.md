@@ -134,10 +134,9 @@ FROM dbo.customer_orders AS cust
 INNER JOIN dbo.pizza_names AS pizz 
 ON pizz.pizza_id = cust.pizza_id
 
-![Screen Shot 2023-06-01 at 10 58 29 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/4e586f49-ce6d-4cf4-8a2b-3fd9de7e44f7)
-
 ```
 
+![Screen Shot 2023-06-01 at 10 58 29 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/4e586f49-ce6d-4cf4-8a2b-3fd9de7e44f7)
 
 
 ### 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
