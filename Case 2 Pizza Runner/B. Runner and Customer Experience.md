@@ -147,4 +147,8 @@ GROUP BY runner_id
 - Runner 3 has 50% successful delivery
 
 One issue is cancelled deliveries which the runner can't do anything about that as a runner may have a lower successful delivery but this could be because he/she may have had a cancelled delivery which is out of their control.
+
+
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/B.%20Runner%20and%20Customer%20Experience.md) for solution for C. Ingredient Optimization!
+
 ***
