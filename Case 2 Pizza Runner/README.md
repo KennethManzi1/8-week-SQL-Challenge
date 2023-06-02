@@ -190,6 +190,11 @@ SELECT cus.customer_id, pn.pizza_name,rec.Topping_name
 FROM dbo.customer_orders AS cus 
 LEFT JOIN dbo.pizza_names AS pn ON cus.pizza_id = pn.pizza_id
 LEFT JOIN dbo.pizza_recipes AS rec ON cus.pizza_id = rec.pizza_id
+WHERE pn.pizza_name = 'Supreme'
 ```
+**Solution:**
+
+![Screen Shot 2023-06-02 at 3 37 03 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/17e90723-804a-45c3-9460-02678a48fba1)
+
 
 ***
