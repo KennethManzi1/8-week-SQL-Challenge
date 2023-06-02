@@ -26,7 +26,7 @@ WHERE run.cancellation IS NULL
 ```
 
 **Answer:**
-
+- The runner has a total revenue of $174.00
 
 
 ### 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
