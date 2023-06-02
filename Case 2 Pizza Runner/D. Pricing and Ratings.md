@@ -54,6 +54,37 @@ WHERE rn.cancellation IS NULL
 
 
 ### 3. The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
+```SQL
+--Creating a table for additional ratings system that allows customers to rate their runner
+DROP TABLE IF EXISTS dbo.ratings;
+CREATE TABLE dbo.ratings
+("order_id" INT,
+"rating_value" INT);
+
+INSERT INTO ratings(
+  "order_id", "rating_value"
+)
+VALUES
+(1,3),
+(2,4),
+(3,5),
+(4,1),
+(5,1),
+(6,3),
+(7,4),
+(8,3),
+(9,2),
+(10,5);
+
+SELECT *
+FROM dbo.ratings
+
+```
+**Solution:**
+
+![Screen Shot 2023-06-02 at 1 45 58 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/a55ec671-98cc-4bf3-aa6c-3a68a4435619)
+
+
 
 ### 4. Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
 -  customer_id
@@ -66,6 +97,19 @@ WHERE rn.cancellation IS NULL
 -  Delivery duration
 -  Average speed
 -  Total number of pizzas
+
+**Solution:**
+
+![Screen Shot 2023-06-02 at 1 48 06 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/29996a72-6eb5-424d-99bb-10f107bfa76d)
+
+
+
+```SQL
+
+
+
+
+```
 
 ### 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
 
