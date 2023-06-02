@@ -136,6 +136,7 @@ INNER JOIN dbo.pizza_names AS pizz
 ON pizz.pizza_id = cust.pizza_id
 
 ```
+![Uploading Screen Shot 2023-06-01 at 10.58.29 PM.png…]()
 
 
 ### 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
