@@ -435,6 +435,7 @@ VALUES
 
 
 
+
 SELECT pizza.pizza_id, pizza.pizza_name, String_agg(pizza.topping_name,',') AS [Standard Ingredients]
 FROM 
 (
@@ -725,3 +726,97 @@ FROM total_cost AS tc
 FULL JOIN dbo.runner_orders AS rn ON tc.order_id = rn.order_id
 WHERE rn.cancellation IS NULL
 )prof
+
+--BONUS
+INSERT INTO dbo.pizza_names
+ ("pizza_id", "pizza_name")
+VALUES
+  (3, 'Supreme')
+
+  SELECT *
+  FROM dbo.pizza_names
+
+DROP TABLE IF EXISTS dbo.customer_orders;
+CREATE TABLE dbo.customer_orders (
+  "order_id" INTEGER,
+  "customer_id" INTEGER,
+  "pizza_id" INTEGER,
+  "exclusions" VARCHAR(4),
+  "extras" VARCHAR(4),
+  "order_time" DATETIME
+);
+
+INSERT INTO dbo.customer_orders
+  ("order_id", "customer_id", "pizza_id", "exclusions", "extras", "order_time")
+VALUES
+  ('1', '101', '1', NULL, NULL, '2020-01-01 18:05:02'),
+  ('2', '101', '1', NULL, NULL, '2020-01-01 19:00:52'),
+  ('3', '102', '1', NULL, NULL, '2020-01-02 23:51:23'),
+  ('3', '102', '2', NULL, NULL, '2020-01-02 23:51:23'),
+  ('3', '102', '3', NULL, NULL, '2020-01-02 23:51:23'),
+  ('4', '103', '1', '4', NULL, '2020-01-04 13:23:46'),
+  ('4', '103', '2', '4', NULL, '2020-01-04 13:23:46'),
+  ('4', '103', '3', '4', NULL, '2020-01-04 13:23:46'),
+  ('5', '104', '1', NULL, '1', '2020-01-08 21:00:29'),
+  ('6', '101', '2', NULL, NULL, '2020-01-08 21:03:13'),
+  ('6', '101', '3', NULL, NULL, '2020-01-08 21:03:13'),
+  ('7', '105', '2', NULL, '1', '2020-01-08 21:20:29'),
+  ('7', '105', '3', NULL, '1', '2020-01-08 21:20:29'),
+  ('8', '102', '1', NULL, NULL, '2020-01-09 23:54:33'),
+  ('9', '103', '1', '4', '1', '2020-01-10 11:22:59'),
+  ('9', '103', '3', '4', '5', '2020-01-10 11:22:59'),
+  ('10', '104', '1', NULL, NULL, '2020-01-11 18:34:49'),
+  ('10', '104', '1', '2', '1', '2020-01-11 18:34:49'),
+  ('10', '104', '3', '2', '4', '2020-01-11 18:34:49'),
+  ('10', '104', '1', '6', '1', '2020-01-11 18:34:49'),
+  ('10', '104', '3', '6', '4', '2020-01-11 18:34:49');
+
+
+ 
+
+  SELECT *
+  FROM dbo.customer_orders
+
+DROP table if exists dbo.pizza_recipes;
+
+CREATE TABLE dbo.pizza_recipes
+(
+  pizza_id int,
+  toppings int,
+  Topping_name nvarchar(150)
+);
+
+INSERT INTO dbo.pizza_recipes
+VALUES
+(1, 1, 'Bacon'),
+(1,2,  'BBQ Sauce'),
+(1,3 , 'Beef'),
+(1,4, 'Cheese'),
+(1,5, 'Chicken'),
+(1, 6, 'Mushrooms'),
+(1,8, 'Pepperoni'),
+(1,10, 'Salami'),
+(2,4, 'Cheese'),
+(2,6, 'Mushrooms'),
+(2,7, 'Onions'),
+(2,9, 'Peppers'),
+(2,11, 'Tomatoes'),
+(2,12, 'Tomato Sauce'),
+(3, 1,  'Bacon'),
+(3,2,  'BBQ Sauce'),
+(3,3 , 'Beef'),
+(3,4, 'Cheese'),
+(3,5, 'Chicken'),
+(3, 6, 'Mushrooms'),
+(3,7, 'Onions'),
+(3,8, 'Pepperoni'),
+(3,9, 'Peppers'),
+(3,10, 'Salami'),
+(2,11, 'Tomatoes'),
+(2,12, 'Tomato Sauce')
+
+SELECT cus.customer_id, pn.pizza_name,rec.Topping_name
+FROM dbo.customer_orders AS cus 
+INNER JOIN dbo.pizza_names AS pn ON cus.pizza_id = pn.pizza_id
+INNER JOIN dbo.pizza_recipes AS rec ON cus.pizza_id = rec.pizza_id
+WHERE pn.pizza_name = 'Supreme'
