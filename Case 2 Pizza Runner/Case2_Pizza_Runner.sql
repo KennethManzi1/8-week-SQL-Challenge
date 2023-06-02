@@ -93,7 +93,7 @@ VALUES
 DROP TABLE IF EXISTS dbo.pizza_names;
 CREATE TABLE dbo.pizza_names (
   "pizza_id" INTEGER,
-  "pizza_name" TEXT
+  "pizza_name" NVARCHAR(100)
 );
 INSERT INTO dbo.pizza_names
   ("pizza_id", "pizza_name")
@@ -106,7 +106,7 @@ VALUES
 DROP TABLE IF EXISTS pizza_recipes;
 CREATE TABLE pizza_recipes (
   "pizza_id" INTEGER,
-  "toppings" TEXT
+  "toppings" NVARCHAR(100)
 );
 INSERT INTO pizza_recipes
   ("pizza_id", "toppings")
@@ -119,7 +119,7 @@ VALUES
 DROP TABLE IF EXISTS pizza_toppings;
 CREATE TABLE pizza_toppings (
   "topping_id" INTEGER,
-  "topping_name" TEXT
+  "topping_name" NVARCHAR(100)
 );
 INSERT INTO pizza_toppings
   ("topping_id", "topping_name")
@@ -380,16 +380,348 @@ GROUP BY runner_id
 /*
 C. Ingredient Optimisation
 1. What are the standard ingredients for each pizza?
+    Meatlovers: Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami
+    Vegetarian: Cheese,Mushrooms,Onions,Peppers,Tomatoes,Tomato Sauce
+
 2. What was the most commonly added extra?
+    The most commonly added Extra Topping was Bacon 
+
 3. What was the most common exclusion?
+    The most commonly Exclusion Topping was Cheese.
+
 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
-5. Meat Lovers
-6. Meat Lovers - Exclude Beef
-7. Meat Lovers - Extra Bacon
-8. Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
-9. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
-10.For example: "Meat Lovers: 2xBacon, Beef, ... , Salami" What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+      Meat Lovers
+      Meat Lovers - Exclude Beef
+      Meat Lovers - Extra Bacon
+      Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
+    For example: "Meat Lovers: 2xBacon, Beef, ... , Salami" What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+
+6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+
 */
 
 --SQL Query to answer the Case study questions for C. Ingredient Optimisation
+--standard ingredients for each pizza?
 
+--Recreating the pizza_recipes table so that each table has pizza_id and its topping
+DROP table if exists dbo.pizza_recipes;
+
+CREATE TABLE dbo.pizza_recipes
+(
+  pizza_id int,
+  toppings int,
+  Topping_name nvarchar(150)
+);
+
+INSERT INTO dbo.pizza_recipes
+VALUES
+(1, 1, 'Bacon'),
+(1,2,  'BBQ Sauce'),
+(1,3 , 'Beef'),
+(1,4, 'Cheese'),
+(1,5, 'Chicken'),
+(1, 6, 'Mushrooms'),
+(1,8, 'Pepperoni'),
+(1,10, 'Salami'),
+(2,4, 'Cheese'),
+(2,6, 'Mushrooms'),
+(2,7, 'Onions'),
+(2,9, 'Peppers'),
+(2,11, 'Tomatoes'),
+(2,12, 'Tomato Sauce');
+
+
+
+
+
+SELECT pizza.pizza_id, pizza.pizza_name, String_agg(pizza.topping_name,',') AS [Standard Ingredients]
+FROM 
+(
+SELECT reci.pizza_id, pname.pizza_name, topp.topping_name
+FROM pizza_recipes as reci
+INNER JOIN pizza_toppings AS topp
+ON reci.toppings = topping_id
+INNER JOIN pizza_names AS pname 
+ON reci.pizza_id = pname.pizza_id
+)pizza
+GROUP BY pizza.pizza_id, pizza.pizza_name
+
+
+--Most Commonly Added Extra
+
+--Creating an Extra topping CTE where we manipuate the toppings using Substrings For Extras.
+
+WITH Extra AS
+(
+SELECT pizza_id, topping_type, topping
+FROM 
+(
+  SELECT pizza_id, CAST(SUBSTRING(extras, 1, 1) AS INT) as [First Topping], CAST(SUBSTRING(extras,3,3) AS INT) AS [Second Topping]
+  FROM dbo.customer_orders
+  WHERE extras IS NOT NULL
+  )pizza
+  UNPIVOT (topping for topping_type in ([First Topping], [Second Topping])) as unpvt
+)
+
+SELECT E.Topping, p.topping_name, COUNT(E.topping) AS [Extra Topping Time]
+FROM Extra AS E
+INNER JOIN dbo.pizza_toppings p ON E.topping = p.topping_id
+GROUP BY E.Topping,  P.topping_name
+
+--the most common exclusion
+
+--Creating an Exclu topping CTE where we manipuate the Toppings using Substrings for Exclusions.
+
+WITH Exclu AS
+(
+SELECT pizza_id, topping_type, topping
+FROM 
+(
+  SELECT pizza_id, CAST(SUBSTRING(exclusions, 1, 1) AS INT) as [First Exclusion], CAST(SUBSTRING(exclusions,3,3) AS INT) AS [Second Exclusion]
+  FROM dbo.customer_orders
+  WHERE exclusions IS NOT NULL
+  )pizza
+  UNPIVOT (topping for topping_type in ([First Exclusion], [Second Exclusion])) as unpvt
+)
+
+SELECT E.Topping, p.topping_name, COUNT(E.topping) AS [Exclusions Topping Time]
+FROM Exclu AS E
+INNER JOIN dbo.pizza_toppings p ON E.topping = p.topping_id
+GROUP BY E.Topping,  p.topping_name
+
+--Generate an order item for each record in the customers_orders table in the format of one of the following:
+      --Meat Lovers
+     -- Meat Lovers - Exclude Beef
+     -- Meat Lovers - Extra Bacon
+     -- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+
+SELECT cust.customer_id, cust.pizza_id, pizz.pizza_name, cust.exclusions, cust.extras,
+CASE WHEN cust.pizza_id = 1 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers'
+WHEN cust.pizza_id = 1 AND (cust.exclusions = 4) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers - Exclude Cheese'
+WHEN cust.pizza_id = 1 AND (cust.exclusions LIKE '%3%' or cust.exclusions = 3) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Meat Lovers - Exclude Beef'
+WHEN cust.pizza_id = 1 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras LIKE '%1%' or cust.extras = 1) THEN 'Meat Lovers - Extra Bacon'
+WHEN cust.pizza_id = 1 AND (cust.exclusions IN ('1, 4')) AND (cust.extras IN ('6, 9')) THEN ' Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers'
+WHEN cust.pizza_id = 1 AND (cust.exclusions IN ('2, 6')) AND (cust.extras IN ('1, 4')) THEN ' Meat Lovers - Exclude BBQ Sauce, Mushroom - Extra Bacon, Cheese'
+WHEN cust.pizza_id = 1 AND (cust.exclusions = 4 ) AND (cust.extras IN ('1, 5')) THEN ' Meat Lovers - Exclude Cheese - Extra Bacon, Chicken' 
+WHEN cust.pizza_id = 2 AND (cust.exclusions IS NULL or cust.exclusions = 0) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Vegeterian'
+WHEN cust.pizza_id = 2 AND (cust.exclusions = 4) AND (cust.extras IS NULL or cust.extras = 0) THEN 'Vegeterian - Exclude Cheese' 
+END AS [Order Item]
+FROM dbo.customer_orders AS cust 
+INNER JOIN dbo.pizza_names AS pizz 
+ON pizz.pizza_id = cust.pizza_id
+
+SELECT *
+FROM customer_orders
+
+--alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
+--Adding the record identifier
+ALTER TABLE dbo.customer_orders
+ADD record_id INT IDENTITY (1,1)
+--Creating Extras table
+DROP TABLE IF EXISTS dbo.extras;
+SELECT		
+      c.record_id,
+      TRIM(e.value) AS topping_id
+INTO dbo.extras
+FROM dbo.customer_orders as c
+	    CROSS APPLY string_split(c.extras, ',') as e;
+--Creating Exclusions table
+
+DROP TABLE IF EXISTS dbo.exclusions;
+SELECT c.record_id, TRIM(e.value) AS topping_id
+
+INTO dbo.exclusions
+FROM dbo.customer_orders as c
+	    CROSS APPLY string_split(c.exclusions, ',') as e;
+
+SELECT *
+FROM dbo.exclusions
+
+SELECT *
+FROM dbo.pizza_recipes
+
+--Quering for the ingredients and separating them by comma
+--Ingredients CTE to get the ingredients together had to first create a table for the exclusions and extras above
+WITH Ingredients AS(
+SELECT cus.record_id, nm.pizza_name, pz.topping_name,
+CASE WHEN pz.toppings IN(
+    SELECT topping_id 
+    FROM extras 
+    WHERE cus.record_id = extras.record_Id
+)
+THEN '2x' + pz.Topping_name
+ELSE pz.Topping_name END AS [Topping]
+FROM dbo.customer_orders AS cus
+INNER JOIN pizza_names AS nm on cus.pizza_id = nm.pizza_id
+INNER JOIN pizza_recipes AS pz ON  cus.pizza_id = pz.pizza_id
+WHERE pz.toppings NOT IN(
+  SELECT exclusions.topping_id
+  FROM exclusions
+  WHERE exclusions.record_id = cus.record_id
+)
+)
+
+SELECT record_id, CONCAT(pizza_name + ':' , String_AGG(topping, ',')) AS [Ingredients]
+FROM Ingredients
+GROUP BY record_id, pizza_name
+ORDER BY record_id
+
+--total quantity of each ingredient used in all delivered pizzas sorted by most frequent first
+
+--Manipulated the Ingredients CTE to check for frequent times a topping was used 
+WITH Ingredients_Toppings AS(
+SELECT cus.record_id, nm.pizza_name, pz.topping_name,
+CASE WHEN pz.toppings IN(
+    SELECT topping_id 
+    FROM extras 
+    WHERE cus.record_id = extras.record_Id
+)
+THEN 2
+ELSE 1
+END AS [Number of Times A Topping Was Used]
+FROM dbo.customer_orders AS cus
+INNER JOIN pizza_names AS nm on cus.pizza_id = nm.pizza_id
+INNER JOIN pizza_recipes AS pz ON  cus.pizza_id = pz.pizza_id
+INNER JOIN dbo.runner_orders as rn ON cus.order_id = rn.order_id
+WHERE pz.toppings NOT IN(
+  SELECT exclusions.topping_id
+  FROM exclusions
+  WHERE exclusions.record_id = cus.record_id AND rn.cancellation IS NULL
+)
+)
+
+SELECT topping_name, SUM([Number of TImes a Topping Was Used]) AS [Total Number of Times a Topping Was Used]
+FROM Ingredients_Toppings
+GROUP BY topping_name
+ORDER by [Total Number of Times a Topping Was Used] DESC
+
+/*
+D. Pricing and Ratings
+ ------ If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
+ ------ What if there was an additional $1 charge for any pizza extras?
+                  Add cheese is $1 extra
+ --------- The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, 
+          how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
+  --------- Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
+                customer_id
+                order_id
+                runner_id
+                rating
+                order_time
+                pickup_time
+                Time between order and pickup
+                Delivery duration
+                Average speed
+                Total number of pizzas
+   --------- If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled 
+             - how much money does Pizza Runner have left over after these deliveries?
+
+*/
+
+--SQL Query to answer the Case study questions for D. Pricing and Ratings
+
+-- Meat lovers pizza cost $12 and Vegetarian costs $10 and there wre no charges
+
+SELECT SUM(c.[Cost of Pizza]) AS total_revenue--, run.[duration in minutes] 
+FROM 
+(
+SELECT pizza_id, pizza_name,
+CASE WHEN pizza_name = 'Meatlovers' THEN $12
+WHEN pizza_name = 'Vegetarian' THEN $10
+END AS [Cost of Pizza]
+FROM dbo.pizza_names
+)c
+INNER JOIN customer_orders AS cust on c.pizza_id = cust.pizza_id
+INNER JOIN runner_orders AS run ON cust.order_id = run.order_id
+WHERE run.cancellation IS NULL
+--GROUP BY run.[duration in minutes]
+
+--- What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
+
+SELECT SUM(CASE WHEN rev.extras IS NULL THEN rev.[Cost of Pizza]
+WHEN extras = 1 THEN rev.[Cost of Pizza] + 1
+ELSE rev.[Cost of Pizza] + 2 END) AS total
+FROM 
+(
+SELECT nm.pizza_id, nm.pizza_name,
+CASE WHEN pizza_name = 'Meatlovers' THEN $12
+WHEN pizza_name = 'Vegetarian' THEN $10
+END AS [Cost of Pizza], cus.exclusions, cus.extras
+FROM dbo.pizza_names as nm
+INNER JOIN dbo.customer_orders as cus ON  nm.pizza_id = cus.pizza_id
+INNER JOIN dbo.runner_orders as rn ON cus.order_id = rn.order_id
+WHERE rn.cancellation IS NULL
+)rev 
+
+--Creating a table for additional ratings system that allows customers to rate their runner
+DROP TABLE IF EXISTS dbo.ratings;
+CREATE TABLE dbo.ratings
+("order_id" INT,
+"rating_value" INT);
+
+INSERT INTO ratings(
+  "order_id", "rating_value"
+)
+VALUES
+(1,3),
+(2,4),
+(3,5),
+(4,1),
+(5,1),
+(6,3),
+(7,4),
+(8,3),
+(9,2),
+(10,5);
+
+SELECT *
+FROM dbo.ratings
+/*
+Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
+                customer_id
+                order_id
+                runner_id
+                rating
+                order_time
+                pickup_time
+                Time between order and pickup
+                Delivery duration
+                Average speed
+                Total number of pizzas
+*/
+
+SELECT cus.customer_id, cus.order_id, rat.rating_value, cus.order_time, run.pickup_time, 
+DATEPART(minute,(run.pickup_time - cus.order_time)) AS [Time between order and pickup],
+run.[duration in minutes], ROUND(AVG((run.[distance in km]/run.[duration in minutes])*60),2) AS [Average Speed],
+COUNT(pizza_id) AS [Number of Pizzas]
+FROM dbo.customer_orders as cus
+LEFT JOIN dbo.ratings AS rat ON cus.order_id = rat.order_id
+LEFT JOIN dbo.runner_orders AS run ON cus.order_id = run.order_id
+WHERE run.cancellation IS NULL
+GROUP BY cus.customer_id, cus.order_id, rat.rating_value, cus.order_time, run.pickup_time, DATEPART(minute,(run.pickup_time - cus.order_time)),
+run.[duration in minutes]
+ORDER BY cus.customer_id
+
+---If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
+
+WITH total_cost AS (
+SELECT cus.order_id, pz.pizza_name, SUM(
+CASE WHEN pz.pizza_name = 'Meatlovers' THEN $12
+WHEN pz.pizza_name = 'Vegetarian' THEN $10
+END) AS [Cost of Pizza]
+FROM dbo.pizza_names as pz
+INNER JOIN dbo.customer_orders AS cus ON pz.pizza_id = cus.pizza_id
+GROUP BY cus.order_id, pz.pizza_name
+)
+
+
+SELECT prof.revenue, prof.[Total Cost when paid 0.3 per km],   prof.revenue - prof.[Total Cost when paid 0.3 per km] AS [Profit]
+FROM 
+(
+SELECT SUM(rn.[distance in km]) * 0.3 AS [Total Cost when paid 0.3 per km],
+SUM(tc.[Cost of Pizza]) AS revenue
+FROM total_cost AS tc 
+FULL JOIN dbo.runner_orders AS rn ON tc.order_id = rn.order_id
+WHERE rn.cancellation IS NULL
+)prof
