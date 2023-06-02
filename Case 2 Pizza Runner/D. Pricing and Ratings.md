@@ -8,6 +8,22 @@
 
 ```sql
 
+-- Meat lovers pizza cost $12 and Vegetarian costs $10 and there wre no charges
+
+SELECT SUM(c.[Cost of Pizza]) AS total_revenue--, run.[duration in minutes] 
+FROM 
+(
+SELECT pizza_id, pizza_name,
+CASE WHEN pizza_name = 'Meatlovers' THEN $12
+WHEN pizza_name = 'Vegetarian' THEN $10
+END AS [Cost of Pizza]
+FROM dbo.pizza_names
+)c
+INNER JOIN customer_orders AS cust on c.pizza_id = cust.pizza_id
+INNER JOIN runner_orders AS run ON cust.order_id = run.order_id
+WHERE run.cancellation IS NULL
+--GROUP BY run.[duration in minutes]
+
 ```
 
 **Solution**
