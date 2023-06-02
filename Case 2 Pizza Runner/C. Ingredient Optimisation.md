@@ -145,8 +145,63 @@ ON pizz.pizza_id = cust.pizza_id
 ![Screen Shot 2023-06-01 at 10 58 29 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/4e586f49-ce6d-4cf4-8a2b-3fd9de7e44f7)
 
 
-### 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
+### 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients. For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
 
-### 6. For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+```sql
+ALTER TABLE dbo.customer_orders
+ADD record_id INT IDENTITY (1,1)
+--Creating Extras table
+DROP TABLE IF EXISTS dbo.extras;
+SELECT		
+      c.record_id,
+      TRIM(e.value) AS topping_id
+INTO dbo.extras
+FROM dbo.customer_orders as c
+	    CROSS APPLY string_split(c.extras, ',') as e;
+--Creating Exclusions table
 
-### 7. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+DROP TABLE IF EXISTS dbo.exclusions;
+SELECT c.record_id, TRIM(e.value) AS topping_id
+
+INTO dbo.exclusions
+FROM dbo.customer_orders as c
+	    CROSS APPLY string_split(c.exclusions, ',') as e;
+
+SELECT *
+FROM dbo.exclusions
+
+SELECT *
+FROM dbo.pizza_recipes
+
+--Quering for the ingredients and separating them by comma
+--Ingredients CTE to get the ingredients together had to first create a table for the exclusions and extras above
+WITH Ingredients AS(
+SELECT cus.record_id, nm.pizza_name, pz.topping_name,
+CASE WHEN pz.toppings IN(
+    SELECT topping_id 
+    FROM extras 
+    WHERE cus.record_id = extras.record_Id
+)
+THEN '2x' + pz.Topping_name
+ELSE pz.Topping_name END AS [Topping]
+FROM dbo.customer_orders AS cus
+INNER JOIN pizza_names AS nm on cus.pizza_id = nm.pizza_id
+INNER JOIN pizza_recipes AS pz ON  cus.pizza_id = pz.pizza_id
+WHERE pz.toppings NOT IN(
+  SELECT exclusions.topping_id
+  FROM exclusions
+  WHERE exclusions.record_id = cus.record_id
+)
+)
+
+SELECT record_id, CONCAT(pizza_name + ':' , String_AGG(topping, ',')) AS [Ingredients]
+FROM Ingredients
+GROUP BY record_id, pizza_name
+ORDER BY record_id
+
+```
+
+![Screen Shot 2023-06-01 at 11 08 52 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/128c3ec4-c3c2-4f5d-a6df-ff071869d4d1)
+
+
+### 6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
