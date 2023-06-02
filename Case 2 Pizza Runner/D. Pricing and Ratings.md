@@ -32,11 +32,25 @@ WHERE run.cancellation IS NULL
 ### 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
 
 ```sql
+SELECT SUM(CASE WHEN rev.extras IS NULL THEN rev.[Cost of Pizza]
+WHEN extras = 1 THEN rev.[Cost of Pizza] + 1
+ELSE rev.[Cost of Pizza] + 2 END) AS total
+FROM 
+(
+SELECT nm.pizza_id, nm.pizza_name,
+CASE WHEN pizza_name = 'Meatlovers' THEN $12
+WHEN pizza_name = 'Vegetarian' THEN $10
+END AS [Cost of Pizza], cus.exclusions, cus.extras
+FROM dbo.pizza_names as nm
+INNER JOIN dbo.customer_orders as cus ON  nm.pizza_id = cus.pizza_id
+INNER JOIN dbo.runner_orders as rn ON cus.order_id = rn.order_id
+WHERE rn.cancellation IS NULL
+)rev 
 
 ```
 
 **Answer:**
-
+- With an additional $1 charge for any pizza extras and with cheese an additional $1, the runner has a total revenue of $182.00
 
 
 ### 3. The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
