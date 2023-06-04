@@ -5,7 +5,7 @@
 ## 📚 Table of Contents
 - [Business Task](#business-task)
 - [Entity Relationship Diagram](#entity-relationship-diagram)
-- [Question and Solution](#question-and-solution)
+- [Case Study Questions](#Case-Study-Questions)
 
 Please note that all the information regarding the case study has been sourced from the following link: [here](https://8weeksqlchallenge.com/case-study-3/). 
 
@@ -46,15 +46,10 @@ When customers churn, they will keep their access until the end of their current
 
 ***
 
-## Question and Solution
+## Case Study Questions
 
-Please join me in executing the queries using PostgreSQL on [DB Fiddle](https://www.db-fiddle.com/f/rHJhRrXy5hbVBNJ6F6b9gJ/16). It would be great to work together on the questions!
 
-Additionally, I have also published this case study on [Medium](https://medium.com/analytics-vidhya/8-week-sql-challenge-case-study-3-foodie-fi-3d8497376ea9?sk=579afc01c30aa6149d85050f8a46ddef).
-
-If you have any questions, reach out to me on [LinkedIn](https://www.linkedin.com/in/katiehuangx/).
-
-## 🎞️ A. Customer Journey
+## A. Customer Journey
 
 Based off the 8 sample customers provided in the sample subscriptions table below, write a brief description about each customer’s onboarding journey.
 
@@ -65,15 +60,7 @@ Based off the 8 sample customers provided in the sample subscriptions table belo
 **Answer:**
 
 ```sql
-SELECT
-  sub.customer_id,
-  plans.plan_id, 
-  plans.plan_name,  
-  sub.start_date
-FROM foodie_fi.plans
-JOIN foodie_fi.subscriptions AS sub
-  ON plans.plan_id = sub.plan_id
-WHERE sub.customer_id IN (1,2,11,13,15,16,18,19);
+
 ```
 
 <img width="556" alt="image" src="https://user-images.githubusercontent.com/81607668/129758340-b7cd527c-31f3-4f33-8d99-5b0a4baab378.png">
