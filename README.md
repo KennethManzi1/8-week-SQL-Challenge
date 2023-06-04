@@ -52,7 +52,7 @@ Danny started by recruiting “runners” to deliver fresh pizza from Pizza Runn
 
 <img src="https://user-images.githubusercontent.com/81607668/129742132-8e13c136-adf2-49c4-9866-dec6be0d30f0.png" width="500" height="520" alt="image">
 
-View the case study [here](https://8weeksqlchallenge.com/case-study-3/) and my **solution** [here]
+View the case study [here](https://8weeksqlchallenge.com/case-study-3/) and my **solution** [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%203%20Foodie-Fi)
 
 ### Business Task
 Danny and his friends launched a new startup Foodie-Fi and started selling monthly and annual subscriptions, giving their customers unlimited on-demand access to exclusive food videos from around the world.
