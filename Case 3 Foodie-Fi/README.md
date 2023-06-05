@@ -53,7 +53,7 @@ When customers churn, they will keep their access until the end of their current
 
 Based off the 8 sample customers provided in the sample subscriptions table below, write a brief description about each customer’s onboarding journey.
 
-View my solution [here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/A.%20Customer%20Journey.md)
 
 **Table: Sample of `subscriptions` table**
 
