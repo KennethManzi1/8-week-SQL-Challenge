@@ -21,7 +21,8 @@ WHERE subs.customer_id < 11
 **Answer:**
 
 --  Customer 1 signed up for a free trial on the 1st of August 2020 and decided to subscribe to the basic monthly plan on August 8th 2020 right after it ended.
---  Customer 2 signed up for a free trial on the 20th of September 2020 and decided to upgrade to the pro annual plan on September 27th 2020 right after it ended.
+--  
+Customer 2 signed up for a free trial on the 20th of September 2020 and decided to upgrade to the pro annual plan on September 27th 2020 right after it ended.
 --  Customer 3 signed up for a free trial on the 13th of January 2020 and decided to upgrade to the basic monthly plan on the 20th of January 2020 right after it ended.
 --  Customer 4 signed up for a free trial on the 17th of Janaury 2020, subscribed to the basic monthly on the 24th of January 2020.
 --  Customer 5 signed up for a free trial on the 3rd of August 2020 and subscribed to the basic monthly on the 10th of August 2020 after it ended.
