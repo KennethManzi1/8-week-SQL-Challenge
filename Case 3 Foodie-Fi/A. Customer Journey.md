@@ -1,4 +1,4 @@
-# Case Study #2 - Pizza Runner
+# Case Study #3 - Customer Journey
 
 ## Solution - A. Pizza Metrics 
 
