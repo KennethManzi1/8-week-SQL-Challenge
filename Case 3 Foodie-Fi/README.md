@@ -53,6 +53,8 @@ When customers churn, they will keep their access until the end of their current
 
 Based off the 8 sample customers provided in the sample subscriptions table below, write a brief description about each customer’s onboarding journey.
 
+View my solution [here]
+
 **Table: Sample of `subscriptions` table**
 
 <img width="261" alt="Screenshot 2021-08-17 at 11 36 10 PM" src="https://user-images.githubusercontent.com/81607668/129756709-75919d79-e1cd-4187-a129-bdf90a65e196.png">
@@ -69,145 +71,32 @@ Based off the 8 sample customers provided in the sample subscriptions table belo
 
 ## B. Data Analysis Questions
 
-### 1. How many customers has Foodie-Fi ever had?
+View my solution [here]
 
+1. How many customers has Foodie-Fi ever had?
 
+2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value
 
-```sql
+3. What plan start_date values occur after the year 2020 for our dataset? Show the breakdown by count of events for each plan_name.
 
+4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
 
-```
+5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
 
-**Answer:**
+6. What is the number and percentage of customer plans after their initial free trial?
 
+7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
 
+8. How many customers have upgraded to an annual plan in 2020?
 
-### 2. What is the monthly distribution of trial plan start_date values for our dataset - use the start of the month as the group by value
+9. How many days on average does it take for a customer to upgrade to an annual plan from the day they join Foodie-Fi?
 
+10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
 
-
-```sql
-
-```
-
-**Answer:**
-
-
-
-
-### 3. What plan start_date values occur after the year 2020 for our dataset? Show the breakdown by count of events for each plan_name.
-
-
-
-````sql
-
-````
-
-**Answer:**
-
-
-
-### 4. What is the customer count and percentage of customers who have churned rounded to 1 decimal place?
-
-
-
-```sql
-
-
-```
-
-**Answer:**
-
-
-
-
-### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
-
-
-
-
-```sql
-
-
-```
-
-
-
-**Answer:**
-
-
-
-### 6. What is the number and percentage of customer plans after their initial free trial?
-
-```sql
-
-```
-
-**Answer:**
-
-
-
-### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
-
-
-
-
-```sql
-
-
-```
-
-**Answer:**
-
-
-
-
-### 8. How many customers have upgraded to an annual plan in 2020?
-
-```sql
-
-
-```
-
-**Answer:**
-
-
-
-
-### 9. How many days on average does it take for a customer to upgrade to an annual plan from the day they join Foodie-Fi?
-
-
-
-
-````sql
-
-
-````
-
-**Answer:**
-
-
-
-
-```sql
-
-
-```
-
-**Answer:**
-
-
-
-
-### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
-
-```sql
-
-
-```
-
-**Answer:**
-
+11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 
 
 ***
+
+
+## C. Challenge Payment Question
