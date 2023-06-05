@@ -20,16 +20,16 @@ WHERE subs.customer_id < 11
 
 **Answer:**
 
--- Customer 1 signed up for a free trial on the 1st of August 2020 and decided to subscribe to the basic monthly plan on August 8th 2020 right after it ended.
--- Customer 2 signed up for a free trial on the 20th of September 2020 and decided to upgrade to the pro annual plan on September 27th 2020 right after it ended.
---  Customer 3 signed up for a free trial on the 13th of January 2020 and decided to upgrade to the basic monthly plan on the 20th of January 2020 right after it ended.
---  Customer 4 signed up for a free trial on the 17th of Janaury 2020, subscribed to the basic monthly on the 24th of January 2020.
---  Customer 5 signed up for a free trial on the 3rd of August 2020 and subscribed to the basic monthly on the 10th of August 2020 after it ended.
---  Customer 6 signed up for a free trial on the 23rd of December 2020 and subscribed to the basic monthly plan on the 30th of December 2020.
---  Customer 7 signed up for a free trial on the 5th of February 2020, subscribed to the basic monthly plan on the 12th of February 2020, and upgraded to the pro monthly plan 3 months later.
---  Customer 8 signed up for a free trial on the 11th of June 2020, subscribed to the basic monthly plan on the 18th of February 2020, and upgraded to the pro monthly plan 2 months later.
---  Customer 9 signed up for a free trial on the 07th of December 2020 and upgraded to the pro annual on the 14th of December 2020.
---  Customer 10 signed up for a free trial on the 19th of September 2020 and upgraded to the pro annual on the 26th of September 2020.
+- Customer 1 signed up for a free trial on the 1st of August 2020 and decided to subscribe to the basic monthly plan on August 8th 2020 right after it ended.
+- Customer 2 signed up for a free trial on the 20th of September 2020 and decided to upgrade to the pro annual plan on September 27th 2020 right after it ended.
+- Customer 3 signed up for a free trial on the 13th of January 2020 and decided to upgrade to the basic monthly plan on the 20th of January 2020 right after it ended.
+- Customer 4 signed up for a free trial on the 17th of Janaury 2020, subscribed to the basic monthly on the 24th of January 2020.
+- Customer 5 signed up for a free trial on the 3rd of August 2020 and subscribed to the basic monthly on the 10th of August 2020 after it ended.
+- Customer 6 signed up for a free trial on the 23rd of December 2020 and subscribed to the basic monthly plan on the 30th of December 2020.
+- Customer 7 signed up for a free trial on the 5th of February 2020, subscribed to the basic monthly plan on the 12th of February 2020, and upgraded to the pro monthly plan 3 months later.
+- Customer 8 signed up for a free trial on the 11th of June 2020, subscribed to the basic monthly plan on the 18th of February 2020, and upgraded to the pro monthly plan 2 months later.
+- Customer 9 signed up for a free trial on the 07th of December 2020 and upgraded to the pro annual on the 14th of December 2020.
+- Customer 10 signed up for a free trial on the 19th of September 2020 and upgraded to the pro annual on the 26th of September 2020.
 
 ![Screen Shot 2023-06-05 at 3 32 06 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/0e4085a7-e01e-4458-a975-48ce6f0f0d7f)
 
