@@ -155,5 +155,8 @@ WHERE rn.cancellation IS NULL
 
 **Solution:**
 
+**Answer:**
+
+
 ![Screen Shot 2023-06-02 at 3 00 03 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/319e6e6f-b4fa-419a-bded-06aa471ae3f6)
 
