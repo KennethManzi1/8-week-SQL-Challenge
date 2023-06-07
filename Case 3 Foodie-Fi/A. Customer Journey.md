@@ -36,5 +36,5 @@ WHERE subs.customer_id < 11
 
 
 
-***Click [here] for solution for B. Data Analysis Questions
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/B.%20Data%20Analysis%20Questions.md) for solution for B. Data Analysis Questions
 
