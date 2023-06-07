@@ -885,24 +885,25 @@ FROM subscriptions
 ![Screen Shot 2023-06-06 at 9 57 34 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e0bd9f6a-28e3-43ca-8ae3-21b8655b9eb9)
 
 
-### 5. How many Vegetarian and Meatlovers were ordered by each customer?**
+### 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
 
 ````sql
-SELECT  c.customer_id, p.pizza_name 
-FROM dbo.customer_orders AS c
-JOIN dbo.pizza_names AS p
-  ON c.pizza_id= p.pizza_id
---GROUP BY c.customer_id
-ORDER BY c.customer_id;
+SELECT COUNT(*) AS [COUNT churn], ROUND(CAST(100 * COUNT(*) AS FLOAT)/ 
+(SELECT COUNT(DISTINCT customer_id) FROM dbo.subscriptions), 1) AS [Percentage Churn]
+FROM
+(
+SELECT subs.customer_id, subs.plan_id, pn.plan_name, ROW_NUMBER() OVER(PARTITION BY subs.customer_id order BY subs.plan_id) AS [Plan Row numbers]
+FROM dbo.subscriptions AS subs 
+FULL JOIN dbo.plans AS pn ON subs.plan_id = pn.plan_id
+)Planrownum
+--INNER JOIN subscriptions AS subs ON planrownum.customer_id = subs.customer_id
+WHERE planrownum.plan_id = 4 AND planrownum.[Plan Row numbers] = 2
 ````
 
 **Answer:**
 
-- Customer 101 ordered 2 Meatlovers pizzas and 1 Vegetarian pizza.
-- Customer 102 ordered 2 Meatlovers pizzas and 2 Vegetarian pizzas.
-- Customer 103 ordered 4 Meatlovers pizzas and 1 Vegetarian pizza.
-- Customer 104 ordered 5 Meatlovers pizza.
-- Customer 105 ordered 1 Vegetarian pizza.
+- 22 customers churned after the free trial which is about 7% of the customers.
+
 
 ### 6. What was the maximum number of pizzas delivered in a single order?
 
