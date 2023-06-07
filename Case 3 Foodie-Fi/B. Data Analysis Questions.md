@@ -905,112 +905,158 @@ WHERE planrownum.plan_id = 4 AND planrownum.[Plan Row numbers] = 2
 - 22 customers churned after the free trial which is about 7% of the customers.
 
 
-### 6. What was the maximum number of pizzas delivered in a single order?
+### 6. What is the number and percentage of customer plans after their initial free trial?
 
 ````sql
-SELECT MAX(M.pizza_per_order) AS [Maximum Number of Pizzas Delivered]
+SELECT [Next Plan], COUNT(*) AS conv, ROUND(CAST(100 * COUNT(*) AS FLOAT)/ 
+(SELECT COUNT(DISTINCT customer_id) FROM dbo.subscriptions), 1) AS [Conv Percentage]
+FROM 
+(
+
+SELECT customer_id, plan_id, LEAD(plan_id, 1) OVER( PARTITION BY customer_id ORDER BY plan_id) AS [Next Plan] -- Using lead to find the next plan 
+FROM dbo.subscriptions
+)Nextplan
+WHERE [Next Plan] IS NOT NULL AND plan_id = 0
+GROUP BY [Next Plan]
+ORDER BY [Next Plan]
+````
+
+**Answer:**
+
+
+- More than 80% of customers are on paid plans with small 5.3% on plan 3 (pro annual $199). Foodie-Fi has to strategize on their customer acquisition who would be willing to spend more.
+
+![Screen Shot 2023-06-06 at 10 02 34 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8d0d0e50-7ccc-4d96-b669-63541465d200)
+
+
+### 7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
+
+````sql
+SELECT Nextplandate.plan_id, pn.plan_name, COUNT(Nextplandate.plan_id) AS [Number of Customers],
+CAST(COUNT(Nextplandate.plan_id) AS FLOAT) * 100/ (SELECT COUNT(distinct customer_id) FROM subscriptions) AS [Customer Percentage]
 FROM
 (
-SELECT orders.order_id, COUNT(orders.pizza_id) AS pizza_per_order
-FROM dbo.customer_orders AS orders
-JOIN dbo.pizza_names AS NAMES ON orders.pizza_id = names.pizza_id
-INNER JOIN dbo.runner_orders as rord ON orders.order_id = rord.order_id
-GROUP BY orders.order_Id
-)M
+SELECT *, LEAD(start_date, 1) OVER( PARTITION BY customer_id ORDER BY plan_id) AS [Next Plan date] -- Using lead to find the next plan 
+FROM dbo.subscriptions
+WHERE start_date <= '2020-12-31'  ---This subquery will pull in everything and the next subscription dates with the records ending at December 31st 202
+)Nextplandate 
+LEFT JOIN dbo.plans AS pn ON Nextplandate.plan_id = pn.plan_id
+WHERE Nextplandate.[Next Plan Date] IS NULL or Nextplandate.[Next Plan Date] > '2020-12-31'
+GROUP BY Nextplandate.plan_id, plan_name
+ORDER by Nextplandate.plan_id
+
+
 ````
 
 **Answer:**
 
+![Screen Shot 2023-06-06 at 10 24 14 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/2229af82-092a-4208-a77f-dcaa393d8c6e)
 
-- Maximum number of pizza delivered in a single order is 5 pizzas.
 
-### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+### 8. How many customers have upgraded to an annual plan in 2020?
 
 ````sql
-SELECT orders.customer_id, orders.order_time,  orders.exclusions, orders.extras, rord.pickup_time, rord.cancellation,
-SUM(CASE WHEN orders.exclusions IS NOT NULL OR orders.extras IS NOT NULL THEN 1 ELSE 0 END) AS at_least_1_change,
-SUM(CASE WHEN orders.exclusions IS NULL AND orders.extras IS  NULL THEN 1 ELSE 0 END) AS no_change
-FROM dbo.customer_orders AS orders
-JOIN dbo.pizza_names AS NAMES ON orders.pizza_id = names.pizza_id
-INNER JOIN dbo.runner_orders as rord ON orders.order_id = rord.order_id
-WHERE rord.pickup_time IS NOT NULL
-GROUP BY orders.customer_id, orders.order_time, orders.exclusions, orders.extras, rord.pickup_time, rord.cancellation--, orders.order_time,  orders.exclusions, orders.extras, names.pizza_name, rord.pickup_time, rord.cancellation
---WHERE CAST(pizza_name AS VARCHAR(150)) = 'Meatlovers'
---WHERE rord.pickup_time IS NOT NULL AND (orders.exclusions IS NULL AND orders.extras IS NULL)
---WHERE rord.pickup_time IS NOT NULL AND (orders.exclusions IS NOT NULL AND orders.extras IS NOT NULL)
---GROUP by orders.order_id, orders.order_time, names.pizza_name, rord.pickup_time
+
+SELECT pn.plan_name, COUNT(subs.plan_id) AS [Number of customers on an Annual Plan]
+FROM subscriptions AS subs 
+INNER JOIN plans as pn on subs.plan_id = pn.plan_id
+WHERE pn.plan_name = 'Pro Annual' AND subs.start_date <= '2020-12-31'
+GROUP BY pn.plan_name
 
 ````
 
 **Answer:**
 
-- Customer 101 and 102 likes his/her pizzas per the original recipe.
-- Customer 103, 104 and 105 have their own preference for pizza topping and requested at least 1 change (extra or exclusion topping) on their pizza.
+- 73 Customers have updgreded to an annual plan in 2020
 
-### 8. How many pizzas were delivered that had both exclusions and extras?
+### 9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
 
 ````sql
-SELECT orders.customer_id, orders.order_time,  orders.exclusions, orders.extras, rord.pickup_time, rord.cancellation,
-SUM(CASE WHEN orders.exclusions IS NOT NULL OR orders.extras IS NOT NULL THEN 1 ELSE 0 END) AS at_least_1_change,
-SUM(CASE WHEN orders.exclusions IS NULL AND orders.extras IS  NULL THEN 1 ELSE 0 END) AS no_change
-FROM dbo.customer_orders AS orders
-JOIN dbo.pizza_names AS NAMES ON orders.pizza_id = names.pizza_id
-INNER JOIN dbo.runner_orders as rord ON orders.order_id = rord.order_id
-WHERE rord.pickup_time IS NOT NULL AND (orders.exclusions IS NOT NULL AND orders.extras IS NOT NULL)
-GROUP BY orders.customer_id, orders.order_time, orders.exclusions, orders.extras, rord.pickup_time, rord.cancellation--, orders.order_time,  orders.exclusions, orders.extras, names.pizza_name, rord.pickup_time, rord.cancellation
---WHERE CAST(pizza_name AS VARCHAR(150)) = 'Meatlovers'
---WHERE rord.pickup_time IS NOT NULL AND (orders.exclusions IS NULL AND orders.extras IS NULL)
---GROUP by orders.order_id, orders.order_time, names.pizza_name, rord.pickup_time
 
+WITH first_day AS  --CTE to get the start date where the customer's plan is a free trieal
+(
+  SELECT subs.customer_id, subs.start_date AS [Free Trial Start Date ]
+  FROM subscriptions as subs
+  INNER JOIN plans as pn ON subs.plan_id = pn.plan_id
+  WHERE pn.plan_name = 'Trial'
+),
 
+Annual AS --CTE to get the start date where the customer's plan is pro annual
+(
+   SELECT subs.customer_id, subs.start_date AS [Annual plan Start Date]
+  FROM subscriptions as subs
+  INNER JOIN plans as pn ON subs.plan_id = pn.plan_id
+  WHERE pn.plan_name = 'Pro Annual'
+)
+
+SELECT AVG(DATEDIFF(day, fd.[Free Trial Start Date], an.[Annual Plan Start Date])) AS [Days on Average]
+FROM first_day fd
+RIGHT JOIN Annual AS an ON fd.customer_id = an.customer_id --Right Join because we want to know whether the customer went through a free trial or not to get to the annual plan.
 ````
 
 **Answer:**
 
-- Only 4 pizzas delivered that had both extra and exclusion topping. 
+- It takes 96 days on average for a customer to buy an annual plan.
+ 
 
-### 9. What was the total volume of pizzas ordered for each hour of the day?
+### 10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
 
 ````sql
-SELECT DATEPART(HOUR, order_time) AS hour_of_day, COUNT(order_id) AS pizza_count
-FROM dbo.customer_orders
-GROUP BY DATEPART(HOUR, order_time) 
+
+WITH first_day AS  --CTE to get the start date where the customer's plan is a free trieal
+(
+  SELECT subs.customer_id, subs.start_date AS [Free Trial Start Date ]
+  FROM subscriptions as subs
+  INNER JOIN plans as pn ON subs.plan_id = pn.plan_id
+  WHERE pn.plan_name = 'Trial'
+),
+
+Annual AS --CTE to get the start date where the customer's plan is pro annual
+(
+   SELECT subs.customer_id, subs.start_date AS [Annual plan Start Date]
+  FROM subscriptions as subs
+  INNER JOIN plans as pn ON subs.plan_id = pn.plan_id
+  WHERE pn.plan_name = 'Pro Annual'
+),
+
+Datediff AS 
+(
+  SELECT DATEDIFF(day, fd.[Free Trial Start Date], an.[Annual Plan Start Date]) AS [Date Diff]
+  FROM first_day fd
+  RIGHT JOIN Annual AS an ON fd.customer_id = an.customer_id 
+),
+
+Groupday AS
+(
+  SELECT *, FLOOR([Date Diff]/30) AS group_day
+  FROM Datediff
+)
+
+SELECT COUNT(group_day) AS [Number of days], CONCAT((group_day *30) +1 , '-',(group_day +1)*30, ' days') as [Days]
+FROM Groupday
+GROUP BY group_day
 ````
 
 **Answer:**
+![Screen Shot 2023-06-06 at 10 27 21 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/f63d14b9-8f98-4cf6-a258-b0e6d8438cc7)
 
- hour 11 is 2 pizzas
- 
- hour 13 is 3 pizzas
- 
- hour 18 is 6 pizzas
- 
- hour 19 is 1 pizza
- 
- hour 21 is 3 pizzas
- 
- hour 23 is 3 pizzas
- 
 
-### 10. What was the volume of orders for each day of the week?
-
+### 11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 ````sql
-SELECT FORMAT(DATEADD(DAY, 2, order_time) ,'dddd')AS day_of_the_week, COUNT(order_id) AS pizza_count
-FROM dbo.customer_orders
-GROUP BY FORMAT(DATEADD(DAY, 2, order_time) ,'dddd')
+SELECT COUNT(*) AS [Number of customers that downgraded]
+FROM
+(
+SELECT *, LEAD(plan_id, 1) OVER( PARTITION BY customer_id ORDER BY plan_id) AS [Next Plan]
+FROM subscriptions 
+WHERE start_date <= '2021-12-13'
+)Nextplan 
+LEFT JOIN dbo.plans as pn ON Nextplan.plan_id = pn.plan_id
+WHERE [Next Plan] = 1 AND pn.plan_name = 'basic monthly'
+
 ````
-
 **Answer:**
+- No customer has downgrade from pro monthly to basic monthly in 2020.
 
 
-Friday had a volume of 5 pizzas
-
-Monday had a volume of 8 pizzas
-
-Saturday had a volume of 3 pizzas
-
-Sunday had a volume of 2 pizzas
-
-
-***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%202%20Pizza%20Runner/B.%20Runner%20and%20Customer%20Experience.md) for solution for B. Runner and Customer Experience!
+***Click [here] for solution for C.  Challenge Payment Question!
 
