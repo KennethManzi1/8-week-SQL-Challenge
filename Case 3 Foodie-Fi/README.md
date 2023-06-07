@@ -63,7 +63,7 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 
 ## B. Data Analysis Questions
 
-View my solution [here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/B.%20Data%20Analysis%20Questions.md)
 
 1. How many customers has Foodie-Fi ever had?
 
