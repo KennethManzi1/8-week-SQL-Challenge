@@ -1,6 +1,6 @@
-# Case Study #2 - Pizza Runner
+# Case Study #3 - Foodie-Fi
 
-## Solution - A. Pizza Metrics 
+## Solution - B. Data Analysis Questions
 
 ### 1. How many customers has Foodie-Fi ever had?
 
