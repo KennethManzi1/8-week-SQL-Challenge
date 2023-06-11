@@ -1333,7 +1333,7 @@ as for the customers with the subscriptions, we can figure out the services and 
 
 - After the trial ends, it is possible to offer another discount to keep the customer drawn into the service.
 
--  Rewarding customers for for their loyalty with bonus points for their future purchases.
+- Rewarding customers for for their loyalty with bonus points for their future purchases.
 
 - Allow the customers to provide feedback so that the user or a customer has an option to easily share their opinion.
 
