@@ -1058,5 +1058,5 @@ WHERE [Next Plan] = 1 AND pn.plan_name = 'basic monthly'
 - No customer has downgrade from pro monthly to basic monthly in 2020.
 
 
-***Click [here] for solution for C.  Challenge Payment Question!
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/C.%20Challenge%20Payment%20Question.md) for solution for C.  Challenge Payment Question!
 
