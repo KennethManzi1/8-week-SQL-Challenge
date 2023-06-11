@@ -104,7 +104,7 @@ FROM dbo.payments2020
 
 ````
 
-![Screen Shot 2023-06-11 at 12 00 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8696fc3d-a500-4076-9142-dec04e1629cc)
+![Screen Shot 2023-06-11 at 12 07 17 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/6a2a0300-c6a7-4708-8c5d-1f670702493c)
 
 
 ***Click [here] for solution for B. Runner and Customer Experience!
