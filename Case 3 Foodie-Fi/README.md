@@ -92,3 +92,6 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 
 
 ## C. Challenge Payment Question
+
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/C.%20Challenge%20Payment%20Question.md) 
+
