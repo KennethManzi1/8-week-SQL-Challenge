@@ -103,5 +103,10 @@ upgrades from pro monthly to pro annual are paid at the end of the current billi
 once a customer churns they will no longer make payments
 
 
+## D. Outside The Box Questions
+
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/D.%20Outside%20The%20Box%20Questions.md)
+
+
 
 
