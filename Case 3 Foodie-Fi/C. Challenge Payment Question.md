@@ -10,7 +10,7 @@ upgrades from pro monthly to pro annual are paid at the end of the current billi
 once a customer churns they will no longer make payments
 
 
-**Steps:**
+**Answer:**
 
 - First thing we need to do is to create the payments table. The table will store the payment data for the year 2020 and has several columns such as payment id, customer id plan id, the plan name, the date of the payment, the order and the amount.
 
@@ -85,9 +85,26 @@ SELECT *
 FROM RecursionDate
 
 ````
-**Answer:**
+
+![Screen Shot 2023-06-11 at 11 57 06 AM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/498d992d-310a-4c8a-a647-95f3de0e25c9)
 
 
+- With the main data in the Vt CTE and the recursion done in the Recursion Date CTE, We will now insert the payment data into the 2020 payments table by inserting into it. We are pulling the data from the recursion date cte 
+- We need to make sure that we are only including 2020 data by filtering with the WHERE clause. We can also rank the payment orders by including a ranking field and partitioning the records by the customer id.
+
+````sql
+INSERT INTO payments2020(customer_id,plan_id, plan_name, payment_date, amount, Payment_order)
+SELECT customer_id, plan_id, plan_name,payment_date, amount, RANK() OVER(partition BY customer_id ORDER BY customer_id, plan_id) AS [Payment_order]
+FROM RecursionDate
+WHERE YEAR(payment_date) = 2020
+ORDER BY customer_id, plan_id, payment_date;
+
+SELECT *
+FROM dbo.payments2020
+
+````
+
+![Screen Shot 2023-06-11 at 12 00 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8696fc3d-a500-4076-9142-dec04e1629cc)
 
 
 ***Click [here] for solution for B. Runner and Customer Experience!
