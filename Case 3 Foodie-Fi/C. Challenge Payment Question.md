@@ -108,5 +108,5 @@ FROM dbo.payments2020
 
 
 
-***Click [here] for solution for D. Outside The Box Questions!
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/D.%20Outside%20The%20Box%20Questions.md) for solution for D. Outside The Box Questions!
 
