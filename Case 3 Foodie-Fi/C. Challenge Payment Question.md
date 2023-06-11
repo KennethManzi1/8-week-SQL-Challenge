@@ -12,7 +12,7 @@ once a customer churns they will no longer make payments
 
 **Steps:**
 
---First thing we need to do is to create the payments table. The table will store the payment data for the year 2020 and has several columns such as payment id, customer id plan id, the plan name, the date of the payment, the order and the amount.
+- First thing we need to do is to create the payments table. The table will store the payment data for the year 2020 and has several columns such as payment id, customer id plan id, the plan name, the date of the payment, the order and the amount.
 
 ````sql
 SELECT COUNT(*) AS pizza_order_count
