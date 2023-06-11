@@ -75,6 +75,7 @@ SELECT *
 FROM vt 
 
 ````
+![Screen Shot 2023-06-11 at 11 52 45 AM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/f7ed4239-b2b5-43fe-a5f7-8a3bb8324bd1)
 
 
 - Testing out the Recursion Date CTE to make sure it works
