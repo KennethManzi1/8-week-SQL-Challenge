@@ -47,3 +47,12 @@ This table stores all customer deposits, withdrawals and purchases made using th
 ## Case Study Questions
 
 ## A. Customer Nodes Exploration
+
+A. Customer Nodes Exploration
+B. How many unique nodes are there on the Data Bank system?
+C. What is the number of nodes per region?
+D. How many customers are allocated to each region?
+E. How many days on average are customers reallocated to a different node?
+F. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
+
+View my solution [here]
