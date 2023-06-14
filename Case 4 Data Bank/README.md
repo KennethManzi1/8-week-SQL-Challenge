@@ -56,3 +56,5 @@ E. How many days on average are customers reallocated to a different node?
 F. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
 
 View my solution [here]
+
+***
