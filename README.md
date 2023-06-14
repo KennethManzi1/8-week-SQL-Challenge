@@ -71,7 +71,7 @@ This case study focuses on using subscription style digital data to answer impor
 
 <img src="https://user-images.githubusercontent.com/81607668/130343294-a8dcceb7-b6c3-4006-8ad2-fab2f6905258.png" alt="Image" width="500" height="520">
 
-View the case study [here](https://8weeksqlchallenge.com/case-study-4/) and my **solution** [here]
+View the case study [here](https://8weeksqlchallenge.com/case-study-4/) and my **solution** [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%204%20Data%20Bank)
 
 ### Business Task
 Danny launched a new initiative, Data Bank which runs just like any other digital bank - but it isn’t only for banking activities, they also have the world’s most secure distributed data storage platform!
