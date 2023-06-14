@@ -46,4 +46,4 @@ This table stores all customer deposits, withdrawals and purchases made using th
 
 ## Case Study Questions
 
-## 🏦 A. Customer Nodes Exploration
+## A. Customer Nodes Exploration
