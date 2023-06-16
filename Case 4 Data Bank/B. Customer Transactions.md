@@ -40,7 +40,12 @@ GROUP BY txn_type
 ORDER BY txn_type
 ````
 
-There were lots of deposits at 1,359,168, followed by purchases at 806,537 and then withdrawals at 793,003.
+**Answer:**
+
+![Screen Shot 2023-06-16 at 5 47 24 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/479cc365-00ca-4d6a-b477-4c87c02a78ed)
+
+
+# There were lots of deposits at 1,359,168, followed by purchases at 806,537 and then withdrawals at 793,003.
 
 
 ***Click [here]
