@@ -84,3 +84,46 @@ GROUP BY cus.region_id, reg.region_name
 
 Australia had the highest number of nodes and Europe had the lowest number of nodes.
 
+### 3. How many customers are allocated to each region?
+````sql
+
+WITH customernodess AS(
+    SELECT *
+    FROM dbo.customer_nodes
+
+    UNION ALL
+
+    SELECT *
+    FROM dbo.customer_nodes2
+
+    UNION ALL
+
+    SELECT * 
+    FROM dbo.customer_nodes3
+
+    UNION ALL
+    
+    SELECT *
+    FROM dbo.customer_nodes4
+    UNION ALL
+    SELECT *
+    FROM dbo.customer_nodes5
+    UNION ALL
+    SELECT *
+    FROM dbo.customer_nodes6
+
+)
+
+
+SELECT cus.region_id, reg.region_name, COUNT(DISTINCT cus.customer_id) AS [Number of Customers Allocated]
+FROM dbo.regions AS reg
+INNER JOIN customernodess AS cus ON reg.region_id = cus.region_id
+GROUP BY cus.region_id, reg.region_name
+````
+
+**Answer:**
+![Screen Shot 2023-06-15 at 10 11 46 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/95aa4d02-8b59-41c9-8deb-85d4250b92ea)
+Australia has the most number of custoemrs allocated at 110, Europe has the least number of customers allocated at 88.
+
+
+
