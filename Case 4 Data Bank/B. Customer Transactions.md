@@ -2,7 +2,7 @@
 
 ## Solution - B. Customer Transactions
 
-Because the dataset was way over 1000 rows, I had to split the customer transactions data into 6 tables and UNION ALL them in a CTE to create the customer nodes table
+Because the dataset was way over 1000 rows, I had to split the customer transactions data into 6 tables and UNION ALL them in a CTE called Customer_Transactions to create the customer Transactions table
 
 ### 1. What is the unique count and total amount for each transaction type?
 
