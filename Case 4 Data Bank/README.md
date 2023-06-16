@@ -67,7 +67,7 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 4. What is the closing balance for each customer at the end of the month?
 5. What is the percentage of customers who increase their closing balance by more than 5%?
 
-View my solution [here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/B.%20Customer%20Transactions.md)
 
 ***
 
