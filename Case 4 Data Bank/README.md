@@ -55,7 +55,7 @@ D. How many customers are allocated to each region?
 E. How many days on average are customers reallocated to a different node?
 F. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
 
-View my solution [here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/A.Customer%20Nodes%20Exploration.md)
 
 ***
 
