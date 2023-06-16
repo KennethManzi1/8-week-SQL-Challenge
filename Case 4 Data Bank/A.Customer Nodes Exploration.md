@@ -2,7 +2,7 @@
 
 ## Solution - A.  Customer Nodes Exploration
 
-Because the dataset was way over 1000 rows, I had to split the customer nodes data into 6 tables and UNION ALL them in a CTE to create the customer nodes table
+Because the dataset was way over 1000 rows, I had to split the customer nodes data into 6 tables and UNION ALL them in a CTE called customernodess to create the customer nodes table
 
 
 
