@@ -123,7 +123,46 @@ GROUP BY cus.region_id, reg.region_name
 
 **Answer:**
 ![Screen Shot 2023-06-15 at 10 11 46 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/95aa4d02-8b59-41c9-8deb-85d4250b92ea)
+
 Australia has the most number of custoemrs allocated at 110, Europe has the least number of customers allocated at 88.
 
 
+### 4. How many days on average are customers reallocated to a different node?
 
+````sql
+
+WITH customernodess AS(
+    SELECT *
+    FROM dbo.customer_nodes
+
+    UNION ALL
+
+    SELECT *
+    FROM dbo.customer_nodes2
+
+    UNION ALL
+
+    SELECT * 
+    FROM dbo.customer_nodes3
+
+    UNION ALL
+    
+    SELECT *
+    FROM dbo.customer_nodes4
+    UNION ALL
+    SELECT *
+    FROM dbo.customer_nodes5
+    UNION ALL
+    SELECT *
+    FROM dbo.customer_nodes6
+
+)
+--Find the Average difference between the end date and the start date in Days and filter out dates that are not formatted
+
+SELECT AVG(DATEDIFF(DAY, start_date, end_date)) AS [Average days a customer was allocated]
+FROM customernodess
+WHERE start_date != '9999-12-31' and end_date != '9999-12-31'
+````
+**Answer:**
+
+It takes on average 14 days for customers to be allocated to a region.
