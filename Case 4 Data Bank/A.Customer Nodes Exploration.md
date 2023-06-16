@@ -166,3 +166,56 @@ WHERE start_date != '9999-12-31' and end_date != '9999-12-31'
 **Answer:**
 
 It takes on average 14 days for customers to be allocated to a region.
+
+
+### 5. What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
+
+````sql
+
+WITH customernodess AS(
+    SELECT *
+    FROM dbo.customer_nodes
+
+    UNION ALL
+
+    SELECT *
+    FROM dbo.customer_nodes2
+
+    UNION ALL
+
+    SELECT * 
+    FROM dbo.customer_nodes3
+
+    UNION ALL
+    
+    SELECT *
+    FROM dbo.customer_nodes4
+    UNION ALL
+    SELECT *
+    FROM dbo.customer_nodes5
+    UNION ALL
+    SELECT *
+    FROM dbo.customer_nodes6
+
+),
+--Date Diff CTE to calculate the difference between the start and end date allocation days.
+Date_diff AS
+(
+SELECT cus.customer_id, DATEDIFF(DAY, cus.start_date, cus.end_date) AS [Days a customer was allocated], rg.region_id, rg.region_name
+FROM customernodess cus
+INNER JOIN regions AS rg ON cus.region_id = rg.region_id
+WHERE start_date != '9999-12-31' and end_date != '9999-12-31'
+
+)
+-- WE will use PERCENTILE_CONT and WITHIN GROUP to find the median, 80th,and 95th percentile
+SELECT DISTINCT region_id, region_name, PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY [Days a customer was allocated]) OVER(PARTITION BY region_name) AS median,
+	   PERCENTILE_CONT(0.8) WITHIN GROUP(ORDER BY [Days a customer was allocated]) OVER(PARTITION BY region_name) AS percentile_80,
+	   PERCENTILE_CONT(0.95) WITHIN GROUP(ORDER BY [Days a customer was allocated]) OVER(PARTITION BY region_name) AS percentile_95
+FROM Date_diff
+ORDER BY region_id
+````
+**Answer:**
+
+![Screen Shot 2023-06-15 at 10 22 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/db1f556d-b489-41d7-b2b4-0fb7564510d8)
+
+The output shows that all the regions have same median and 95th percentile for the same reallocation days metric with Africa and Europe having 24 days as the 80th percentile and America, Asia and Australia having 23 days as the 80th percentile reallocation metric.
