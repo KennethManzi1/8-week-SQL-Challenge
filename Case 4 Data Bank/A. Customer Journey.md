@@ -1,4 +1,4 @@
-# Case Study #3 - Foodie-Fi
+# Case Study #4 - Data Mart
 
 ## Solution - A. Customer Journey
 
