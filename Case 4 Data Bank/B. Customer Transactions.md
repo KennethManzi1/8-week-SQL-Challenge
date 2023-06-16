@@ -6,6 +6,8 @@ Because the dataset was way over 1000 rows, I had to split the customer transact
 
 ### 1. What is the unique count and total amount for each transaction type?
 
+We will first create the CTE for the Customer Transactions data as the dataset is too large
+
 We use count to find the unique transaction types numbers and SUM to calculate the total amounts.
 
 ````sql
@@ -51,6 +53,8 @@ There were lots of deposits at 1,359,168, followed by purchases at 806,537 and t
 
 
 ### 2. What is the average total historical deposit counts and amounts for all customers?
+
+We will first create the CTE for the Customer Transactions data as the dataset is too large
 
 We create a subquery to find the total deposits and amounts for each customer.
 
@@ -103,7 +107,9 @@ Average historical number of Deposits is 5 and Average Deposit Amount is 508
 
 ### 3. For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?
 
-First we create a subquery to pull the number of deposits, purchases and, and number of withdrawals for each month and you can see that We are using the Date Part functions to get the month and date name to get the name of the month.
+We will first create the CTE for the Customer Transactions data as the dataset is too large
+
+Then  we create a subquery to pull the number of deposits, purchases and, and number of withdrawals for each month and you can see that We are using the Date Part functions to get the month and date name to get the name of the month
 
 After that we use the outer main query to pull the unique number of customers per month
 
