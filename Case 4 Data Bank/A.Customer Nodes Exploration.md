@@ -2,7 +2,7 @@
 
 ## Solution - A.  Customer Nodes Exploration
 
-### Because the dataset was way over 1000 rows, I had to split the customer nodes data into 5 tables and UNION ALL them in a CTE to create the customer nodes table
+## Because the dataset was way over 1000 rows, I had to split the customer nodes data into 5 tables and UNION ALL them in a CTE to create the customer nodes table
 
 
 
@@ -42,4 +42,4 @@ FROM customernodess
 ````
 **Answer:**
 
-## There are 5 unique nodes on the data bank system
+There are 5 unique nodes on the data bank system
