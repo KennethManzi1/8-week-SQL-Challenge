@@ -221,5 +221,5 @@ ORDER BY region_id
 The output shows that all the regions have same median and 95th percentile for the same reallocation days metric with Africa and Europe having 24 days as the 80th percentile and America, Asia and Australia having 23 days as the 80th percentile reallocation metric.
 
 
-***Click [here]  
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/B.%20Customer%20Transactions.md)
 for solution for B. Customer Transactions
