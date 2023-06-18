@@ -174,6 +174,41 @@ GROUP BY Rb.customer_id
 ![Screen Shot 2023-06-17 at 9 59 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/1666f6d0-15d3-42e2-9a4e-727f3a46f7d2)
 
 
+***
+
+### Option 1  data is allocated based off the amount of money at the end of the previous month
+### How much data would have been required on a monthly basis?
+
+We will first create the CTE for the Customer Transactions data as the dataset is too large
+````SQL
+
+WITH Customer_Transactions AS
+(
+SELECT *
+FROM dbo.customer_transactions1
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions2
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions3
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions4
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions5
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions6
+
+),
+````
 
 ***Click [here]
 
