@@ -242,9 +242,24 @@ GROUP BY [Month of transaction], [Month Name]
 ORDER BY [Data Allocated] DESC;
 ````
 
-***Answer
+
+**Answer:**
 
 ![Screen Shot 2023-06-18 at 1 30 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/0ffb9f8e-6bc5-4ad6-be16-49496b2b3374)
+
+January requires more monthly data allocation at 351,521 while February requires a data allocation at 230473 and March at 109155. April thad the least requirement of data allocation at -78991.
+
+This means that the data that is required to allocate per month varies depending on the month and the transaction activities of the customers.
+
+This insight suggests that the amount of data required by customers is directly related to their transaction activities, and specifically to their end-of-month balances. 
+
+Furthermore, this means that that customers with higher balances tend to require more data than those with lower balances. Ex with the January month since it has higher data allocation, this means that the customers require more data for the month of January.
+
+This will definitely help to predict customer behaviour which in turn will help to optimizing business strategies and managing costs.
+
+***
+
+### Option 2: data is allocated on the average amount of money kept in the account in the previous 30 days
 
 
 
