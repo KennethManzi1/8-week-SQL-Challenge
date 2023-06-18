@@ -13,7 +13,7 @@ We use count to find the unique transaction types numbers and SUM to calculate t
 ````sql
 WITH Customer_Transactions AS
 (
-    SELECT *
+SELECT *
 FROM dbo.customer_transactions1
 UNION ALL
 
@@ -63,7 +63,7 @@ Then we calculate the average total deposists and total amounts for all customer
 ````sql
 WITH Customer_Transactions AS
 (
-    SELECT *
+SELECT *
 FROM dbo.customer_transactions1
 UNION ALL
 
@@ -117,7 +117,7 @@ After that we use the outer main query to pull the unique number of customers pe
 ````sql
 WITH Customer_Transactions AS
 (
-    SELECT *
+SELECT *
 FROM dbo.customer_transactions1
 UNION ALL
 
@@ -175,7 +175,7 @@ Then we will use sum to get the total transactions and within that we will disti
 
 WITH Customer_Transactions AS
 (
-    SELECT *
+SELECT *
 FROM dbo.customer_transactions1
 UNION ALL
 
@@ -237,7 +237,7 @@ Finally our main outer query will calculate the percentage of customers whose cl
 
 WITH Customer_Transactions AS
 (
-    SELECT *
+SELECT *
 FROM dbo.customer_transactions1
 UNION ALL
 
