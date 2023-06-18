@@ -73,7 +73,7 @@ GROUP BY customer_id,  DATEPART(MONTH, txn_date),  DATENAME(MONTH, txn_date)
 
 Next thing we will need to do is to get customer balance at the end of each month.
 
-Again since we need the customer transaction data, we will need the CTE again to write the query to get the customer closing balance
+Again since we need the customer transaction data, we will need the Customer Transactions CTE again to write the query to get the customer closing balance
 
 ````sql
 
@@ -116,6 +116,63 @@ GROUP BY customer_id,  DATEPART(MONTH, txn_date),  DATENAME(MONTH, txn_date)
 **Answer:**
 
 ![Screen Shot 2023-06-17 at 9 55 33 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/3bce184e-5d26-4b5a-ad5f-204e4cb7c262)
+
+
+***Click [here]
+
+
+***
+
+Finally we will need to get minimum, average and maximum values of the running balance for each customer.
+
+We will use the Customer Transactions CTE to get our customer transactions data
+
+Then we will use the Running Balance query we created earlier as a subquery to pull the minimum, average, maximum values of the running balance in the main query
+
+
+````sql
+
+WITH Customer_Transactions AS
+(
+SELECT *
+FROM dbo.customer_transactions1
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions2
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions3
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions4
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions5
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions6
+
+)
+
+SELECT Rb.customer_id, MIN(Rb.[Running Balance]) AS [Minimum Running Balance], MAX(Rb.[Running Balance]) AS [Maximum Running Balance], AVG(Rb.[Running Balance]) AS [Average Running Balance]
+FROM
+(
+SELECT customer_id, txn_date, txn_type, txn_amount, 
+SUM(
+CASE WHEN txn_type = 'deposit' THEN txn_amount ELSE -txn_amount END)
+OVER(PARTITION BY customer_id ORDER BY txn_date) AS [Running Balance]
+FROM Customer_Transactions
+)Rb
+GROUP BY Rb.customer_id
+
+````
+![Screen Shot 2023-06-17 at 9 59 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/1666f6d0-15d3-42e2-9a4e-727f3a46f7d2)
+
 
 
 ***Click [here]
