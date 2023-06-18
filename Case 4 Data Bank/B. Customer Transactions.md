@@ -163,7 +163,136 @@ ORDER BY transact.month
 ![Screen Shot 2023-06-16 at 5 54 08 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/4cc12a48-96b3-43ee-875d-73717080b067)
 
 ### 4. What is the closing balance for each customer at the end of the month?
+We will first create the CTE for the Customer Transactions data as the dataset is too large
 
+Then we use a subquery to aggregate the customer transactions by the customer and the month they made the transaction
+
+Within the subquery, we will use the date add function to truncate the date column to have it start at the beginning of the month so that we can group the transactions by month.
+
+Then we will use sum to get the total transactions and within that we will distinguish the deposits and the withdrawals with a case statement. Lastly we will use the main outer query to pull the closing balance based on the month
+
+````sql
+
+WITH Customer_Transactions AS
+(
+    SELECT *
+FROM dbo.customer_transactions1
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions2
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions3
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions4
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions5
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions6
+
+),
+
+
+month_transaction AS(
+    SELECT customer_id, DATEADD(MONTH, DATEDIFF(MONTH, 0, txn_date), 0) AS [Start of the month],
+    SUM(CASE WHEN txn_type = 'Deposit' THEN txn_amount ELSE -txn_amount END) AS total_amount
+    FROM customer_transactions
+    GROUP By customer_id, txn_amount, txn_type, DATEADD(MONTH, DATEDIFF(MONTH, 0, txn_date), 0) 
+
+);
+
+SELECT customer_id, DATEPART(MONTH, [Start of the month]) AS MONTH, DATENAME(MONTH, [Start of the month]) AS [Name of the month],
+ SUM(total_amount) AS [Closing Balance]
+FROM month_transaction
+GROUP BY customer_id, DATEPART(MONTH, [Start of the month]),  DATENAME(MONTH, [Start of the month])
+
+````
+**Answer:**
+
+
+![Screen Shot 2023-06-17 at 8 32 26 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/6f81b8e2-7c5a-4d67-a742-2e87136cf2f1)
+
+
+### 5. What is the percentage of customers who increase their closing balance by more than 5%?
+
+We will first create the CTE for the Customer Transactions data as the dataset is too large
+
+
+Then we will create a CTE to calculate the total transactions towards the end of the month
+
+Afterwords we will create a CTE to calculate the closing balance of each customer per month and the percentage increase in the closing balance for each customer.
+
+Finally our main outer query will calculate the percentage of customers whose closing balance increased 5% compared to the previous month
+
+
+````SQL
+
+WITH Customer_Transactions AS
+(
+    SELECT *
+FROM dbo.customer_transactions1
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions2
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions3
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions4
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions5
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions6
+
+),
+
+Monthly_transactions AS
+(
+    SELECT customer_id, EOMONTH(txn_date) AS end_date,
+    SUM(CASE WHEN txn_type = 'Deposit' THEN txn_amount ELSE -txn_amount END) AS total_amount
+    FROM customer_transactions
+    GROUP BY customer_id, EOMONTH(txn_date)
+),
+
+EOMclosingbalancepct AS(
+
+SELECT pct.customer_id, pct.end_date, pct.[Closing Balance], COALESCE(LAG(pct.[Closing Balance]) OVER(PARTITION BY customer_id ORDER BY end_date),0) AS [Previous Closing Balance],
+COALESCE(100 * (pct.[Closing Balance] - LAG(pct.[Closing Balance]) OVER (PARTITION BY customer_id ORDER BY end_date))/ COALESCE(LAG(pct.[Closing Balance]) OVER(PARTITION BY customer_id ORDER BY end_date),0),0) AS [Percent Increase]
+FROM
+(
+SELECT customer_id, end_date,
+ SUM(total_amount) AS [Closing Balance]
+FROM Monthly_transactions
+GROUP BY customer_id, end_date
+)pct
+)
+
+SELECT CAST(100.0 * COUNT(DISTINCT pc.customer_id) / (SELECT COUNT(DISTINCT customer_id) FROM customer_transactions) AS FLOAT) AS pct_customers
+FROM EOMclosingbalancepct AS pc
+--INNER JOIN customer_transactions AS ct ON pc.customer_id = ct.customer_id
+WHERE [Percent Increase] > 5;
+
+````
+**Answer:**
+
+
+53.8 percent of the customers had their closing balance increase by 5% compared to the previous month.
 
 
 ***Click [here]
