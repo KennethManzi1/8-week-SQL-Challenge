@@ -210,7 +210,7 @@ FROM dbo.customer_transactions6
 ),
 ````
 
-we will then create the CTE to get the total monthly transactions for each customer for each month. This CTE is the Monthly_transactions CTE.
+We will then create the CTE to get the total monthly transactions for each customer for each month. This CTE is the Monthly_transactions CTE.
 
 After that we will create the CTE to get the running balance and later calculate the month end balance for each customer. That CTE is called the RBalance CTE.
 
