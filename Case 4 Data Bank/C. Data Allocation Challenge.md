@@ -18,6 +18,9 @@
 
 
 
+
+
+
 We will first create the CTE for the Customer Transactions data as the dataset is too large
 
 Then we will first create a query that gets running customer balance column that includes the impact each transaction
