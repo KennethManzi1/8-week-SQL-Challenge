@@ -23,7 +23,10 @@
 
 We will first create the CTE for the Customer Transactions data as the dataset is too large
 
-Then we will first create a query that gets running customer balance column that includes the impact each transaction
+Then we will first create a query that gets running customer balance column that includes the impact each transaction.
+
+We will be using SUM() Over() to get the running total balance of each customer and assigning negative values for withdrawals and purchases.
+
 ````sql
 WITH Customer_Transactions AS
 (
@@ -66,7 +69,53 @@ GROUP BY customer_id,  DATEPART(MONTH, txn_date),  DATENAME(MONTH, txn_date)
 
 ![Screen Shot 2023-06-17 at 9 50 23 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/0759b213-115e-4e76-8d25-890183893ed1)
 
+***
 
+Next thing we will need to do is to get customer balance at the end of each month.
+
+Again since we need the customer transaction data, we will need the CTE again to write the query to get the customer closing balance
+
+````sql
+
+WITH Customer_Transactions AS
+(
+SELECT *
+FROM dbo.customer_transactions1
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions2
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions3
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions4
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions5
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions6
+
+)
+
+
+SELECT customer_id, DATEPART(MONTH, txn_date) AS [Month], DATENAME(MONTH, txn_date) AS [Name of the Month],
+SUM(
+CASE WHEN txn_type = 'deposit' THEN txn_amount ELSE -txn_amount END) AS [Closing Customer Balance]
+FROM Customer_Transactions
+GROUP BY customer_id,  DATEPART(MONTH, txn_date),  DATENAME(MONTH, txn_date)
+
+````
+
+**Answer:**
+
+![Screen Shot 2023-06-17 at 9 55 33 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/3bce184e-5d26-4b5a-ad5f-204e4cb7c262)
 
 
 ***Click [here]
