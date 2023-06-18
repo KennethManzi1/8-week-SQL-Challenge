@@ -210,6 +210,44 @@ FROM dbo.customer_transactions6
 ),
 ````
 
+we will then create the CTE to get the total monthly transactions for each customer for each month. This CTE is the Monthly_transactions CTE.
+After that we will create the CTE to get the running balance and later calculate the month end balance for each customer. That CTE is called the RBalance CTE.
+Lastly with the data gathered, we will create a query to calculate the data required per month by finding the total monthly ending balances for each customer.
+
+````SQL
+
+Monthly_transactions AS
+(
+    SELECT customer_id, txn_date, DATEPART(MONTH, txn_date) AS [Month of transaction], DATENAME(MONTH, txn_date) AS [Month Name], txn_type,
+    SUM(CASE WHEN txn_type = 'Deposit' THEN txn_amount ELSE -txn_amount END) AS total_amount
+    FROM customer_transactions
+    GROUP BY customer_id, txn_date, txn_type
+),
+
+RBalance AS
+(
+SELECT Running_Balance.customer_id, Running_Balance.[Month of transaction], Running_Balance.[Month Name], MAX(Running_Balance.[Running Balance]) AS [Month End Balance]
+FROM
+(
+SELECT customer_id, txn_date, [Month of transaction], [Month Name], [total_amount], 
+SUM([total_amount]) OVER(PARTITION BY customer_id ORDER BY txn_date) AS [Running Balance]
+FROM Monthly_transactions
+)Running_Balance
+GROUP BY  Running_Balance.customer_id, Running_Balance.[Month of transaction], [Month Name]
+)
+
+SELECT [Month of transaction], [Month Name], SUM([Month End Balance]) AS [Data Allocated]
+FROM RBalance
+GROUP BY [Month of transaction], [Month Name]
+ORDER BY [Data Allocated] DESC;
+````
+
+***Answer
+
+![Screen Shot 2023-06-18 at 1 30 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/0ffb9f8e-6bc5-4ad6-be16-49496b2b3374)
+
+
+
 ***Click [here]
 
 for solution for D.  Extra Challenge
