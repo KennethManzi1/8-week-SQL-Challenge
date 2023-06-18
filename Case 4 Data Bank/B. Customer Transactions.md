@@ -295,7 +295,5 @@ WHERE [Percent Increase] > 5;
 53.8 percent of the customers had their closing balance increase by 5% compared to the previous month.
 
 
-***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/C.%20Data%20Allocation%20Challenge.md)
-
-for solution for C. Data Allocation Challenge
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/C.%20Data%20Allocation%20Challenge.md) for solution for C. Data Allocation Challenge
 
