@@ -18,7 +18,7 @@
 
 
 
-
+***
 
 
 We will first create the CTE for the Customer Transactions data as the dataset is too large
