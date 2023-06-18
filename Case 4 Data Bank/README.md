@@ -85,7 +85,7 @@ customer balance at the end of each month
 minimum, average and maximum values of the running balance for each customer
 Using all of the data available - how much data would have been required for each option on a monthly basis?
 
-View my solution [here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/C.%20Data%20Allocation%20Challenge.md)
 
 ***
 
