@@ -176,7 +176,7 @@ GROUP BY Rb.customer_id
 
 ***
 
-### Option 1  data is allocated based off the amount of money at the end of the previous month
+### Option 1: data is allocated based off the amount of money at the end of the previous month
 ### How much data would have been required on a monthly basis?
 
 We will first create the CTE for the Customer Transactions data as the dataset is too large
@@ -349,6 +349,83 @@ anamolies that may affect the bank. In addition to collecting data on the negati
 The bank should also collect more data for the positive balance especially for January so that the bank can collect
 insights that could help them improve their business.
 
+***
+
+### Option 3: data is updated real-time
+
+We will first create the CTE for the Customer Transactions data as the dataset is too large
+
+````SQL
+
+WITH Customer_Transactions AS
+(
+SELECT *
+FROM dbo.customer_transactions1
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions2
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions3
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions4
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions5
+UNION ALL
+
+SELECT *
+FROM dbo.customer_transactions6
+
+),
+````
+
+We then will create the CTE to get the total monthly transactions for each customer for each month.
+
+Next we will create the CTE to get the running balance of each month by calculating the running totals of the transactions using the SUM() OVER() clause.
+
+Lastly with the data gathered, we will create a query to calculate the data in real-time.
+
+
+````SQL
+Monthly_transactions AS
+(
+    SELECT customer_id, txn_date, DATEPART(MONTH, txn_date) AS [Month of transaction], DATENAME(MONTH, txn_date) AS [Month Name], txn_type, txn_amount,
+    SUM(CASE WHEN txn_type = 'Deposit' THEN txn_amount ELSE -txn_amount END) AS total_amount
+    FROM customer_transactions
+    GROUP BY customer_id, txn_date, DATEPART(MONTH, txn_date), DATENAME(MONTH, txn_date), txn_type, txn_amount
+),
+
+RBalance AS
+(
+
+SELECT customer_id, [Month of transaction], [Month Name], [total_amount], 
+SUM([total_amount]) OVER(PARTITION BY customer_id ORDER BY txn_date) AS [Running Balance]
+FROM Monthly_transactions
+
+)
+
+
+SELECT [Month of transaction], [Month Name], SUM([Running Balance]) AS [Data Required Per Month]
+FROM RBalance
+GROUP BY [Month of transaction], [Month Name]
+ORDER BY [Data Required Per Month] DESC;
+
+````
+
+![Screen Shot 2023-06-18 at 10 24 44 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/572369eb-f077-4378-b6ea-787f34515dcb)
+
+
+The data required for the month of March is significantly higher than for the other months. This shows that there were more transactions happening in March than in the other months. 
+
+April too also had a high data requirement which means there were also alot of data transactions happening in that month as well.
+
+The data required for January and February are positive, indicating that there might be some customers who have a higher balance at the beginning of the year.
 
 
 ***Click [here]
