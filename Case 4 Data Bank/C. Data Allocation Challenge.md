@@ -429,6 +429,6 @@ The data required for January and February are positive, indicating that there m
 
 
 
-***Click [here]
+***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/D.%20Extra%20Challenge.md)
 for solution for D.  Extra Challenge
 
