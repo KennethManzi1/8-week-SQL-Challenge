@@ -297,7 +297,9 @@ FROM dbo.customer_transactions6
 
 
 We will create the CTE to get the total monthly transactions for each customer for each month. This CTE is the monthly transactions CTE
-Next we will create the CTE to get the running balance and later calculate the average running customer balance per customer for each month. This CTE is called the Rbalance CTE
+
+Next we will create the CTE to get the running balance and later calculate the average running customer balance per customer for each month. 
+This CTE is called the Rbalance CTE
 
 Lastly with the data gathered, we will create a query to calculate the data required per month by finding the total monthly average balances for each customer.
 
