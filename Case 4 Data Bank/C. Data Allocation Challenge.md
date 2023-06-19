@@ -428,7 +428,7 @@ April too also had a high data requirement which means there were also alot of d
 The data required for January and February are positive, indicating that there might be some customers who have a higher balance at the beginning of the year.
 
 
-***Click [here]
 
+***Click [here]
 for solution for D.  Extra Challenge
 
