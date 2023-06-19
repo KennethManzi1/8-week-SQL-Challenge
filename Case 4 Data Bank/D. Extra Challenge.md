@@ -61,8 +61,11 @@ daily_interest AS(
 )
 
 SELECT customer_id, DATEFROMPARTS(YEAR([Start Date of The Month]), MONTH([Start Date of The Month]), 1) AS [First day of month], [Difference of days in month], [Daily Interest Data],
-ROUND(SUM([Daily Interest Data] * [Difference of days in month]), 2) AS [Data Required]
+ROUND(SUM([Daily Interest Data] * [Difference of days in month]), 3) AS [Data Required]
 FROM daily_interest
 GROUP BY customer_id, DATEFROMPARTS(YEAR([Start Date of The Month]), MONTH([Start Date of The Month]), 1), [Difference of days in month], [Daily Interest Data]
 ORDER BY [Data Required]
 ````
+![Screen Shot 2023-06-19 at 4 48 36 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/493e990b-9043-4173-90cf-17a54de7405c)
+
+
