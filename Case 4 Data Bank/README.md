@@ -100,7 +100,7 @@ Special notes:
 Data Bank wants an initial calculation which does not allow for compounding interest, however they may also be interested in a daily compounding interest calculation so you can try to perform this calculation if you have the stamina!
 
 
-View my solution [here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%204%20Data%20Bank/D.%20Extra%20Challenge.md)
 
 ***
 
