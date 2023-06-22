@@ -1,5 +1,5 @@
 ---Case 4
---Creating the Data Mart Database
+--Creating the Data Bank Database
 
 
 
@@ -11,11 +11,11 @@ IF NOT EXISTS (
       FROM sys.databases
       WHERE name = N'TutorialDB'
       )
-   CREATE DATABASE [Data Mart];
+   CREATE DATABASE [Data Bank];
 GO
 
 IF SERVERPROPERTY('ProductVersion') > '12'
-   ALTER DATABASE [Data Mart] SET QUERY_STORE = ON;
+   ALTER DATABASE [Data Bank] SET QUERY_STORE = ON;
 GO
 
 
