@@ -47,7 +47,7 @@ Each record in the dataset is related to a specific aggregated slice of the unde
 ## Question and Solution
 
 
-## 🧼 A. Data Cleansing Steps
+## A. Data Cleansing Steps
 
 In a single query, perform the following operations and generate a new table in the `data_mart` schema named `clean_weekly_sales`:
 - Convert the `week_date` to a `DATE` format
@@ -68,11 +68,11 @@ In a single query, perform the following operations and generate a new table in 
 - Ensure all `null` string values with an "unknown" string value in the original `segment` column as well as the new `age_band` and `demographic` columns
 - Generate a new `avg_transaction` column as the sales value divided by transactions rounded to 2 decimal places for each record
 
-View my solution [here] 
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%205%20Data%20Mart/A.%20Data%20Cleansing%20Steps.md)
 
 ***
 
-## 🛍 B. Data Exploration
+## B. Data Exploration
 
 **1. What day of the week is used for each week_date value?**
 
@@ -99,7 +99,7 @@ View my solution [here]
 
 ***
 
-## 🧼 C. Before & After Analysis
+## C. Before & After Analysis
 
 This technique is usually used when we inspect an important event and want to inspect the impact before and after a certain point in time.
 
