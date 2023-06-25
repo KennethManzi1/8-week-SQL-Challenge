@@ -105,7 +105,7 @@ In a single query we will create a CTE table called clean_weekly_sales that is i
 We will create the following columns using the following actions below:
 - Weekdate column. CASTING the week_date Column as a date.
 - Weeknumber column: We will use DATEPART to pull the week of the date.
-- Month_Number column: We will use the DatePART to pull the month of the date.
+- Month_Number column: We will use the DATEPART to pull the month of the date.
 - Calender_year column: Using DATEPART to pull the year digit of the date.
 - Region column: Pulling from Weeklysales CTE.
 - Platform column: Pulling from Weeklysales CTE.
