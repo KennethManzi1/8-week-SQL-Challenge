@@ -317,7 +317,7 @@ FROM before_after_sales122020
 - Based on the data, we can see that New customer sales had a small growth of 1.01% in sales in 2020.
 - However, Guest and existing customer sales had a small decline of 3% and 2.27% respectively in 2020.
 
-- Based on the data, one area to focus on to improve sales would be in the demographics especially for unknown. Figure out which people fit in the unknown category whether they are single or not and work to invest in improving the sales within the demographics.
+- Based on the data, one area to focus on to improve sales would be in the demographics especially for unknown. Figuring which people that are in the unknown category fit in a different category such as "single", "widowed" or another category and work to invest in improving the sales within these demographics.
 
 - Furthermore the team would need to find ways to keep their guest and existing customers more enticed with their products as the decline in sales for guest and existing customers means that they are no longer happy with using these products or they found an alternative and decided to stick with that so that may mean improving the quality of the product or try to get feedback on the current customers as to what other improvements they would like to see.
 
