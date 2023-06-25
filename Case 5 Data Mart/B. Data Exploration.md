@@ -168,7 +168,7 @@ ORDER BY Calender_year
 - In 2019 there were 365639285 total transactions.
 - In 2020 there were 375813651 total transactions.
 
-## What is the total sales for each region for each month?
+## 4. What is the total sales for each region for each month?
 
 ````sql
 SELECT SUM(ts.sales) AS [Total Sales], ts.region, ts.Month_number
@@ -184,3 +184,43 @@ ORDER BY ts.Month_number
 **Answer:**
 
 ![Screen Shot 2023-06-24 at 10 07 53 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/1b5f36ad-0371-40dc-a27c-3e930f4d7887)
+
+
+## 5. What is the total count of transactions for each platform
+
+````sql
+SELECT platform, SUM(transactions) AS [Total transactions]
+FROM clean_weekly_sales
+GROUP BY platform
+````
+
+**Answer:**
+
+![Screen Shot 2023-06-24 at 10 10 31 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/c85f18ac-1259-4d9b-88bf-89b58d05b3c6)
+
+- Retail has a total of 1081934227 transactions
+- Shopify has a total of 5925169 transactions
+
+## 6. What is the percentage of sales for Retail vs Shopify for each month?
+
+````sql
+SELECT perc.Calender_year, perc.Month_number, ROUND(100 * MAX(CASE WHEN platform = 'Shopify' Then perc.[monthly sales]
+ELSE NULL END)/ SUM([monthly sales]), 2) AS [Shopify Percentage],
+
+ROUND(100 * MAX(CASE WHEN platform = 'Retail' Then perc.[monthly sales]
+ELSE NULL END)/ SUM([monthly sales]), 2) AS [Retail Percentage]
+
+FROM
+(
+SELECT Calender_year, Month_number, platform, SUM(CAST(Sales AS float)) AS [monthly sales]
+FROM clean_weekly_sales
+GROUP BY Calender_year, Month_number, platform
+)perc 
+GROUP BY perc.Calender_year, perc.Month_number
+ORDER BY perc.Month_number
+````
+**Answer:**
+![Screen Shot 2023-06-24 at 10 12 13 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e3b6f1e0-73cc-4a8b-89eb-c378a2585b4d)
+
+## 7. What is the percentage of sales by demographic for each year in the dataset?
+
