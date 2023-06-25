@@ -123,7 +123,7 @@ FROM clean_weekly_sales
 Here we use the DATENAME() date function to get the name of the week day in this case it is Monday
 
 
-###2. What range of week numbers are missing from the dataset?
+## 2. What range of week numbers are missing from the dataset?
 
 To solve this problem, we can create CTE for the range of the week numbers where we call the CTE within itself using Recursion to get the week numbers that are missing
 
