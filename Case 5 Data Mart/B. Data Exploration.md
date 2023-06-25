@@ -121,3 +121,10 @@ FROM clean_weekly_sales
 ![Screen Shot 2023-06-24 at 9 48 26 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/714a5c26-8b0f-48df-897d-526beab3a369)
 
 Here we use the DATENAME() date function to get the name of the week day in this case it is Monday
+
+
+
+
+
+
+
