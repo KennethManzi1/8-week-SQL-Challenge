@@ -133,6 +133,8 @@ FROM clean_weekly_sales
 WHERE week_date = '2020-06-15'
 
 ````
+![Screen Shot 2023-06-24 at 11 06 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/f6fe2331-f0b4-4e8c-98e1-66ee28824c15)
+
 From this query we can see that the weekdate falls under week 25.
 
 
