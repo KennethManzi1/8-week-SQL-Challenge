@@ -168,4 +168,19 @@ ORDER BY Calender_year
 - In 2019 there were 365639285 total transactions.
 - In 2020 there were 375813651 total transactions.
 
+## What is the total sales for each region for each month?
 
+````sql
+SELECT SUM(ts.sales) AS [Total Sales], ts.region, ts.Month_number
+FROM
+(
+SELECT CAST(sales AS FLOAT) AS sales, region, Month_number
+FROM clean_weekly_sales
+)ts
+GROUP BY ts.region, ts.Month_number
+ORDER BY ts.Month_number
+
+````
+**Answer:**
+
+![Screen Shot 2023-06-24 at 10 07 53 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/1b5f36ad-0371-40dc-a27c-3e930f4d7887)
