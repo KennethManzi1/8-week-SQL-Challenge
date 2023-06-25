@@ -317,3 +317,11 @@ FROM before_after_sales122020
 - Based on the data, we can see that New customer sales had a small growth of 1.01% in sales in 2020.
 - However, Guest and existing customer sales had a small decline of 3% and 2.27% respectively in 2020.
 
+- Based on the data, one area to focus on to improve sales would be in the demographics especially for unknown. Figure out which people fit in the unknown category whether they are single or not and work to invest in improving the sales within the demographics.
+
+- Furthermore the team would need to find ways to keep their guest and existing customers more enticed with their products as the decline in sales for guest and existing customers means that they are no longer happy with using these products or they found an alternative and decided to stick with that so that may mean improving the quality of the product or try to get feedback on the current customers as to what other improvements they would like to see.
+
+- As retail had a drastic decline in sales while shopify improved their sales, this may mean that customers prefer to shop these products online more than buying it on foot. The team can fully focus their efforts on shopify and slowly abandon their retail efforts as there is a better ROI on sales growth in that front or they can offer discounts/coupons on retail products to convince customers to shop for retail.
+
+- For region, as Europe only had a growth of sales of 4.73% while the other regions all had declines, this may mean that some customers may not have access to the stores to buy those products or they lost interest in those products. Gaining feedback from customers will help on focusing on areas of improvement for these products and their retail and shopify stores across all the regions
+
