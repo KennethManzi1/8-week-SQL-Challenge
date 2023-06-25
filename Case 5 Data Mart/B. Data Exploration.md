@@ -123,8 +123,32 @@ FROM clean_weekly_sales
 Here we use the DATENAME() date function to get the name of the week day in this case it is Monday
 
 
+###2. What range of week numbers are missing from the dataset?
+
+To solve this problem, we can create CTE for the range of the week numbers where we call the CTE within itself using Recursion to get the week numbers that are missing
 
 
+````sql
+WITH missing_weeknum AS(
+SELECT 1 AS week_number
+UNION ALL
+SELECT week_number + 1
+FROM missing_weeknum
+WHERE week_number < 52
+)
 
+SELECT *
+FROM missing_weeknum
+WHERE week_number NOT IN(
+  SELECT DISTINCT week_number
+  FROM clean_weekly_sales
+) option (maxrecursion 1000)
 
+````
+
+**Answer:**
+
+![Screen Shot 2023-06-24 at 9 57 39 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/07148554-cb30-406c-a134-3301002caa40)
+
+We don't have 28 weeks of data between weeks 1-12 and 13-28
 
