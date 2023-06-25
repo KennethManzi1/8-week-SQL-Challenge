@@ -125,9 +125,14 @@ clean_weekly_sales AS(
 
 ### 1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
 
-````sql
+We first need to get the week_number for the date 2020-06-15 so that we can come up with the ranges for the before 2020-06-15 and after 2020-06-15
 
+````sql
+SELECT DISTINCT week_number 
+FROM clean_weekly_sales 
+WHERE week_date = '2020-06-15'
 
 ````
+From this query we can see that the weekdate falls under week 25.
 
 **Answer:**
