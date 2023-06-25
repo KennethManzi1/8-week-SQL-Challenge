@@ -113,7 +113,7 @@ Using this analysis approach - answer the following questions:
 
 **3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?**
 
-View my solution [here] 
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%205%20Data%20Mart/C.%20Before%20&%20After%20Analysis.md)
 
 ***
 
