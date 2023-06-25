@@ -135,4 +135,37 @@ WHERE week_date = '2020-06-15'
 ````
 From this query we can see that the weekdate falls under week 25.
 
+
+
+So now we can create a CTE for the total sales filtered before and after week 25.
+
+````sql
+tsales AS(
+SELECT week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 21 and 28)
+GROUP BY week_date, week_number
+),
+
+````
+Then we will create a CTE for both before and after week 25 sales
+````sql
+before_after_sales AS(
+    SELECT 
+    SUM(CASE WHEN week_number BETWEEN 21 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 28 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales
+)
+
+SELECT [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales
+
+
+````
+
 **Answer:**
+![Screen Shot 2023-06-24 at 11 03 58 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/55c39ca4-35e1-45a5-a302-c5c9d72ef646)
+
+Here we can see that there was a decline of sales after week 25 which was at a 0.3% decline.
+
+
