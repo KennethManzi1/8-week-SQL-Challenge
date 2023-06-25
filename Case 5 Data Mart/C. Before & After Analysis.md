@@ -200,12 +200,12 @@ before_after_sales12 AS(
     FROM tsales12
 )
 
-
 SELECT [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
 FROM before_after_sales12
+
 ````
-![Screen Shot 2023-06-24 at 11 25 31 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e25f051c-99c2-426b-b2f3-53bd7f86e732)
 
+![Screen Shot 2023-06-24 at 11 37 43 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e2b5a537-41ff-477e-b6df-f7554e709375)
 
-Here we can see that there was a decline of sales twelve weeks after week 25 which was at a 0.34% decline.
+ere we can see that there was a decline of sales twelve weeks after week 25 which was at a 2.14% decline in the year 2020
 
