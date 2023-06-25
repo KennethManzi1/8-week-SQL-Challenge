@@ -151,6 +151,7 @@ GROUP BY week_date, week_number
 
 ````
 Then we will create a CTE for both before and after week 25 sales
+
 ````sql
 before_after_sales4 AS(
     SELECT 
@@ -168,6 +169,43 @@ FROM before_after_sales4
 **Answer:**
 ![Screen Shot 2023-06-24 at 11 03 58 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/55c39ca4-35e1-45a5-a302-c5c9d72ef646)
 
-Here we can see that there was a decline of sales after week 25 which was at a 0.3% decline.
+Here we can see that there was a decline of sales four weeks after week 25 which was at a 0.3% decline.
 
+
+***
+
+### 2. What about the entire 12 weeks before and after?
+
+We will do the same thing as part 1 except now we will go 12 weeks before week 25 and 12 weeks after week 25 instead of 4 weeks before/after
+
+So now we can create a CTE for the total sales filtered twelve weeks before week 25 and twelve weeks after week 25.
+
+````sql
+tsales12 AS(
+SELECT week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37)
+GROUP BY week_date, week_number
+),
+````
+
+Then we will create a CTE for both before and after week 25 sales
+
+````sql
+
+before_after_sales12 AS(
+    SELECT 
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales12
+)
+
+
+SELECT [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales12
+````
+![Screen Shot 2023-06-24 at 11 25 31 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e25f051c-99c2-426b-b2f3-53bd7f86e732)
+
+
+Here we can see that there was a decline of sales twelve weeks after week 25 which was at a 0.34% decline.
 
