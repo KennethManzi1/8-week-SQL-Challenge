@@ -224,3 +224,61 @@ ORDER BY perc.Month_number
 
 ## 7. What is the percentage of sales by demographic for each year in the dataset?
 
+````sql
+SELECT perc.Calender_year, ROUND(100 * MAX(CASE WHEN Demographic = 'Couples' Then perc.[Yearly sales]
+ELSE NULL END)/ SUM([Yearly sales]), 2) AS [Sales Percentage by Couples],
+
+ROUND(100 * MAX(CASE WHEN Demographic = 'Families' Then perc.[Yearly sales]
+ELSE NULL END)/ SUM([Yearly sales]), 2) AS [Sales Percentage by Families],
+
+ROUND(100 * MAX(CASE WHEN Demographic = 'Unknown' Then perc.[Yearly sales]
+ELSE NULL END)/ SUM([Yearly sales]), 2) AS [Sales Percentage by Unknown]
+
+FROM
+(
+SELECT Calender_year, Demographic, SUM(CAST(Sales AS float)) AS [Yearly sales]
+FROM clean_weekly_sales
+GROUP BY Calender_year, Demographic
+)perc
+GROUP BY perc.Calender_year
+ORDER BY perc.Calender_year
+````
+**Answer:**
+
+![Screen Shot 2023-06-24 at 10 14 47 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/be6d8a73-198d-4059-b6bf-207da8dc2b34)
+
+## 8. Which age_band and demographic values contribute the most to Retail sales?
+
+````sql
+SELECT Age_band, Demographic, SUM(CAST(sales AS FLOAT)) AS [Sales in retail], 
+ROUND(100 * SUM(CAST(sales AS float)),2)/ (SELECT SUM(CAST(sales AS FLOAT))  FROM clean_weekly_sales) AS [Contribution]
+FROM clean_weekly_sales 
+WHERE platform = 'Retail'
+GROUP BY Age_band, Demographic
+ORDER BY [Sales in retail]
+````
+
+**Answer:**
+![Screen Shot 2023-06-24 at 10 16 35 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/9dbc62e7-72d4-4aa7-9de0-d6ce05c03bf4)
+
+## 9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
+
+- No we cannot use the avg_transaction column to find the average transaction size for each year because that is only calculating one sale per record divided by one transaction per record so that won't bring the right result because it will divide the sales and transactions per record.
+  
+- To calculate the average transaction size for each year for retail vs shopify, we will need to find the total number of sales and divide that by the total number of transactions to get the right result.
+
+
+````sql
+
+SELECT Calender_year, platform, ROUND(SUM(CAST(sales AS FLOAT))/ SUM(transactions), 2) AS [Average transaction size]
+FROM clean_weekly_sales 
+GROUP BY Calender_year, platform
+ORDER BY Calender_year
+
+````
+
+
+**Answer:**
+
+![Screen Shot 2023-06-24 at 10 21 10 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/d7620b68-a4f3-42aa-8c59-a4ecc5bfc464)
+
