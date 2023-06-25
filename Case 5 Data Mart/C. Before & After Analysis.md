@@ -145,7 +145,7 @@ So now we can create a CTE for the total sales filtered four weeks before week 2
 tsales4 AS(
 SELECT week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
 FROM clean_weekly_sales 
-WHERE (week_number BETWEEN 21 and 28)
+WHERE (week_number BETWEEN 21 and 28) and Calender_year = '2020'
 GROUP BY week_date, week_number
 ),
 
@@ -167,9 +167,10 @@ FROM before_after_sales4
 ````
 
 **Answer:**
-![Screen Shot 2023-06-24 at 11 03 58 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/55c39ca4-35e1-45a5-a302-c5c9d72ef646)
+![Screen Shot 2023-06-24 at 11 39 41 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/79d7a5c0-0230-42e6-9075-f87639d1c7c7)
 
-Here we can see that there was a decline of sales four weeks after week 25 which was at a 0.3% decline.
+
+Here we can see that there was a decline of sales four weeks after week 25 which was at a 1.15% decline in the year 2020
 
 
 ***
@@ -207,5 +208,5 @@ FROM before_after_sales12
 
 ![Screen Shot 2023-06-24 at 11 37 43 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e2b5a537-41ff-477e-b6df-f7554e709375)
 
-ere we can see that there was a decline of sales twelve weeks after week 25 which was at a 2.14% decline in the year 2020
+Here we can see that there was a decline of sales twelve weeks after week 25 which was at a 2.14% decline in the year 2020
 
