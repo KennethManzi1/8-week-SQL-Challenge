@@ -94,7 +94,7 @@ This case study is all about calculating metrics, growth and helping the busines
 
 <img src="https://user-images.githubusercontent.com/81607668/131437982-fc087a4c-0b77-4714-907b-54e0420e7166.png" alt="Image" width="500" height="520">
 
-View the case study [here](https://8weeksqlchallenge.com/case-study-5/) and my **solution** [here]
+View the case study [here](https://8weeksqlchallenge.com/case-study-5/) and my **solution** [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%205%20Data%20Mart)
 
 ### Business Task
 Data Mart is an online supermarket that specialises in fresh produce.
