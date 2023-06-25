@@ -128,6 +128,6 @@ Which areas of the business have the highest negative impact in sales metrics pe
 
 Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
 
-View my solution [here] 
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%205%20Data%20Mart/D.%20Bonus%20Question.md)
 
 ***
