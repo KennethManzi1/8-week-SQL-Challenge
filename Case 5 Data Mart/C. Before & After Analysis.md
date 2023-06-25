@@ -142,7 +142,7 @@ From this query we can see that the weekdate falls under week 25.
 So now we can create a CTE for the total sales filtered four weeks before week 25 and four weeks after week 25.
 
 ````sql
-tsales AS(
+tsales4 AS(
 SELECT week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
 FROM clean_weekly_sales 
 WHERE (week_number BETWEEN 21 and 28)
