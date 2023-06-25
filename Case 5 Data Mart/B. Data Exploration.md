@@ -152,3 +152,20 @@ WHERE week_number NOT IN(
 
 We don't have 28 weeks of data between weeks 1-12 and 13-28
 
+## 3. How many total transactions were there for each year in the dataset?
+````sql
+SELECT Calender_year, SUM(transactions) AS [total transactions]
+FROM clean_weekly_sales
+GROUP BY Calender_year
+ORDER BY Calender_year
+
+````
+
+**Answer:**
+![Screen Shot 2023-06-24 at 10 04 10 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ed193b13-1737-47fc-b5dd-f1b939b71462)
+
+In 2018 there were 346406460 total transactions
+In 2019 there were 365639285 total transactions
+In 2020 there were 375813651 total transactions.
+
+
