@@ -139,7 +139,7 @@ From this query we can see that the weekdate falls under week 25.
 
 
 
-So now we can create a CTE for the total sales filtered before and after week 25 in the year of 2020
+So now we can create a CTE for the total sales filtered four weeks before week 25 and four weeks after week 25.
 
 ````sql
 tsales AS(
