@@ -95,7 +95,7 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 **9. Can we use the `avg_transaction` column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?**
 
 
-View my solution [here] 
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%205%20Data%20Mart/B.%20Data%20Exploration.md)
 
 ***
 
