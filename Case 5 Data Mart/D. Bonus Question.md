@@ -237,8 +237,83 @@ ORDER BY [Growth/Decline in Sales]
 ![Screen Shot 2023-06-25 at 3 49 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8d6ba9a0-490f-4a4f-954a-40dd5f2528d8)
 
 
-From this data, we can see that retail had a drastic decline by 2.43% on 2020 while Shopify improved their growth in sales by 7.18% in 2020
+From this data, we can see that Retail had a drastic decline by 2.43% on 2020 while Shopify improved their growth in sales by 7.18% in 2020
 
 
 ***
+
+
+Next We will query by age_band
+
+````sql
+
+tsales122020 AS(
+SELECT Calender_year, Age_band, --region, platform, 
+--Demographic, --customer_type,
+week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37) and Calender_year = '2020'
+GROUP BY Calender_year, Age_band, week_date, week_number
+),
+
+
+before_after_sales122020 AS(
+    SELECT Calender_year, Age_band, --region, platform, 
+    --Demographic,-- customer_type,
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales122020
+    GROUP BY Calender_year, Age_band
+)
+
+SELECT [Calender_year], 
+Age_band, --region, platform, 
+--Demographic, --customer_type, 
+[Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales122020
+````
+
+![Screen Shot 2023-06-25 at 3 54 26 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/13f12471-1658-4e5a-b22e-85362d991b51)
+
+Based on this data, we can see that across all age types, there was a decline of sales with Young adults only having a small decline in sales while unknown has a major decline of sales at 3.10%
+
+***
+
+Finally we will now query by customer_type
+
+
+
+````sql
+
+tsales122020 AS(
+SELECT Calender_year, customer_type, --region, platform, 
+--Demographic, --Age_band,
+week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37) and Calender_year = '2020'
+GROUP BY Calender_year, customer_type, week_date, week_number
+),
+
+
+before_after_sales122020 AS(
+    SELECT Calender_year, customer_type, --region, platform, 
+    --Demographic,-- Age_band,
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales122020
+    GROUP BY Calender_year, customer_type
+)
+
+SELECT [Calender_year], 
+customer_type, --region, platform, 
+--Demographic, --Age_band, 
+[Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales122020
+````
+
+![Screen Shot 2023-06-25 at 3 59 24 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/1e4e0353-0973-4143-bcf0-57cfb92dbf81)
+
+
+- Based on the data, we can see that New customer sales had a small growth of 1.01% in sales in 2020.
+- However, Guest and existing customer sales had a small decline of 3% and 2.27% respectively in 2020.
 
