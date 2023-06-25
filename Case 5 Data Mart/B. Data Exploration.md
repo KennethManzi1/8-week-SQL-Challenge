@@ -103,7 +103,7 @@ clean_weekly_sales AS(
   sales
   FROM weeklysales
 
-)
+);
 
 ````
 ***
