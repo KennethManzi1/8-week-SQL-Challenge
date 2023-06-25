@@ -206,7 +206,44 @@ FROM before_after_sales12
 
 ````
 
+**Answer:**
+
 ![Screen Shot 2023-06-24 at 11 37 43 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e2b5a537-41ff-477e-b6df-f7554e709375)
 
 Here we can see that there was a decline of sales twelve weeks after week 25 which was at a 2.14% decline in the year 2020
 
+
+***
+
+### 3. How do the sale metrics for these 2 periods before and after compare with the previous years in 2018 and 2019?
+
+We will use the week 4 and week 12 CTEs that we created for parts 1 and 2 to grab the Sales time differences and the Growth and Decline in Sales for both 2018 and 2019
+
+We will Start the 4 week time periods with the year of 2018
+
+
+````sql
+
+tsales42018 AS(
+SELECT Calender_year, week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 21 and 28) and Calender_year = '2018'
+GROUP BY Calender_year, week_date, week_number
+),
+
+
+before_after_sales42018 AS(
+    SELECT Calender_year,
+    SUM(CASE WHEN week_number BETWEEN 21 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 28 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales42018
+    GROUP BY Calender_year
+)
+
+SELECT [Calender_year], [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales42018
+
+````
+![Screen Shot 2023-06-24 at 11 48 57 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/d634776b-bf85-47c1-abd2-b6f86ccaac45)
+
+Here we can see that there was a growth of sales at 0.19% on 2018 and this can be seen with a difference of $4,102,105
