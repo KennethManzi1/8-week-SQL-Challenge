@@ -152,15 +152,15 @@ GROUP BY week_date, week_number
 ````
 Then we will create a CTE for both before and after week 25 sales
 ````sql
-before_after_sales AS(
+before_after_sales4 AS(
     SELECT 
     SUM(CASE WHEN week_number BETWEEN 21 and 24 THEN [Total Sales] END) AS [Before Sales],
     SUM(CASE WHEN week_number BETWEEN 25 and 28 THEN [Total Sales] END) AS [After Sales]
-    FROM tsales
+    FROM tsales4
 )
 
 SELECT [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
-FROM before_after_sales
+FROM before_after_sales4
 
 
 ````
