@@ -323,5 +323,5 @@ FROM before_after_sales122020
 
 - As retail had a drastic decline in sales while shopify improved their sales, this may mean that customers prefer to shop these products online more than buying it on foot. The team can fully focus their efforts on shopify and slowly abandon their retail efforts as there is a better ROI on sales growth in that front or they can offer discounts/coupons on retail products to convince customers to shop for retail.
 
-- For region, as Europe only had a growth of sales of 4.73% while the other regions all had declines, this may mean that some customers may not have access to the stores to buy those products or they lost interest in those products. Gaining feedback from customers will help on focusing on areas of improvement for these products and their retail and shopify stores across all the regions
+- For region, as Europe only had a growth of sales of 4.73% while the other regions all had declines, this may mean that some customers may not have access to the stores to buy the products or they may have lost interest in them. Gaining feedback from customers will help on focusing on areas of improvement for these products and their retail and shopify stores across all the regions.
 
