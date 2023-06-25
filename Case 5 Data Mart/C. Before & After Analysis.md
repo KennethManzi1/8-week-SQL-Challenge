@@ -340,5 +340,7 @@ FROM before_after_sales122019
 
 ![Screen Shot 2023-06-25 at 12 08 03 AM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/3776e26c-96e6-43e1-980f-1de8eaaaab52)
 
-Here we can see that there was a Decline of sales at -0.3% on 2019 and this can be seen with a difference of -$20,740,294 which means that the sales drastically dropped 12 weeks after week 25 on 2019
+Here we can see that there was a Decline of sales at -0.3% on 2019 and this can be seen with a difference of -$20,740,294.
+
+This means that the sales drastically dropped 12 weeks after week 25 on 2019
 
