@@ -149,6 +149,6 @@ FROM clean_weekly_sales
 ![Screen Shot 2023-06-23 at 10 18 40 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/adb8b8ef-a34b-45e4-be45-fb60bba9f2ee)
 
 
-Click [here]
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%205%20Data%20Mart/B.%20Data%20Exploration.md)
 for solution for B. Data Exploration
 
