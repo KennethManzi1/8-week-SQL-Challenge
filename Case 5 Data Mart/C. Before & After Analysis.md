@@ -347,6 +347,6 @@ This means that the sales drastically dropped 12 weeks after week 25 on 2019.
 
 
 
-Click [here]
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%205%20Data%20Mart/D.%20Bonus%20Question.md)
 for solution for D. Bonus Question
 
