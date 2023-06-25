@@ -13,17 +13,187 @@
 
 ### Do you have any further recommendations for Danny’s team at Data Mart or any interesting insights based off this analysis?
 
-
----We will use the week 12 CTEs that we created for parts 1 and 2 to pull the sales metrics performance in 2020 based on the region,
---- platform, age_band, demographic, and customer_ type
---We will add customer_type in the Clean Weekly Sales CTE so that we can use it in the week 12 2020 CTEs as well 
-
-
-
+We will need both the Weekly Sales CTE and Clean weekly Sales CTE as we will be using both CTEs to help answer the questions
 
 ````sql
+WITH Weeklysales AS(
+
+SELECT DISTINCT *
+FROM dbo.weekly_sales
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales1
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales2
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales3
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales4
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales5
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales6
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales7
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales8
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales9
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales10
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales11
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales12
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales13
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales14
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales15
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales16
+
+UNION 
+SELECT DISTINCT *
+FROM dbo.weekly_sales17
+
+),
+
+
+clean_weekly_sales AS(
+  SELECT CAST(week_date AS DATE) AS [week_date],
+  DATEPART(WEEK, CAST(week_date AS DATE) ) AS [week_number],
+  DATEPART(MONTH, CAST(week_date AS DATE) ) AS [Month_number],
+  DATEPART(YEAR, CAST(week_date AS DATE) ) AS [Calender_year],
+  region,
+  platform,
+  segment,
+  CASE WHEN RIGHT(segment, 1) = '1' THEN 'Young Adults'
+  WHEN RIGHT(segment, 1) = '2' THEN 'Middle Aged'
+  WHEN RIGHT(segment, 1) = '3' THEN 'Retires'
+  ELSE 'Unknown' END AS [Age_band],
+  CASE WHEN LEFT(segment, 1 ) = 'C' THEN 'Couples'
+  WHEN LEFT(segment, 1 ) = 'F' THEN 'Families'
+  ELSE 'Unknown' END AS [Demographic],
+  transactions,
+  ROUND(CAST(Sales AS float)/transactions, 2) AS [Avg_transactions],
+  sales,
+  customer_type
+  FROM weeklysales
+
+),
+
 
 ````
 
 
+
+
+Next We will use the week 12 CTEs that we created for parts 1 and 2 to pull the sales metrics performance in 2020 based on the region, platform, age_band, demographic, and customer_ type
+
+We will add customer_type in the Clean Weekly Sales CTE so that we can use it in the week 12 2020 CTEs as well 
+
 **Answer:**
+
+Query below calculates the Growth/Decline in Sales based in the Demographics
+
+
+````sql
+
+tsales122020 AS(
+SELECT Calender_year, --region, platform, Age_band, 
+Demographic, --customer_type,
+week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37) and Calender_year = '2020'
+GROUP BY Calender_year, Demographic, week_date, week_number
+),
+
+
+before_after_sales122020 AS(
+    SELECT Calender_year, --region, platform, Age_band, 
+    Demographic,-- customer_type,
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales122020
+    GROUP BY Calender_year, Demographic
+)
+
+SELECT [Calender_year], 
+--region, platform, Age_band, 
+Demographic, --customer_type, 
+[Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales122020
+ORDER BY [Growth/Decline in Sales]
+````
+![Screen Shot 2023-06-25 at 3 33 33 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/7549a24b-5202-4116-8b45-99ae3c5f4e6e)
+
+Here we can see that that for unknown demographic, the sales drastically declined at 3.34% while sales for families declined at 1.82% and the sales for couples declined at 0.87% for the year of 2020.
+
+***
+
+Next we will Query based in Region
+
+````sql
+
+tsales122020 AS(
+SELECT Calender_year, region, --platform, Age_band, 
+--Demographic, --customer_type,
+week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37) and Calender_year = '2020'
+GROUP BY Calender_year, region, week_date, week_number
+),
+
+
+before_after_sales122020 AS(
+    SELECT Calender_year, region, --platform, Age_band, 
+    --Demographic,-- customer_type,
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales122020
+    GROUP BY Calender_year, region
+)
+
+SELECT [Calender_year], 
+region, --platform, Age_band, 
+--Demographic, --customer_type, 
+[Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales122020
+ORDER BY [Growth/Decline in Sales]
+
+````
+
+![Screen Shot 2023-06-25 at 3 42 01 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/200063c7-1748-4823-8b9d-7e27eea6e358)
