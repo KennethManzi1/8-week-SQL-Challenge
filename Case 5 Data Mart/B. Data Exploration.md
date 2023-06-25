@@ -282,3 +282,11 @@ ORDER BY Calender_year
 
 ![Screen Shot 2023-06-24 at 10 21 10 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/d7620b68-a4f3-42aa-8c59-a4ecc5bfc464)
 
+
+Click [here]
+for solution for C. Before & After Analysis
+
+
+
+
+
