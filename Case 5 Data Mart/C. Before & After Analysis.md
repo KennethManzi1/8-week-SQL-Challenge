@@ -264,7 +264,7 @@ GROUP BY Calender_year, week_date, week_number
 before_after_sales122018 AS(
     SELECT Calender_year,
     SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
-    SUM(CASE WHEN week_number BETWEEN 25 and 37THEN [Total Sales] END) AS [After Sales]
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
     FROM tsales122018
     GROUP BY Calender_year
 )
@@ -310,4 +310,35 @@ FROM before_after_sales42019
 
 
 Here we can see that there was a growth of sales at 0.1% on 2019 and this can be seen with a difference of $2,336,594
+
+
+
+--For the 2019 Week 12 Time Periods
+
+````sql
+
+
+tsales122019 AS(
+SELECT Calender_year, week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37) and Calender_year = '2019'
+GROUP BY Calender_year, week_date, week_number
+),
+
+
+before_after_sales122019 AS(
+    SELECT Calender_year,
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37 THEN [Total Sales] END) AS [After Sales]
+    FROM tsales122019
+    GROUP BY Calender_year
+)
+
+SELECT [Calender_year], [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales122019
+````
+
+![Screen Shot 2023-06-25 at 12 08 03 AM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/3776e26c-96e6-43e1-980f-1de8eaaaab52)
+
+Here we can see that there was a Decline of sales at -0.3% on 2019 and this can be seen with a difference of -$20,740,294
 
