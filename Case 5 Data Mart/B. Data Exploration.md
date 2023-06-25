@@ -112,11 +112,11 @@ clean_weekly_sales AS(
 
 
 ````sql
-
-
+SELECT DISTINCT  week_date, DATENAME(WEEKDAY, week_date) AS [Week_day]
+FROM clean_weekly_sales
 ````
-
 
 **Answer:**
 
+![Screen Shot 2023-06-24 at 9 48 26 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/714a5c26-8b0f-48df-897d-526beab3a369)
 
