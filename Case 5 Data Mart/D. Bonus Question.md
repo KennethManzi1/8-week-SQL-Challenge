@@ -234,7 +234,11 @@ ORDER BY [Growth/Decline in Sales]
 
 
 ````
+![Screen Shot 2023-06-25 at 3 49 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8d6ba9a0-490f-4a4f-954a-40dd5f2528d8)
+
 
 From this data, we can see that retail had a drastic decline by 2.43% on 2020 while Shopify improved their growth in sales by 7.18% in 2020
-![Screen Shot 2023-06-25 at 3 49 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8d6ba9a0-490f-4a4f-954a-40dd5f2528d8)
+
+
+***
 
