@@ -247,3 +247,34 @@ FROM before_after_sales42018
 ![Screen Shot 2023-06-24 at 11 48 57 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/d634776b-bf85-47c1-abd2-b6f86ccaac45)
 
 Here we can see that there was a growth of sales at 0.19% on 2018 and this can be seen with a difference of $4,102,105
+
+
+For the 2018 Week 12 Time Periods
+
+````sql
+
+tsales122018 AS(
+SELECT Calender_year, week_date, week_number, SUM(CAST(sales as FLOAT)) AS [Total Sales]
+FROM clean_weekly_sales 
+WHERE (week_number BETWEEN 13 and 37) and Calender_year = '2018'
+GROUP BY Calender_year, week_date, week_number
+),
+
+
+before_after_sales122018 AS(
+    SELECT Calender_year,
+    SUM(CASE WHEN week_number BETWEEN 13 and 24 THEN [Total Sales] END) AS [Before Sales],
+    SUM(CASE WHEN week_number BETWEEN 25 and 37THEN [Total Sales] END) AS [After Sales]
+    FROM tsales122018
+    GROUP BY Calender_year
+)
+
+SELECT [Calender_year], [Before Sales], [After Sales], [After Sales] - [Before Sales] AS [Sales Time Diff], ROUND(100*([After Sales] - [Before Sales])/ [Before Sales],2) AS [Growth/Decline in Sales]
+FROM before_after_sales122018
+
+````
+
+
+![Screen Shot 2023-06-24 at 11 53 03 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/7460c7e4-0dcf-4d3d-99f5-7baac6425ec5)
+
+Here we can see that there was a growth of sales at 1.63% on 2018 and this can be seen with a difference of $104,256,193
