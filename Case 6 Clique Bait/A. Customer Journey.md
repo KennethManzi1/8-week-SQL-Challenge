@@ -5,7 +5,7 @@
 ### 1. How many users are there?
 
 ````sql
----A Customer Journey Query
+
 
 
 ````
@@ -13,4 +13,4 @@
 
 **Answer:**
 
-**
+***
