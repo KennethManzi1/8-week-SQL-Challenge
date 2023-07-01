@@ -139,8 +139,7 @@ Clique Bait is an online seafood store. In this case study - you are required to
 
 ### Entity Relationship Diagram
 
-<img width="825" alt="image" src="https://user-images.githubusercontent.com/81607668/134619326-f560a7b0-23b2-42ba-964b-95b3c8d55c76.png">
-
+![Screen Shot 2023-06-28 at 4 50 21 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/240144cf-6d1d-4778-a6bb-9aa535f0b26a)
 
 
 ***
