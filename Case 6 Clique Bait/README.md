@@ -80,7 +80,7 @@ In this case study - you are required to support the founder and CEO Danny’s v
 **9. What are the top 3 products by purchases?**
 
 
-View my solution[here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/A.%20Digital%20Analysis.md)
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/A.%20Digital%20Analysis.md)
 
 ***
 
@@ -102,7 +102,7 @@ Which product had the highest view to purchase percentage?
 What is the average conversion rate from view to cart add?
 What is the average conversion rate from cart add to purchase?
 
-View my solution[here]
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/B.%20Product%20Funnel%20Analysis.md)
 
 
 
