@@ -99,14 +99,29 @@ Order By event_type
 
 ### 5. What is the percentage of visits which have a purchase event?
 
+Also done in Postgres SQL
+
+To answer this question, we will need the event name filtered by purchase from the event table and joined with the events
+
+In order to get the percentage of visits based on the purchase event.
+
 ````sql
 
-
+SELECT 100 * COUNT(DISTINCT e.visit_id)/
+    (SELECT COUNT(DISTINCT visit_id) FROM clique_bait.events) AS percentage_purchase
+FROM clique_bait.events AS e
+FULL JOIN clique_bait.event_identifier AS i
+ON e.event_type = i.event_type
+WHERE i.event_name = 'Purchase'
+LIMIT 10;
 
 ````
+![Screen Shot 2023-07-01 at 3 20 38 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/50b041bb-c463-405e-90f6-9b41b3fc408e)
 
 
 **Answer:**
+
+
 ***
 
 ### 6. What is the percentage of visits which view the checkout page but do not have a purchase event?
