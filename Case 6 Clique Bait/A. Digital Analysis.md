@@ -216,13 +216,43 @@ GROUP BY ph.product_category
 
 ### 9. What are the top 3 products by purchases?
 
-````sql
+- Done in Postgres.
+- We first made a CTE to grab the purchase_ids of the customers.
+- Then we made another CTE to grab the products that the customers added to cart.
+- Then we joined the CTEs together to write a query that pulled the number of purchases for the top 3 products
 
+
+````sql
+WITH purch AS (
+  SELECT DISTINCT visit_id AS purchase_id
+  FROM clique_bait.events
+  WHERE event_type = 3 --Purchase
+),
+cartpurch AS (
+  SELECT 
+    ph.page_name,
+    e.visit_id 
+  FROM clique_bait.events e
+  LEFT JOIN clique_bait.page_hierarchy ph ON ph.page_id = e.page_id
+  WHERE ph.product_id IS NOT NULL 
+    AND e.event_type = 2 -- Add to cart
+)
+
+SELECT 
+  cp.page_name as Product,
+  COUNT(ph.*) AS Number_of_products_purchased
+FROM purch AS ph
+LEFT JOIN cartpurch AS cp ON cp.visit_id = ph.purchase_id 
+GROUP BY cp.page_name
+ORDER BY COUNT(ph.*) DESC 
+LIMIT 3;
 
 
 ````
 
-
 **Answer:**
+
+
+![Screen Shot 2023-07-01 at 3 39 44 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/56c036e3-e241-44e9-af59-06c3f2f5655d)
 
 
