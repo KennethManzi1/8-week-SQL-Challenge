@@ -38,14 +38,39 @@ What metrics can you use to quantify the success or failure of each campaign com
 
 
 ````sql
+WITH user_records AS(
 
+SELECT u.user_id, e.visit_id, MIN(e.event_time) AS visit_start_time, c.campaign_name, SUM(CASE WHEN i.event_name = 'Page View' THEN 1 ELSE 0 END) AS page_views,
+SUM(CASE WHEN i.event_name = 'Add to Cart' THEN 1 ELSE 0 END) AS
+add_to_cart, SUM(CASE WHEN i.event_name = 'Ad Impression' THEN 1 ELSE 0 END) AS Ad_Impression, 
 
+SUM(CASE WHEN i.event_name = 'Add to Cart' THEN 1 ELSE 0 END) AS
+add_to_cart, SUM(CASE WHEN i.event_name = 'Purchase' THEN 1 ELSE 0 END) AS Purchase,
 
+SUM(CASE WHEN i.event_name = 'Ad Click' THEN 1 ELSE 0 END) AS Ad_Click,
+STRING_AGG(CASE WHEN i.event_name = 'Add to Cart' AND PH.product_id IS NOT NULL THEN PH.page_name ELSE NULL END, ', ' ORDER BY e.sequence_number) AS cart_products
+
+FROM clique_bait.users AS u
+LEFT JOIN clique_bait.events AS e ON u.cookie_id = e.cookie_id
+LEFT JOIN clique_bait.page_hierarchy AS PH ON e.page_id = ph.page_id
+LEFT JOIN clique_bait.event_identifier AS i ON e.event_type = i.event_type
+LEFT JOIN clique_bait.campaign_identifier AS c ON e.event_time BETWEEN c.start_date AND c.end_date
+  
+GROUP BY u.user_id, e.visit_id, c.campaign_name
+)
+
+SELECT *
+FROM user_records
+WHERE user_id = 1
+ORDER BY page_views
 
 
 ````
 
 
 **Answer:**
+
+
+![Screen Shot 2023-07-02 at 2 07 46 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/491c81bf-c3e3-4d78-94ec-59750f544c27)
 
 
