@@ -24,7 +24,23 @@ Does clicking on an impression lead to higher purchase rates?
 What is the uplift in purchase rate when comparing users who click on a campaign impression versus users who do not receive an impression? What if we compare them with users who just an impression but do not click?
 What metrics can you use to quantify the success or failure of each campaign compared to eachother?
 
+***
+
+- We will first create a CTE in postgres that pulls in the following records
+    - Within the CTE  will first pull User_id from the users table
+    - Then we will pull the Visit id from the events table
+    - Aterwords we will calculate the visit_start_time from the events table which is the earliest start time by using the MIN function for this field to get that early start time
+    - We will be pulling the Page_views, purchase and add_to_cart CASE statements that we created on question 8 from PART A to calculate the number of page views, purchases and add to cart items per customer.
+    - We will using the same case statements alongside sum to find the count of ad impressions and Same thing with Click as well.
+    - To get the cart orders, we will use a Postgres function called STRING_AGG which is an aggregate function of CONCAT that takes the records and concatenates them into a single string.
+    - So in this case we will use it to get the products that were added to cart and then separate them by a comma while organizing them based on a sequence number which is the order added to the cart.
+
+
+
 ````sql
+
+
+
 
 
 ````
@@ -32,7 +48,4 @@ What metrics can you use to quantify the success or failure of each campaign com
 
 **Answer:**
 
-
-
-***Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%203%20Foodie-Fi/B.%20Data%20Analysis%20Questions.md) for solution for B. Data Analysis Questions
 
