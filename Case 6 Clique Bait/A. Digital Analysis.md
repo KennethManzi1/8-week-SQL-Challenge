@@ -256,4 +256,4 @@ LIMIT 3;
 ![Screen Shot 2023-07-01 at 3 39 44 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/56c036e3-e241-44e9-af59-06c3f2f5655d)
 
 
-Click here for solution for B. Product Funnel Analysis
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/B.%20Product%20Funnel%20Analysis.md) for solution for B. Product Funnel Analysis
