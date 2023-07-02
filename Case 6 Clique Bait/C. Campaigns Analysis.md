@@ -1,4 +1,4 @@
-# Case Study #3 - Foodie-Fi
+# Case Study #6 - Clique Bait
 
 ## Solution - C. Campaigns Analysis
 
@@ -74,3 +74,14 @@ ORDER BY page_views
 ![Screen Shot 2023-07-02 at 2 07 46 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/491c81bf-c3e3-4d78-94ec-59750f544c27)
 
 
+### Five key insights from C that will help Danny and his team
+
+- Page views and clicks vs buying the product: Based on the data that the query generated, the team can identify how they can increase the cart-adds and purchases from the amount of page views viewed from customers and the amount of clicks. Essentially, the team can should work on going from bringing the customer to click the page and view it to the purchase based on the customer's preferences and if they like the product.
+  
+- Impressions vs clicks: Improving the impressions and clicks may lead to the customer wanting to buy the product after they viewed the campaign.
+  
+- Campaign impact: Which campaigns lead to better success in terms of the customers buying the products vs which campaigns lead to subpar results? Can compare campaign impacts to better figure out which campaigns were more impactful or less impactful in key areas such as clicks, views and impressions and can work on implementing improvements based on the feedback.
+  
+- Adding products to carts ---> purchase?: What is the impact of a customer adding a product to the cart after they view or click the campaign? Does the customer ultimately purchase the product or not?
+  
+- More emphasis on impressions and clicks as some users have lower impressions and clicks but have higher page views and cart ads.
