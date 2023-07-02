@@ -56,11 +56,11 @@ FROM dbo.customer_transactions6
 )
 
 
-SELECT customer_id, DATEPART(MONTH, txn_date) AS [Month], DATENAME(MONTH, txn_date) AS [Name of the Month],
+SELECT customer_id, txn_date, txn_type, txn_amount, 
 SUM(
-CASE WHEN txn_type = 'deposit' THEN txn_amount ELSE -txn_amount END) AS [Closing Customer Balance]
+CASE WHEN txn_type = 'deposit' THEN txn_amount ELSE -txn_amount END)
+OVER(PARTITION BY customer_id ORDER BY txn_date) AS [Running Balance]
 FROM Customer_Transactions
-GROUP BY customer_id,  DATEPART(MONTH, txn_date),  DATENAME(MONTH, txn_date)
 ````
 
 
