@@ -29,4 +29,6 @@
 
 **Answer:**
 
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/C.%20Campaigns%20Analysis.md) for solution to C. Campaigns Analysis
+
 ***
