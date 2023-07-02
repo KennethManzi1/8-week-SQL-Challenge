@@ -26,7 +26,7 @@ What metrics can you use to quantify the success or failure of each campaign com
 
 ***
 
-- We will first create a CTE in postgres that pulls in the following records
+- We will first create a CTE in Postgres that pulls in the following records
     - Within the CTE  will first pull User_id from the users table
     - Then we will pull the Visit id from the events table
     - Aterwords we will calculate the visit_start_time from the events table which is the earliest start time by using the MIN function for this field to get that early start time
