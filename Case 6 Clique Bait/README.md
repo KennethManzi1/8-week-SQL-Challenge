@@ -132,5 +132,5 @@ Generate a table that has 1 single row for every unique visit_id record and has 
     - What is the uplift in purchase rate when comparing users who click on a campaign impression versus users who do not receive an impression? What if we compare them with users who just an impression but do not click?
     - What metrics can you use to quantify the success or failure of each campaign compared to eachother?
 
-View my solution[here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/C.%20Campaigns%20Analysis.md)
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%206%20Clique%20Bait/C.%20Campaigns%20Analysis.md)
 ***
