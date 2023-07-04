@@ -49,9 +49,11 @@ purchased_visitors AS(
   WHERE event_type = 3 
 ),
 
---Then we will get the final CTE called product funnel that grabs everything from the first two CTES and then we calculate
--- the count of page views, the count of cart additions and purchased products and then to calculate the number of abandoned products,
---we will subtract the number of purchased products in the cart from the number of products in the cart.
+````
+
+- Then we will get the final CTE called product funnel that grabs everything from the first two CTES and then we calculate the count of page views, the count of cart additions and purchased products and then to calculate the number of abandoned products, we will subtract the number of purchased products in the cart from the number of products in the cart.
+
+````sql
 ProductFunnel AS(
  SELECT p.page_name AS product_name, p.product_id AS product_number, p.product_category, COUNT(p.page_views) AS views, COUNT(p.add_to_cart) AS cart_adds, COUNT(pv.purchased) AS product_purchased, COUNT(p.add_to_cart) - COUNT(pv.purchased) AS product_abandoned
 FROM pevents AS p
@@ -100,9 +102,12 @@ purchased_visitors AS(
   WHERE event_type = 3 
 ),
 
---Then we will get the final CTE called product funnel that grabs everything from the first two CTES and then we calculate
--- the count of page views, the count of cart additions and purchased products and then to calculate the number of abandoned products,
---we will subtract the number of purchased products in the cart from the number of products in the cart.
+````
+
+
+- Then we will get the final CTE called product funnel that grabs everything from the first two CTES and then we calculate the count of page views, the count of cart additions and purchased products and then to calculate the number of abandoned products, we will subtract the number of purchased products in the cart from the number of products in the cart.
+
+````sql
 ProductFunnel2 AS(
  SELECT p.product_category, COUNT(p.page_views) AS views, COUNT(p.add_to_cart) AS cart_adds, COUNT(pv.purchased) AS product_purchased, COUNT(p.add_to_cart) - COUNT(pv.purchased) AS product_abandoned
 FROM pevents AS p
