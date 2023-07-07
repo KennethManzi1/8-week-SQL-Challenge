@@ -1,4 +1,4 @@
-## 🌲 Case Study #7: Balanced Tree
+## Case Study #7: Balanced Tree
 
 <img src="https://github.com/katiehuangx/8-Week-SQL-Challenge/assets/81607668/8ada3c0c-e90a-47a7-9a5c-8ffd6ee3eef8" alt="Image" width="500" height="520">
 
@@ -86,405 +86,87 @@ Danny, the CEO of this trendy fashion company has asked you to assist the team�
 
 ## Question and Solution
 
-Please join me in executing the queries using PostgreSQL on [DB Fiddle](https://www.db-fiddle.com/f/dkhULDEjGib3K58MvDjYJr/8). It would be great to work together on the questions!
 
-If you have any questions, reach out to me on [LinkedIn](https://www.linkedin.com/in/katiehuangx/).
-
-## 📈 A. High Level Sales Analysis
+##  A. High Level Sales Analysis
 
 **1. What was the total quantity sold for all products?**
 
-```sql
-SELECT 
-  product.product_name, 
-  SUM(sales.qty) AS total_quantity
-FROM balanced_tree.sales
-INNER JOIN balanced_tree.product_details AS product
-	ON sales.prod_id = product.product_id
-GROUP BY product.product_name;
-```
 
-**Answer:**
 
-|product_name|total_quantity|
-|:----|:----|
-|White Tee Shirt - Mens|3800|
-|Navy Solid Socks - Mens|3792|
-|Grey Fashion Jacket - Womens|3876|
-|Navy Oversized Jeans - Womens|3856|
-|Pink Fluro Polkadot Socks - Mens|3770|
-|Khaki Suit Jacket - Womens|3752|
-|Black Straight Jeans - Womens|3786|
-|White Striped Socks - Mens|3655|
-|Blue Polo Shirt - Mens|3819|
-|Indigo Rain Jacket - Womens|3757|
-|Cream Relaxed Jeans - Womens|3707|
-|Teal Button Up Shirt - Mens|3646|
 
-***
+
 
 **2. What is the total generated revenue for all products before discounts?**
 
-```sql
-SELECT 
-  product.product_name, 
-  SUM(sales.qty) * SUM(sales.price) AS total_revenue
-FROM balanced_tree.sales
-INNER JOIN balanced_tree.product_details AS product
-	ON sales.prod_id = product.product_id
-GROUP BY product.product_name;
-```
-
-**Answer:**
-
-|product_name|total_revenue|
-|:----|:----|
-|White Tee Shirt - Mens|192736000|
-|Navy Solid Socks - Mens|174871872|
-|Grey Fashion Jacket - Womens|266862600|
-|Navy Oversized Jeans - Womens|63863072|
-|Pink Fluro Polkadot Socks - Mens|137537140|
-|Khaki Suit Jacket - Womens|107611112|
-|Black Straight Jeans - Womens|150955392|
-|White Striped Socks - Mens|77233805|
-|Blue Polo Shirt - Mens|276022044|
-|Indigo Rain Jacket - Womens|89228750|
-|Cream Relaxed Jeans - Womens|46078010|
-|Teal Button Up Shirt - Mens|45283320|
-
-***
 
 **3. What was the total discount amount for all products?**
 
-```sql
-SELECT 
-  product.product_name, 
-  SUM(sales.qty * sales.price * sales.discount/100) AS total_discount
-FROM balanced_tree.sales
-INNER JOIN balanced_tree.product_details AS product
-	ON sales.prod_id = product.product_id
-GROUP BY product.product_name;
-```
-
-**Answer:**
-
-|product_name|total_discount|
-|:----|:----|
-|White Tee Shirt - Mens|17968|
-|Navy Solid Socks - Mens|16059|
-|Grey Fashion Jacket - Womens|24781|
-|Navy Oversized Jeans - Womens|5538|
-|Pink Fluro Polkadot Socks - Mens|12344|
-|Khaki Suit Jacket - Womens|9660|
-|Black Straight Jeans - Womens|14156|
-|White Striped Socks - Mens|6877|
-|Blue Polo Shirt - Mens|26189|
-|Indigo Rain Jacket - Womens|8010|
-|Cream Relaxed Jeans - Womens|3979|
-|Teal Button Up Shirt - Mens|3925|
+### View my solution here
 
 ***
 
-## 🧾 B. Transaction Analysis
+## B. Transaction Analysis
 
 **1. How many unique transactions were there?**
 
-```sql
-SELECT COUNT(DISTINCT txn_id) AS transaction_count
-FROM balanced_tree.sales;
-```
 
-**Answer:**
-
-|transaction_count|
-|:----|
-|2500|
 
 ***
 
 **2. What is the average unique products purchased in each transaction?**
 
-```sql
-SELECT ROUND(AVG(total_quantity)) AS avg_unique_products
-FROM (
-  SELECT 
-    txn_id, 
-    SUM(qty) AS total_quantity
-  FROM balanced_tree.sales
-  GROUP BY txn_id
-) AS total_quantities;
-```
-
-**Answer:**
-
-|avg_unique_products|
-|:----|
-|18|
-
 ***
 
 **3. What are the 25th, 50th and 75th percentile values for the revenue per transaction?**
 
-```sql
-WITH revenue_cte AS (
-  SELECT 
-    txn_id, 
-    SUM(price * qty) AS revenue
-  FROM balanced_tree.sales
-  GROUP BY txn_id
-)
-
-SELECT
-  PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY revenue) AS median_25th,
-    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY revenue) AS median_50th,
-PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY revenue) AS median_75th
-FROM revenue_cte;
-```
-
-**Answer:**
-
-|median_25th|median_50th|median_75th|
-|:----|:----|:----|
-|375.75|509.5|647|
 
 ***
 
 **4. What is the average discount value per transaction?**
 
-```sql
-SELECT ROUND(AVG(discount_amt)) AS avg_discount
-FROM (
-  SELECT 
-	  txn_id,
-    SUM(qty * price * discount/100) AS discount_amt
-  FROM balanced_tree.sales
-  GROUP BY txn_id
-) AS discounted_value
-```
 
-**Answer:**
-
-|avg_discount|
-|:----|
-|60|
+***
 
 **5. What is the percentage split of all transactions for members vs non-members?**
 
-```sql
-WITH transactions_cte AS (
-  SELECT
-    member,
-    COUNT(DISTINCT txn_id) AS transactions
-  FROM balanced_tree.sales
-  GROUP BY member
-)
 
-SELECT
-	member,
-  transactions,
-  ROUND(100 * transactions
-    /(SELECT SUM(transactions) 
-      FROM transactions_cte)) AS percentage
-FROM transactions_cte
-GROUP BY member, transactions;
-```
-
-**Answer:**
-
-Members have a transaction count at 60% compared to than non-members who account for only 40% of the transactions.
-
-|member|transactions|percentage|
-|:----|:----|:----|
-|false|995|40|
-|true|1505|60|
 
 ***
 
 **6. What is the average revenue for member transactions and non-member transactions?**
 
-```sql
-WITH revenue_cte AS (
-  SELECT
-    member,
-  	txn_id,
-    SUM(price * qty) AS revenue
-  FROM balanced_tree.sales
-  GROUP BY member, txn_id
-)
 
-SELECT
-	member,
-  ROUND(AVG(revenue),2) AS avg_revenue
-FROM revenue_cte
-GROUP BY member;
-```
 
-**Answer:**
-
-The average revenue per transaction for members is only $1.23 higher compared to non-members.
-
-|member|avg_revenue|
-|:----|:----|
-|false|515.04|
-|true|516.27|
 
 ***
 
-## 👚 C. Product Analysis
+##  C. Product Analysis
 
 **1. What are the top 3 products by total revenue before discount?**
 
-```sql
-SELECT 
-  product.product_id,
-  product.product_name, 
-  SUM(sales.qty) * SUM(sales.price) AS total_revenue
-FROM balanced_tree.sales
-INNER JOIN balanced_tree.product_details AS product
-	ON sales.prod_id = product.product_id
-GROUP BY product.product_id, product.product_name
-ORDER BY total_revenue DESC
-LIMIT 3;
-```
 
-**Answer:**
-
-|product_id|product_name|total_revenue|
-|:----|:----|:----|
-|2a2353|Blue Polo Shirt - Mens|276022044|
-|9ec847|Grey Fashion Jacket - Womens|266862600|
-|5d267b|White Tee Shirt - Mens|192736000|
 
 ***
 
 **2. What is the total quantity, revenue and discount for each segment?**
 
-```sql
-SELECT 
-  product.segment_id,
-  product.segment_name, 
-  SUM(sales.qty) AS total_quantity,
-  SUM(sales.qty * sales.price) AS total_revenue,
-  SUM((sales.qty * sales.price) * sales.discount/100) AS total_discount
-FROM balanced_tree.sales
-INNER JOIN balanced_tree.product_details AS product
-	ON sales.prod_id = product.product_id
-GROUP BY product.segment_id, product.segment_name;
-```
-
-**Answer:**
-
-|segment_id|segment_name|total_quantity|total_revenue|total_discount|
-|:----|:----|:----|:----|:----|
-|4|Jacket|11385|366983|42451|
-|6|Socks|11217|307977|35280|
-|5|Shirt|11265|406143|48082|
-|3|Jeans|11349|208350|23673|
 
 ***
 
 **3. What is the top selling product for each segment?**
 
-```sql
-WITH top_selling_cte AS ( 
-  SELECT 
-    product.segment_id,
-    product.segment_name, 
-    product.product_id,
-    product.product_name,
-    SUM(sales.qty) AS total_quantity,
-    RANK() OVER (
-      PARTITION BY segment_id 
-      ORDER BY SUM(sales.qty) DESC) AS ranking
-  FROM balanced_tree.sales
-  INNER JOIN balanced_tree.product_details AS product
-    ON sales.prod_id = product.product_id
-  GROUP BY 
-    product.segment_id, product.segment_name, product.product_id, product.product_name
-)
 
-SELECT 
-  segment_id,
-  segment_name, 
-  product_id,
-  product_name,
-  total_quantity
-FROM top_selling_cte
-WHERE ranking = 1;
-```
-
-**Answer:**
-
-|segment_id|segment_name|product_id|product_name|total_quantity|
-|:----|:----|:----|:----|:----|
-|3|Jeans|c4a632|Navy Oversized Jeans - Womens|3856|
-|4|Jacket|9ec847|Grey Fashion Jacket - Womens|3876|
-|5|Shirt|2a2353|Blue Polo Shirt - Mens|3819|
-|6|Socks|f084eb|Navy Solid Socks - Mens|3792|
 
 ***
 
 **4. What is the total quantity, revenue and discount for each category?**
 
-```sql
-SELECT 
-  product.category_id,
-  product.category_name, 
-  SUM(sales.qty) AS total_quantity,
-  SUM(sales.qty * sales.price) AS total_revenue,
-  SUM((sales.qty * sales.price) * sales.discount/100) AS total_discount
-FROM balanced_tree.sales
-INNER JOIN balanced_tree.product_details AS product
-	ON sales.prod_id = product.product_id
-GROUP BY product.category_id, product.category_name
-ORDER BY product.category_id;
-```
 
-**Answer:**
-
-|category_id|category_name|total_quantity|total_revenue|total_discount|
-|:----|:----|:----|:----|:----|
-|1|Womens|22734|575333|66124|
-|2|Mens|22482|714120|83362|
 
 ***
 
 **5. What is the top selling product for each category?**
 
-```sql
-WITH top_selling_cte AS ( 
-  SELECT 
-    product.category_id,
-    product.category_name, 
-    product.product_id,
-    product.product_name,
-    SUM(sales.qty) AS total_quantity,
-    RANK() OVER (
-      PARTITION BY product.category_id 
-      ORDER BY SUM(sales.qty) DESC) AS ranking
-  FROM balanced_tree.sales
-  INNER JOIN balanced_tree.product_details AS product
-    ON sales.prod_id = product.product_id
-  GROUP BY 
-    product.category_id, product.category_name, product.product_id, product.product_name
-)
-
-SELECT 
-  category_id,
-  category_name, 
-  product_id,
-  product_name,
-  total_quantity
-FROM top_selling_cte
-WHERE ranking = 1;
-```
-
-**Answer:**
-
-|category_id|category_name|product_id|product_name|total_quantity|
-|:----|:----|:----|:----|:----|
-|1|Womens|9ec847|Grey Fashion Jacket - Womens|3876|
-|2|Mens|2a2353|Blue Polo Shirt - Mens|3819|
 
 ***
 
@@ -518,7 +200,7 @@ WHERE ranking = 1;
 
 ***
 
-## 📝 Reporting Challenge
+## Reporting Challenge
 
 Write a single SQL script that combines all of the previous questions into a scheduled report that the Balanced Tree team can run at the beginning of each month to calculate the previous month’s values.
 
@@ -530,7 +212,7 @@ Feel free to split up your final outputs into as many tables as you need - but b
 
 ***
 
-## 💡 Bonus Challenge
+##  Bonus Challenge
 
 Use a single SQL query to transform the `product_hierarchy` and `product_prices` datasets to the `product_details` table.
 
