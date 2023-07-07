@@ -14,8 +14,12 @@
 ### 2. What is the total generated revenue for all products before discounts?
 
 
+**Answer:**
+
 ***
 
 ### 3. What was the total discount amount for all products?
+
+**Answer:**
 
 ***
