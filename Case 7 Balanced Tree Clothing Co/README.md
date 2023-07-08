@@ -98,7 +98,7 @@ Danny, the CEO of this trendy fashion company has asked you to assist the teamâ€
 3. What was the total discount amount for all products?
 
 
-View my solution here
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/A.%20High%20Level%20Sales%20Analysis.md) 
 
 ***
 
