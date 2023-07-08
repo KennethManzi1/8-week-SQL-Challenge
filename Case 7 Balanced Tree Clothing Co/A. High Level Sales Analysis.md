@@ -164,4 +164,8 @@ GROUP BY p.product_name
 ![Screen Shot 2023-07-08 at 3 38 26 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e53b5b04-1bb7-491c-9794-afb3a7bdda42)
 
 - The total discount is 156229.14
+
+Click [here] for solution to B. Transaction Analysis
+
+
 ***
