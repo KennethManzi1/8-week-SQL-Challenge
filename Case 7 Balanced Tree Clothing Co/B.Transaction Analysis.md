@@ -104,3 +104,7 @@ FROM saless
 
 - There are 2500 Transactions
 
+***
+
+### 2. What is the average unique products purchased in each transaction?
+
