@@ -209,7 +209,7 @@ GROUP BY aa.member
 ````
 ![Screen Shot 2023-07-09 at 4 21 21 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/61229593-e3dc-4214-b46a-a8375b693dbe)
 
-Click [here] for solution to C. Product Analysis
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/C.%20Product%20Analysis.md) for solution to C. Product Analysis
 
 
 
