@@ -75,7 +75,51 @@
 ***
 
 
-What is the percentage split of revenue by segment for each category?
-What is the percentage split of total revenue by category?
-What is the total transaction “penetration” for each product? (hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions)
-What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
+### 7. What is the percentage split of revenue by segment for each category?
+
+````sql
+
+````
+
+
+**Answer:**
+
+***
+
+
+### 8. What is the percentage split of total revenue by category?
+
+````sql
+
+````
+
+
+**Answer:**
+
+***
+
+
+### 9. What is the total transaction “penetration” for each product? (hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions)
+
+````sql
+
+````
+
+
+**Answer:**
+
+***
+
+
+### 10. What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
+
+````sql
+
+````
+
+
+**Answer:**
+
+***
+
+
