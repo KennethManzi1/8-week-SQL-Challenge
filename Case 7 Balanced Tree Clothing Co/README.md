@@ -150,7 +150,7 @@ View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 
 10. What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
 
-View my solution here
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/C.%20Product%20Analysis.md)
 
 ## Reporting Challenge
 
