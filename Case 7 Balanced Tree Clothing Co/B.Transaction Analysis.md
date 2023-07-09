@@ -98,3 +98,9 @@ FROM saless
 
 ````
 
+**Answer:**
+
+![Screen Shot 2023-07-08 at 10 46 08 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/2e85acf4-ee4e-4ff3-986b-1a399701c96f)
+
+- There are 2500 Transactions
+
