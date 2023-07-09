@@ -88,7 +88,13 @@
 
 ## Solution - B. Transaction Analysis
 
-### 1. 
+### 1. How many unique transactions were there?
 
+- We will use DISTINCT to get the unique transactions then count them to get the number of unique transactions
 
+````SQL
+SELECT COUNT(DISTINCT txn_id) AS [Number of Unique Transactions]
+FROM saless
+
+````
 
