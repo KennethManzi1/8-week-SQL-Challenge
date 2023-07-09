@@ -165,7 +165,7 @@ GROUP BY p.product_name
 
 - The total discount is 156229.14
 
-Click [here] for solution to B. Transaction Analysis
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/B.Transaction%20Analysis.md) for solution to B. Transaction Analysis
 
 
 ***
