@@ -101,21 +101,23 @@
 SELECT s.product_id, s.Product, CONCAT('$', s.[Total Revenue]) AS [Total Revenue]
 FROM
 (
-SELECT TOP 3  pd.product_id, pd.product_name AS [Product], SUM(sls.qty) * SUM(sls.price) AS [Total Revenue]
+SELECT TOP 3  pd.product_id, pd.product_name AS [Product], SUM(sls.qty * sls.price) AS [Total Revenue]
 FROM saless AS sls
 INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
 GROUP BY pd.product_id, pd.product_name
 ORDER BY [Total Revenue] DESC
 )s
+
 ````
 
 **Answer:**
 
 
-![Screen Shot 2023-07-09 at 9 29 01 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/a1663fc5-0127-44f1-9d74-625408d3c39e)
+![Screen Shot 2023-07-09 at 9 36 27 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/85c4930b-0beb-4b69-940e-54dcb4467b1c)
 
 
-- Here we can see that Blue Polo Shirt for Mens accumulated the highest total revenue of $276022044
+
+- Here we can see that Blue Polo Shirt for Mens accumulated the highest total revenue of $217683
 
 
 ***
