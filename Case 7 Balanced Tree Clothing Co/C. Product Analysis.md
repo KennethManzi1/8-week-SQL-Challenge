@@ -162,13 +162,37 @@ ORDER BY s.segment_id
 
 
 ### 3. What is the top selling product for each segment?
+- To get the top selling product for each segment, you can create a rank for the top selling product for each segment using the RANK() Window function.
+  
+- So we will pull in the segment and product information,then create a ranking for the top selling product in a subquery.
+  
+- In the outer query we filter the top selling product and its segment by the top rank
+
 
 ````sql
+SELECT r.segment_id, r.Segment, r.product_id, r.Product, r.[Total Quantity], r.[Ranked Products]
+FROM 
+(
+SELECT pd.segment_id, pd.segment_name AS [Segment], pd.product_id, pd.product_name AS [Product], 
+SUM(sls.qty) AS [Total Quantity],RANK() OVER(PARTITION BY pd.segment_id ORDER BY SUM(sls.qty)) AS [Ranked Products]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.segment_id, pd.segment_name, pd.product_id, pd.product_name
+)r
+WHERE r.[Ranked Products] = 1
+
 
 ````
 
 
 **Answer:**
+
+![Screen Shot 2023-07-10 at 5 06 51 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/6790ca14-45d5-4557-806d-f225513780ea)
+
+- We can see that the women's top two segments have a higher quantity than the men's top two segments and for women they prefer cream relaxed jeans and a khaki suit jacket as those two are the top selling jeans and jackets for women.
+  
+- For the mens we can see that they mostly prefer a Teal Button Up shirt and  white striped socks as those two are the top selling shirts and socks for men
+
 
 ***
 
