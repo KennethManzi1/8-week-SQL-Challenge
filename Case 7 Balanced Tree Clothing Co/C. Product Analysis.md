@@ -9,16 +9,21 @@
 - CONCAT to add the dollar sign $$$
 
 ````sql
+SELECT s.product_id, s.Product, CONCAT('$', s.[Total Revenue])
+FROM
+(
 SELECT TOP 3  pd.product_id, pd.product_name AS [Product], SUM(sls.qty * sls.price) AS [Total Revenue]
 FROM saless AS sls
 INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
 GROUP BY pd.product_id, pd.product_name
 ORDER BY [Total Revenue] DESC
+)s
 ````
 
 **Answer:**
 
-![Screen Shot 2023-07-09 at 9 18 13 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/de7aeb26-9ec3-4ebb-addb-b41d29d0f05a)
+![Screen Shot 2023-07-09 at 9 20 47 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/2e1a4da3-86d6-45e3-b428-2f382ca8a97a)
+
 
 
 - Here we can see that Blue Polo Shirt for Mens accumulated the highest total revenue of $217,683
