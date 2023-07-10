@@ -9,9 +9,6 @@
 - CONCAT to add the dollar sign $$$
 
 ````sql
-SELECT s.product_id, s.Product, CONCAT('$', s.[Total Revenue])
-FROM
-(
 SELECT s.product_id, s.Product, CONCAT('$', s.[Total Revenue]) AS [Total Revenue]
 FROM
 (
