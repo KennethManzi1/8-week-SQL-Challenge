@@ -4,12 +4,25 @@
 
 ### 1. What are the top 3 products by total revenue before discount?
 
-````sql
+- To solve this problem, we will calculate the total revenue by multiplying the total quantity x the total price from the saless cte.
+- Then we will pull the product information from the product details table through an inner join
+- CONCAT to add the dollar sign $$$
 
+````sql
+SELECT TOP 3  pd.product_id, pd.product_name AS [Product], SUM(sls.qty * sls.price) AS [Total Revenue]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.product_id, pd.product_name
+ORDER BY [Total Revenue] DESC
 ````
 
-
 **Answer:**
+
+![Screen Shot 2023-07-09 at 9 18 13 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/de7aeb26-9ec3-4ebb-addb-b41d29d0f05a)
+
+
+- Here we can see that Blue Polo Shirt for Mens accumulated the highest total revenue of $217,683
+
 
 ***
 
