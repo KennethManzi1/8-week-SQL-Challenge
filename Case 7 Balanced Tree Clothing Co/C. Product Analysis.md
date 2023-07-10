@@ -94,7 +94,9 @@
 ### 1. What are the top 3 products by total revenue before discount?
 
 - To solve this problem, we will calculate the total revenue by multiplying the total quantity x the total price from the saless cte.
-- Then we will pull the product information from the product details table through an inner join
+  
+- Then we will pull the product information from the product details table through an INNER JOIN .
+  
 - CONCAT to add the dollar sign $$$
 
 ````sql
@@ -126,12 +128,34 @@ ORDER BY [Total Revenue] DESC
 
 ### 2. What is the total quantity, revenue and discount for each segment?
 
+- To solve this problem, we will calculate the total revenue by multiplying the total quantity x the total price from the saless cte and we will also find the total quantity from the saless cte.
+  
+- We will get the total discount as well and we will pull the segments from the product details table through an INNER JOIN.
+
+- CONCAT to add the dollar sign $$$
+
+
 ````sql
+
+SELECT s.segment_id, s.Segment, s.[Total Quantity], CONCAT('$', s.[Total Revenue before Discount]) AS [Total Revenue Before Discount], 
+CONCAT('$', s.[Total Discount]) AS [Total Discount]
+FROM 
+(
+SELECT pd.segment_id, pd.segment_name AS [Segment], SUM(qty) AS [Total Quantity], SUM(sls.qty * sls.price) AS [Total Revenue before Discount],
+ROUND(SUM(sls.qty * sls.price * (CAST(sls.discount AS FLOAT))/100), 1) AS [Total Discount]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.segment_id, pd.segment_name
+)s
+ORDER BY s.segment_id
 
 ````
 
 
 **Answer:**
+
+![Screen Shot 2023-07-09 at 9 50 02 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/c74e0f75-0f7c-4da0-8373-ffd177155426)
+
 
 ***
 
