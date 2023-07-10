@@ -230,13 +230,31 @@ ORDER BY s.category_id, S.Category
 
 ### 5. What is the top selling product for each category?
 
+- We will do the same Ranking as we did for number 3 except this time we are ranking the top selling products per category rather than the segment
+
+
 ````sql
+SELECT r.category_id, r.Category, r.product_id, r.Product, r.[Total Quantity], r.[Ranked Products]
+FROM 
+(
+SELECT pd.category_id, pd.category_name AS [Category], pd.product_id, pd.product_name AS [Product], 
+SUM(sls.qty) AS [Total Quantity],RANK() OVER(PARTITION BY pd.category_id ORDER BY SUM(sls.qty)) AS [Ranked Products]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.category_id, pd.category_name, pd.product_id, pd.product_name
+)r
+WHERE r.[Ranked Products] = 1
 
 ````
 
 
 **Answer:**
 
+![Screen Shot 2023-07-10 at 5 49 47 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/f1ea6101-ec3a-4b6b-b0e7-6e675180b4cc)
+
+
+- We can see that the Cream Relaxed Jeans is the top ranked product for the Women with a total amount of 3707.
+- We can also see that the Teal Buttom up Shirt is the top ranked product for the Men with a total amount of 3646.
 ***
 
 
