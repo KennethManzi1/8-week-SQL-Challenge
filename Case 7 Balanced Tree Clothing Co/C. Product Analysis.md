@@ -156,6 +156,7 @@ ORDER BY s.segment_id
 
 ![Screen Shot 2023-07-09 at 9 50 02 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/c74e0f75-0f7c-4da0-8373-ffd177155426)
 
+- Here we can see that the Shirt Segment has the highest total revenue of $406143 and the highest total discount of $49594.3
 
 ***
 
