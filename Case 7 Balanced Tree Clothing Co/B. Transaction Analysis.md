@@ -87,7 +87,7 @@
   )
 ````
 
-## Solution - B. Transaction Analysis
+***
 
 ### 1. How many unique transactions were there?
 
