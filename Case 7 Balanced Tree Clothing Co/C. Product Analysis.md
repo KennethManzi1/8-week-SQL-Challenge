@@ -196,15 +196,34 @@ WHERE r.[Ranked Products] = 1
 
 ***
 
+- We will solve this problem by pulling the category names, calculating the total quantity, total revenue, and the total discount. Luckily we have already calculated the total quantity, total revenue, and total discount before so this shouldn't be too difficult.
+  
+- CONCAT to add the Dollar sign $$.
 
 ### 4. What is the total quantity, revenue and discount for each category?
 
 ````sql
+SELECT s.category_id, s.Category, s.[Total Quantity], CONCAT('$', s.[Total Revenue before Discount]) AS [Total Revenue Before Discount], CONCAT('$', s.[Total Discount]) AS [Total Discount]
+FROM 
+(
+SELECT pd.category_id, pd.category_name AS [Category], SUM(sls.qty) AS [Total Quantity], SUM(sls.qty * sls.price) AS [Total Revenue before Discount],
+ROUND(SUM(sls.qty * sls.price * (CAST(sls.discount AS FLOAT))/100), 1) AS [Total Discount]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.category_id, pd.category_name
+--ORDER BY pd.category_id, pd.category_name
+)s
+ORDER BY s.category_id, S.Category
 
 ````
 
 
 **Answer:**
+
+![Screen Shot 2023-07-10 at 5 36 21 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/a20fd284-0526-430c-bad0-917e0e0961e1)
+
+- Here we can see that the Men's category had a higher Total Revenue and a higher total discount than the women's category despite the women's category having a higher quantity of products than the men's category
+
 
 ***
 
