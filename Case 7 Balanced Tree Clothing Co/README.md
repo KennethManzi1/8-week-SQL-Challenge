@@ -163,7 +163,7 @@ He first wants you to generate the data for January only - but then he also want
 Feel free to split up your final outputs into as many tables as you need - but be sure to explicitly reference which table outputs relate to which question for full marks :)
 
 
-View my solution here
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/D.%20Reporting%20Challenge.md)
 
 ***
 
