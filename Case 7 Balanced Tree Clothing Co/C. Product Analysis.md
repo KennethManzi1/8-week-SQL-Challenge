@@ -375,11 +375,22 @@ ORDER BY Penetration
 
 ````sql
 
+SELECT TOP 1 s.prod_id, s2.prod_id, s3.prod_id, COUNT(*) AS [Combinations]
+FROM saless s 
+JOIN saless s2 ON s2.txn_id = s.txn_id AND s.prod_id < s2.prod_id
+JOIN saless s3 ON s3.txn_id = s.txn_id AND s2.prod_id < s3.prod_id
+GROUP BY s.prod_id, s2.prod_id, s3.prod_id
+ORDER BY Combinations DESC
+
 ````
 
 
 **Answer:**
 
-***
+![Screen Shot 2023-07-11 at 4 40 48 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/8b5ac6db-0c13-40ec-8b00-6f2ea397b1da)
 
+
+- From this query we see that the most common combination of any 3 products for one transaction are the following: 5d267b	9ec847 and	c8d436. And we can see that their combination occurred 352 times.
+
+***
 
