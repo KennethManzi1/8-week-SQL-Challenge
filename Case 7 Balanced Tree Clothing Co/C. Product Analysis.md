@@ -325,12 +325,21 @@ ORDER BY category_id, [Revenue Percentage Split] DESC
 
 ### 8. What is the percentage split of total revenue by category?
 
+- We will pull the category information then calculate the revenue divided by any other revenue combination calculations(by pulling the revenue again from the saless CTE through a subquery select or a self join).
+
+
 ````sql
+SELECT pd.category_id, pd.category_name AS [Category], ROUND(100 * CAST(SUM(sls.qty * sls.price) AS FLOAT) / (SELECT SUM(qty * price) FROM saless), 2) AS [Revenue Percentage Split]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.category_id, pd.category_name
 
 ````
 
 
 **Answer:**
+
+![Screen Shot 2023-07-11 at 4 07 42 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/74645e6b-1356-4c68-b1e1-1e3bcfea0997)
 
 ***
 
@@ -343,6 +352,8 @@ ORDER BY category_id, [Revenue Percentage Split] DESC
 
 
 **Answer:**
+
+
 
 ***
 
