@@ -325,7 +325,7 @@ ORDER BY category_id, [Revenue Percentage Split] DESC
 
 ### 8. What is the percentage split of total revenue by category?
 
-- We will pull the category information then calculate the revenue divided by any other revenue combination calculations(by pulling the revenue again from the saless CTE through a subquery select or a self join).
+- We will pull the category information then calculate the revenue divided by total revenue combinations calculations (by pulling the revenue again from the saless CTE through a subquery select or a self join).
 
 
 ````sql
@@ -347,6 +347,12 @@ GROUP BY pd.category_id, pd.category_name
 ### 9. What is the total transaction “penetration” for each product? (hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions)
 
 ````sql
+SELECT pd.product_id, pd.product_name, 
+ROUND(CAST (COUNT(sls.txn_id) AS FLOAT)/ (SELECT COUNT(DISTINCT txn_id) FROM saless), 2) AS [Penetration]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.product_id, pd.product_name
+ORDER BY Penetration
 
 ````
 
@@ -354,6 +360,7 @@ GROUP BY pd.category_id, pd.category_name
 **Answer:**
 
 
+![Screen Shot 2023-07-11 at 4 21 14 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ebcd329c-34d0-4254-a234-aebd8f97427b)
 
 ***
 
