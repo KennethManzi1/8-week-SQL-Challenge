@@ -392,7 +392,7 @@ ORDER BY Combinations DESC
 
 - From this query we see that the most common combination of any 3 products for one transaction are the following: 5d267b	9ec847 and	c8d436. And we can see that their combination occurred 352 times.
 
-Click [here] for solution to D. Reporting Challenge
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/D.%20Reporting%20Challenge.md) for solution to D. Reporting Challenge
 
 ***
 
