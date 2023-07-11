@@ -346,6 +346,8 @@ GROUP BY pd.category_id, pd.category_name
 
 ### 9. What is the total transaction “penetration” for each product? (hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions)
 
+- As mentioned by Danny Ma, we can get the Penetration by getting the number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions. The penetration formula is displayed in the query below
+
 ````sql
 SELECT pd.product_id, pd.product_name, 
 ROUND(CAST (COUNT(sls.txn_id) AS FLOAT)/ (SELECT COUNT(DISTINCT txn_id) FROM saless), 2) AS [Penetration]
@@ -364,8 +366,12 @@ ORDER BY Penetration
 
 ***
 
+- We can solve for this problem by getting the frequency of the possible combinations of any 3 products in a single transaction.
+- We will need to find the number of combinations of 3 products out of the 12 Distinct(Unique) products.
+- We can get the possible combinations by self joining the saless CTE twice and we can calculate the frequency
 
 ### 10. What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
+
 
 ````sql
 
