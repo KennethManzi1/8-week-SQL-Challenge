@@ -289,16 +289,36 @@ ORDER BY segment_id, [Revenue Percentage Split] DESC
 
 ***
 
+- Same thing as question 6 except we splitting the revenue by segment for each category
 
 ### 7. What is the percentage split of revenue by segment for each category?
 
+
+
 ````sql
+
+rev2 AS
+(
+SELECT pd.category_id, pd.category_name AS [Category], pd.product_id, pd.product_name AS [Product], SUM(qty) AS [Total Quantity], SUM(sls.qty * sls.price) AS [Total Revenue before Discount]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.category_id, pd.category_name, pd.product_id, pd.product_name
+)
+
+SELECT *, 
+ROUND(100 *[Total Revenue before Discount] / (SUM([Total Revenue before Discount] ) OVER (PARTITION BY category_id)), 2) AS [Revenue Percentage Split]
+FROM rev2
+ORDER BY category_id, [Revenue Percentage Split] DESC
 
 ````
 
 
 
 **Answer:**
+
+![Screen Shot 2023-07-11 at 3 46 43 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e144dcd6-9de1-4c01-a417-fb47b2ff603b)
+
+
 
 ***
 
