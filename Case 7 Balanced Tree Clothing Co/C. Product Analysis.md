@@ -259,13 +259,33 @@ WHERE r.[Ranked Products] = 1
 
 
 ### 6. What is the percentage split of revenue by product for each segment?
+- We will first create a CTE that calculates the total revenue.
+- We will use the CTE to calculate the percent split of revenue by product for each segment.
+- We will use a a SUM() OVER( Order By) technique as well to find running total combinations to get the revenue percentage split
+
 
 ````sql
+
+rev AS
+(
+SELECT pd.segment_id, pd.segment_name AS [Segment], pd.product_id, pd.product_name AS [Product], SUM(qty) AS [Total Quantity], SUM(sls.qty * sls.price) AS [Total Revenue before Discount]
+FROM saless AS sls
+INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+GROUP BY pd.segment_id, pd.segment_name, pd.product_id, pd.product_name
+)
+
+SELECT *, 
+ROUND(100 *[Total Revenue before Discount] / (SUM([Total Revenue before Discount] ) OVER (PARTITION BY segment_id)), 2) AS [Revenue Percentage Split]
+FROM rev
+ORDER BY segment_id, [Revenue Percentage Split] DESC
 
 ````
 
 
 **Answer:**
+![Screen Shot 2023-07-11 at 2 58 32 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/2b2bc5f6-7d6e-424d-8560-2353ab80a36c)
+
+
 
 ***
 
@@ -275,6 +295,7 @@ WHERE r.[Ranked Products] = 1
 ````sql
 
 ````
+
 
 
 **Answer:**
