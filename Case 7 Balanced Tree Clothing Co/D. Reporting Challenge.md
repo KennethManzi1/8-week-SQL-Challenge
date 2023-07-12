@@ -136,3 +136,36 @@ FROM sales_monthly
 ![Screen Shot 2023-07-12 at 4 55 30 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/52d2db24-b675-49dd-b3d2-0260dba0378f)
 
 
+***
+
+- The below query is the report data for when the Month is February.
+
+````SQL
+ales_monthly AS
+(
+  SELECT s.*, ROUND(AVG(s.[Total quantity products]), 1) AS [Average Unique Products], ROUND(AVG(s.[Total Revenue before discounts]), 1) AS [Average Revenue], ROUND(AVG(s.[Total Discount]), 1) AS [Average Discount],
+  PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY s.[Total Revenue before discounts]) OVER() AS [25th Percentile],
+  PERCENTILE_CONT(0.50) WITHIN GROUP(ORDER BY s.[Total Revenue before discounts]) OVER() AS [50th Percentile],
+  PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY s.[Total Revenue before discounts]) OVER() AS [75th Percentile]
+  FROM
+  (
+  SELECT pd.category_id, pd.category_name AS [Category], pd.product_id, pd.product_name AS [Product], RANK() OVER(PARTITION BY pd.segment_id ORDER BY SUM(sls.qty)) AS [Ranked Products], pd.segment_id, pd.segment_name AS [Segment], sls.txn_id AS [Transactions], sls.member, ROUND(100 * CAST(COUNT(sls.member) AS FLOAT)/(SELECT COUNT(member) FROM saless),2) AS [Member Percentage], COUNT(DISTINCT sls.txn_id) AS [Number of Transactions], SUM(qty) AS [Total quantity products], SUM(sls.qty * sls.price) AS [Total Revenue before discounts], ROUND(SUM(sls.qty * sls.price * CAST(discount AS FLOAT)), 2) AS [Total Discount],
+  DATENAME(MONTH, start_txn_time) AS [Month], DATENAME(YEAR, start_txn_time) AS [Year]
+  FROM saless sls
+  INNER JOIN product_details AS pd ON  sls.prod_id = pd.product_id
+  WHERE DATEPART(MONTH, start_txn_time) = 2 AND DATEPART(YEAR, start_txn_time) = '2021'
+  GROUP BY DATENAME(MONTH, start_txn_time), DATENAME(YEAR, start_txn_time), txn_id, member, pd.product_id, pd.product_name, pd.segment_id, pd.segment_name, pd.category_id, pd.category_name
+  )s
+  GROUP BY s.[Number of Transactions], s.[Total Discount], s.[Total quantity products], s.[Total Revenue before discounts], s.[Month], s.[Year], s.Transactions, s.member, s.[Member Percentage], s.product_id, s.Product, s.segment_id, s.Segment, s.[Ranked Products], s.Category, s.category_id
+)
+
+SELECT DISTINCT *
+FROM sales_monthly
+````
+
+**Answer:**
+
+![Screen Shot 2023-07-12 at 4 58 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/79ff2bb1-841a-430c-8065-26d55a17b129)
+
+
+***
