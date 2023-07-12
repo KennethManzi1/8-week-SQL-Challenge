@@ -10,6 +10,95 @@
 
 ### Feel free to split up your final outputs into as many tables as you need - but be sure to explicitly reference which table outputs relate to which question for full marks :)
 
+
+- Because the Sales data is over 150000 rows and Azure Data studio so far only lets me insert 1000 rows of data per table, I decided to create 15 CTEs to insert data and UNION them all in a CTE called saless
+
+````SQL
+
+  WITH Saless AS
+  (
+    SELECT *
+    FROM sales
+    
+    UNION ALL
+    
+    SELECT *
+    FROM sales1
+    
+    UNION ALL
+    
+    SELECT *
+    FROM sales2 
+    
+    UNION ALL
+    
+    SELECT *
+    FROM sales3
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales4 
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales5
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales6
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales7
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales8
+
+    UNION ALL
+
+    SELECT *
+    FROM sales88
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales9
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales10
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales11
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales12
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales13
+
+    UNION ALL
+    
+    SELECT *
+    FROM sales14
+  )
+````
+
+***
+
 - The below is the single SQL script that combines all of the questions into a scheduled report that the balanced team can run at the beginning of each month to calculate the previous month's values.
 - Currently the script is filtered by January. We can change the filter to February or any other month on the where clause
 
