@@ -151,24 +151,25 @@ FROM dbo.product_details
     - This is why I did the self join way as I thought it was efficient to self join the product hierachy table at the category and the segment level and join them back to the style level of the product hierarchy table.
 
 /*
-Recur AS(
-  SELECT *
+WITH Recur AS(
+  SELECT parent_id, id, level_text--, --0 AS cparent_id
   FROM dbo.product_hierarchy
-  --WHERE parent_id IS NULL
+  WHERE parent_id IS NULL
 
 UNION ALL 
 
-SELECT r.*
-FROM recur AS r
-JOIN dbo.product_hierarchy AS p ON r.parent_id = p.id
+SELECT p.parent_id, p.id, p.level_text 
+FROM dbo.product_hierarchy AS p
+JOIN Recur ON p.id = Recur.parent_id
 
 ) 
 
 SELECT *
 FROM recur
 option (maxrecursion 32767)
-
 */
+
+
 
 
 ***
