@@ -173,6 +173,6 @@ Use a single SQL query to transform the `product_hierarchy` and `product_prices`
 
 Hint: you may want to consider using a recursive CTE to solve this problem!
 
-View my solution here
+View my solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/E.%20Bonus%20Challenge.md)
 
 ***
