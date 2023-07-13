@@ -136,4 +136,39 @@ JOIN product_prices AS p ON hh.style_id = p.id
 
 
 
+- Product Details table below for reference
+
+````sql
+SELECT *
+FROM dbo.product_details
+````
+
+![Screen Shot 2023-07-13 at 3 54 57 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/d5994c2b-1c80-4657-a8d4-6662ae729e0d)
+
+- Disclaimer:
+    - I tried to recreate the product details table in a recursive CTE but my query got terminated as it went over the Max Recursion limit.
+    - I would love feedback on an efficient way to write this recursive CTE or if I am missing key details for this query. The query is currently commented out.
+    - This is why I did the self join way as I thought it was efficient to self join the product hierachy table at the category and the segment level and join them back to the style level of the product hierarchy table.
+
+/*
+Recur AS(
+  SELECT *
+  FROM dbo.product_hierarchy
+  --WHERE parent_id IS NULL
+
+UNION ALL 
+
+SELECT r.*
+FROM recur AS r
+JOIN dbo.product_hierarchy AS p ON r.parent_id = p.id
+
+) 
+
+SELECT *
+FROM recur
+option (maxrecursion 32767)
+
+*/
+
+
 ***
