@@ -6,7 +6,7 @@
 
 ### Hint: you may want to consider using a recursive CTE to solve this problem!
 
-
+***
 
 - Because the Sales data is over 150000 rows and Azure Data studio so far only lets me insert 1000 rows of data per table, I decided to create 15 CTEs to insert data and UNION them all in a CTE called saless
 
