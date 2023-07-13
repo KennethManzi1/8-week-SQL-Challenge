@@ -167,5 +167,6 @@ FROM sales_monthly
 
 ![Screen Shot 2023-07-12 at 4 58 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/79ff2bb1-841a-430c-8065-26d55a17b129)
 
+Click [Here] for solution to E. Bonus Challenge
 
 ***
