@@ -11,7 +11,7 @@ Thanks @DataWithDanny for the excellent SQL case studies!
 - [Case Study #4: Data Bank](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%204%20Data%20Bank)
 - [Case Study #5: Data Mart](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%205%20Data%20Mart)
 - [Case Study #6: Clique Bait](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%206%20Clique%20Bait)
-- [Case Study #7: Balanced Tree Clothing Co.](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/README.md)
+- [Case Study #7: Balanced Tree Clothing Co](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%207%20Balanced%20Tree%20Clothing%20Co/README.md)
 - [Case Study #8: Fresh Segments](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%208%20%20Fresh%20Segments)
 
 ***
