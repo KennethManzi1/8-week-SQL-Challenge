@@ -29,7 +29,7 @@ What metrics can you use to quantify the success or failure of each campaign com
 - We will first create a CTE in Postgres that pulls in the following records
     - Within the CTE  will first pull User_id from the users table
     - Then we will pull the Visit id from the events table
-    - Aterwords we will calculate the visit_start_time from the events table which is the earliest start time by using the MIN function for this field to get that early start time
+    - Afterwords we will calculate the visit_start_time from the events table which is the earliest start time by using the MIN function for this field to get that early start time
     - We will be pulling the Page_views, purchase and add_to_cart CASE statements that we created on question 8 from PART A to calculate the number of page views, purchases and add to cart items per customer.
     - We will using the same case statements alongside sum to find the count of ad impressions and Same thing with Click as well.
     - To get the cart orders, we will use a Postgres function called STRING_AGG which is an aggregate function of CONCAT that takes the records and concatenates them into a single string.
