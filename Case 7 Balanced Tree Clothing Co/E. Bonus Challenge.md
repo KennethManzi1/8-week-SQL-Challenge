@@ -119,7 +119,7 @@ JOIN (
 JOIN(
   SELECT * 
   FROM dbo.product_hierarchy
-  WHERE level_name = 'Category'
+  --WHERE level_name = 'Category'
   --WHERE id BETWEEN 1 and 2
 )c ON s.parent_id = c.id
 WHERE st.level_name = 'Style' 
