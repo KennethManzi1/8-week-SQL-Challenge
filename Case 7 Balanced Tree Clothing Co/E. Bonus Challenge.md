@@ -108,21 +108,24 @@
 SELECT hh.style_id, hh.[Segment ID], hh.[Category ID], p.product_id, hh.Style, hh.Category, hh.Segment, CONCAT(hh.Style, ' ', hh.Segment, ' - ', hh.Category) AS [Product Name], p.price
 FROM 
 (
-SELECT st.id AS style_id, st.level_text AS [Style], c.parent_id AS [Category ID], c.level_text AS [Category], s.parent_id AS [Segment ID], s.level_text AS [Segment]
+SELECT st.id AS style_id, st.level_text AS [Style], s.parent_id AS [Category ID], c.level_text AS [Category], s.id AS [Segment ID], s.level_text AS [Segment]
 FROM dbo.product_hierarchy AS st
-JOIN(
-  SELECT * 
-  FROM dbo.product_hierarchy
-  --WHERE id BETWEEN 1 and 2
-)c ON st.parent_id = c.id
 JOIN (
   SELECT *
   FROM dbo.product_hierarchy
+  WHERE level_name = 'Segment'
   --WHERE id BETWEEN 7 AND 8
 )s ON st.parent_id = s.id
-WHERE st.id BETWEEN 7 AND 18
+JOIN(
+  SELECT * 
+  FROM dbo.product_hierarchy
+  WHERE level_name = 'Category'
+  --WHERE id BETWEEN 1 and 2
+)c ON s.parent_id = c.id
+WHERE st.level_name = 'Style' 
 )hh
-JOIN product_prices AS p ON hh.style_id = p.id
+LEFT JOIN product_prices AS p ON hh.style_id = p.id
+
 
 ````
 
