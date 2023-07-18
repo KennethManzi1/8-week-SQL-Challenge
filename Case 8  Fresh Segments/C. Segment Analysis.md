@@ -70,5 +70,5 @@
 
 
 
-***Click [here] for solution for D. Index Analysis
+Click [here] for solution for D. Index Analysis
 
