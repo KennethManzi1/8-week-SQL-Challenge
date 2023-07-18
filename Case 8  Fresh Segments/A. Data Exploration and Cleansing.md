@@ -94,5 +94,5 @@
 
 ***
 
-***Click [here] for solution for B. Interest Analysis
+Click [here] for solution for B. Interest Analysis
 
