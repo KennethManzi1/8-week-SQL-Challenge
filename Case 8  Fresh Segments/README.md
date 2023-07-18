@@ -114,7 +114,7 @@ View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
 
 
-View my Solution [here] 
+View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/C.%20Segment%20Analysis.md)
 
 ***
 
