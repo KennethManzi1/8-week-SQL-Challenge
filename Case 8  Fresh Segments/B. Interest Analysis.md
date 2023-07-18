@@ -72,6 +72,6 @@
 
 
 
-***Click [here]
+Click [here]
 for solution for C. Segment Analysis
 
