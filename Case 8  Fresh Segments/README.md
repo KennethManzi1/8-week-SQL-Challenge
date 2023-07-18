@@ -94,7 +94,7 @@ View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/bl
 5.  After removing these interests - how many unique interests are there for each month?
 
 
-View my Solution [here] 
+View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/B.%20Interest%20Analysis.md)
 
 
 ***
