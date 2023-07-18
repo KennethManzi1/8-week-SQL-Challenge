@@ -77,7 +77,7 @@ Danny has asked for your assistance to analyse aggregated metrics for an example
 7. Are there any records in your joined table where the month_year value is before the created_at value from the fresh_segments.interest_map table? Do you think these values are valid and why?
 
 
-View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/A.%20Fresh%20Segments.md)
+View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/A.%20Data%20Exploration%20and%20Cleansing.md)
 
 ***
 
