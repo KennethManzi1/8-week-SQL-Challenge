@@ -252,7 +252,7 @@ FROM interestmetrics
 ![Screen Shot 2023-07-19 at 12 46 34 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ba2f1f92-01d0-4f1a-8a8d-f72224014e89)
 
 
-Azure data studio currently lets me insert data up to 1000 rows and I am running the SQL server through a SQL server image in docker as well. I still haven't figured out how to bypass that 1000 row limit so had to split the interest_metrics data into 14 tables and then UNION them all into the interestmetrics CTE. 
+Azure data studio currently lets me insert data up to 1000 rows and I am running the SQL server in Azure Data Studio through a SQL server image in Docker as well. I still haven't figured out how to bypass that 1000 row limit so had to split the interest_metrics data into 14 tables and then UNION them all into the interestmetrics CTE. 
 
 
 If anyone knows how to remove the 1000 row limit through Azure Data Studio or Docker that would be greatly be appreciated!!
