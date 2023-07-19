@@ -812,5 +812,5 @@ Yes. These records have the same month and the month_year column dates are the f
 
 ***
 
-Click [here] for solution for B. Interest Analysis
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/B.%20Interest%20Analysis.md) for solution for B. Interest Analysis
 
