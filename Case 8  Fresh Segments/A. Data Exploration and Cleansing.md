@@ -257,6 +257,7 @@ Azure data studio currently lets me insert data up to 1000 rows and I am running
 
 If anyone knows how to remove the 1000 row limit through Azure Data Studio or Docker that would be greatly be appreciated!!
 
+
 ***
 
 ### 2. What is count of records in the fresh_segments.interest_metrics for each month_year value sorted in chronological order (earliest to latest) with the null values appearing first?
@@ -264,11 +265,20 @@ If anyone knows how to remove the 1000 row limit through Azure Data Studio or Do
 
 ````sql
 
+
+SELECT COUNT(*) AS [Number of Records], month_year
+FROM interestmetrics
+GROUP BY month_year
+ORDER BY [Number of Records] DESC
+
 ````
 
 
 **Answer:**
 
+![Screen Shot 2023-07-19 at 12 54 39 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/6b60b3c0-10ea-406e-b2c2-ca944827aeb8)
+
+We can see that on August 1 2019, the highest number of records was 1149.
 
 ***
 
