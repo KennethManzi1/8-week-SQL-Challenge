@@ -276,7 +276,9 @@ ORDER BY [Number of Records] DESC
 
 **Answer:**
 
-![Screen Shot 2023-07-19 at 12 54 39 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/6b60b3c0-10ea-406e-b2c2-ca944827aeb8)
+
+![Screen Shot 2023-07-19 at 12 56 43 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/aa6cdca3-7c23-4b82-a5e0-9a097fae8667)
+
 
 We can see that on August 1 2019, the highest number of records was 1149.
 
