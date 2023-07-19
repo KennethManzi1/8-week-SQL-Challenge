@@ -803,9 +803,11 @@ mi.interest_id != 'Null' AND (mi.month_year < ma.created_at)
 
 **Answer:**
 
-Yes. These records have the same month and the month_year column dates are the first date of the month. Therefore, these records are valid.
 
 ![Screen Shot 2023-07-19 at 2 08 48 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ac61c937-b72a-4c0d-bf0e-d6d78f288de4)
+
+
+Yes. These records have the same month and the month_year column dates are the first date of the month. Therefore, these records are valid.
 
 
 ***
