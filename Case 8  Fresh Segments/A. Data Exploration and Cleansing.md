@@ -288,12 +288,65 @@ We can see that on August 1 2019, the highest number of records was 1149.
 
 ### 3. What do you think we should do with these null values in the fresh_segments.interest_metrics?
 
+We can gather the number of interest ids from the interest metrics table and maps table then use a case statement to check to see whether either don't exist in one of the tables or the other by counting on how much they exist across both tables.
+
+
 ````sql
+
+
+DELETE FROM fresh_segments.interest_metrics
+WHERE month_year IS NULL
+
+
+DELETE FROM fresh_segments.interest_metrics1
+WHERE month_year IS NULL
+
+
+DELETE FROM fresh_segments.interest_metrics2
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics3
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics4
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics5
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics6
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics7
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics8
+WHERE month_year IS NULL
+
+
+DELETE FROM fresh_segments.interest_metrics9
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics10
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics11
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics12
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics13
+WHERE month_year IS NULL
+
+DELETE FROM fresh_segments.interest_metrics14
+WHERE month_year IS NULL
 
 ````
 
 
 **Answer:**
+
 
 
 ***
