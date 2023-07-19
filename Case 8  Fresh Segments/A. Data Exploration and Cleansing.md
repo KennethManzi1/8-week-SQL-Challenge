@@ -359,6 +359,9 @@ We can gather the number of interest ids from the interest metrics table and map
 
 Azure data studio currently lets me insert data up to 1000 rows and I am running the SQL server in Azure Data Studio through a SQL server image in Docker as well. I still haven't figured out how to bypass that 1000 row limit so had to split the interest_metrics data into 14 tables and the interest_maps data into 2 tables and then UNION them all into the interestmetrics CTE and the interestmaps CTE respectively. 
 
+
+If anyone knows how to remove the 1000 row limit through Azure Data Studio or Docker that would be greatly be appreciated!!
+
 ````sql
 
 WITH interestmetrics AS
