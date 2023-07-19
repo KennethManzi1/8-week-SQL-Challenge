@@ -8,11 +8,254 @@
 
 ````sql
 
+ALTER TABLE fresh_segments.interest_metrics
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics
+SET month_year = CAST(_year + '-' + _month + '-01' AS DATE)
+
+
+
+
+ALTER TABLE fresh_segments.interest_metrics1
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics1
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics1
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+
+ALTER TABLE fresh_segments.interest_metrics2
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics2
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics2
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+
+
+ALTER TABLE fresh_segments.interest_metrics3
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics3
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics3
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+
+ALTER TABLE fresh_segments.interest_metrics4
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics4
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics4
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+
+ALTER TABLE fresh_segments.interest_metrics5
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics5
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics5
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics6
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics6
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics6
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics7
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics7
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics7
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics8
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics8
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics8
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics9
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics9
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics9
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+ALTER TABLE fresh_segments.interest_metrics10
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics10
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics10
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+ALTER TABLE fresh_segments.interest_metrics11
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics11
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics11
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics12
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics12
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics12
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics13
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics13
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics13
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+ALTER TABLE fresh_segments.interest_metrics14
+DROP COLUMN month_year
+
+ALTER TABLE fresh_segments.interest_metrics14
+ADD month_year VARCHAR(150)
+
+UPDATE fresh_segments.interest_metrics14
+SET month_year = CAST(_year + '-' + _month + '-01' AS VARCHAR(150))
+
+
+WITH interestmetrics AS
+(
+    SELECT *
+    FROM fresh_segments.interest_metrics
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics1
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics2
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics3
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics4
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics5
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics6
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics7
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics8
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics9
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics10
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics11
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics12
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics13
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics14   
+
+)
+
+SELECT *
+FROM interestmetrics
+
 ````
 
 
 **Answer:**
 
+
+![Screen Shot 2023-07-19 at 12 46 34 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ba2f1f92-01d0-4f1a-8a8d-f72224014e89)
+
+
+Azure data studio currently lets me insert data up to 1000 rows and I am running the SQL server through a SQL server image in docker as well. I still haven't figured out how to bypass that 1000 row limit so had to split the interest_metrics data into 14 tables and then UNION them all into the interestmetrics CTE. 
+
+
+If anyone knows how to remove the 1000 row limit through Azure Data Studio or Docker that would be greatly be appreciated!!
 
 ***
 
