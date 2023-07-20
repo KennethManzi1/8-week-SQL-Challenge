@@ -658,6 +658,6 @@ ORDER BY month_year
 
 
 
-Click [here]
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/C.%20Segment%20Analysis.md)
 for solution for C. Segment Analysis
 
