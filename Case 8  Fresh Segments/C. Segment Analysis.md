@@ -3,9 +3,7 @@
 ## Solution - C. Segment Analysis
 
 
-We will solve this by pulling the number of distinct interests and the number of distinct month_year in the dataset.
-
-We will use the interestmetrics CTE and interestmaps CTE to solve for B as well.
+We will use the interestmetrics CTE and interestmaps CTE to solve all the problems in C.
 
 
 ````sql
