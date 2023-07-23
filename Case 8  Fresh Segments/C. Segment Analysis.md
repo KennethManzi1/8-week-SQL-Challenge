@@ -245,15 +245,6 @@ WHERE mx.[Minimum Percentile ranking] = mt.percentile_ranking
 
 
 
-
-**Answer:**
-
-***
-
-### 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
-
-
-
 ````sql
 SELECT DISTINCT mx.interest_id, mx.interest_name, mx.[Maximum Percentile ranking], mt.percentile_ranking, mt.month_year
 FROM Percentile AS mx
@@ -304,7 +295,14 @@ ORDER BY [Month year min], [Month Year Max]
 ***
 
 
+### 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
 
+
+
+
+**Answer:**
+
+***
 
 Click [here] for solution for D. Index Analysis
 
