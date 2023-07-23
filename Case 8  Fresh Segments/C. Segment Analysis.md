@@ -134,6 +134,24 @@ ORDER BY [Maximum Composition] DESC
 ![Screen Shot 2023-07-23 at 1 37 42 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ba7961f0-d4cc-417a-a6fc-f3b5508c62bd)
 
 
+- We got the top 10 interests with the largest compositions.
+- Now we will get the bottom 10 interests by ordering the composition in ascending order
+
+````sql
+SELECT TOP 10 mt.month_year, mc.interest_id, mp.interest_name, MAX(mt.composition) AS [Maximum Composition]
+FROM monthcounts as mc
+LEFT JOIN interestmetrics AS mt ON mc.interest_id = mt.interest_id
+LEFT JOIN interestmap AS mp on mc.interest_id = mp.id
+GROUP BY mt.month_year, mc.interest_id, mp.interest_name
+ORDER BY [Maximum Composition] 
+
+````
+
+**Answer:**
+
+![Screen Shot 2023-07-23 at 1 42 47 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/211b47f5-3bd1-41ce-87b2-ebdb334e95b0)
+
+
 ***
 
 
