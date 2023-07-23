@@ -311,5 +311,5 @@ ORDER BY [Month year min], [Month Year Max]
 
 ***
 
-Click [here] for solution for D. Index Analysis
+Click [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/D.%20Index%20Analysis.md) for solution for D. Index Analysis
 
