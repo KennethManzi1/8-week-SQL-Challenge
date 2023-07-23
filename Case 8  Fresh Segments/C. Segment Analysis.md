@@ -302,9 +302,11 @@ ORDER BY [Month year min], [Month Year Max]
 
 **Answer:**
 
-- Based on the data, we can see that lots of the customers like to shop retail products, are very active and travel frequently which means that that the team should market and sell products that relate to traveling, fitness, and retail as we can see from the composition and ranking that many customers like to shop for retail, stay active, and travel frequently by booking hotels and planning trips.
+- Based on the data, we can see that lots of the customers like to shop retail products, are very active and travel frequently which means that that the team should market and sell products that relate to traveling, fitness such as gym equipments, and retail as we can see from the composition and ranking that many customers like to shop for retail, stay active, and travel frequently by booking hotels and planning for trips.
 
-- Products to avoid selling would be LED lighting and winter apparels. That may depend on location and the time of the season. For the winter apparels, you wouldn't want to sell those in the summer particularly June - August because customers are more focusing on planning trips, maybe competing for triatholons or other physical activities more so than worrying about winter.
+- Products to avoid selling would be LED lighting and winter apparels(This may depend on location and the time of the season).
+- For the winter apparels, you wouldn't want to sell those in the summer particularly June - August because customers are more focusing on planning trips, maybe competing for triatholons or other physical activities more so than worrying about winter storms.
+- Around September/October that will change as the weather gets more colder and now customers will start worrying about being prepared for the cold and snow storms as fall approaches.
 
 
 ***
