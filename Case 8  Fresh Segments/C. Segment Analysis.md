@@ -2,6 +2,104 @@
 
 ## Solution - C. Segment Analysis
 
+
+We will solve this by pulling the number of distinct interests and the number of distinct month_year in the dataset.
+
+We will use the interestmetrics CTE and interestmaps CTE to solve for B as well.
+
+
+````sql
+
+WITH interestmetrics AS
+(
+    SELECT *
+    FROM fresh_segments.interest_metrics
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics1
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics2
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics3
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics4
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics5
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics6
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics7
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics8
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics9
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics10
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics11
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics12
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics13
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics14   
+
+),
+
+interestmap AS
+(
+    SELECT *
+    FROM fresh_segments.interest_map mp
+    UNION ALL 
+    SELECT *
+    FROM fresh_segments.interest_map2
+
+)
+````
+
+***
+
 ### 1. Using our filtered dataset by removing the interests with less than 6 months worth of data, which are the top 10 and bottom 10 interests which have the largest composition values in any month_year? Only use the maximum composition value for each interest but you must keep the corresponding month_year
 
 - First we will create a CTE to grab the interests with at least more than 6 months worth of data.
