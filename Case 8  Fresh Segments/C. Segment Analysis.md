@@ -202,7 +202,7 @@ ORDER BY [Standard Deviation Percentile Rank value] DESC
 
 ### 4. For the 5 interests found in the previous question - what was minimum and maximum percentile_ranking values for each interest and its corresponding year_month value? Can you describe what is happening for these 5 interests?
 
-- First we will use the query that generated the 5 interests for their standard deviation percentile as a subquery to get their Min and Max standard deviation percentile and convert it as a CTE
+- First we will use the query from question 3 that generated the 5 interests for their standard deviation percentile as a subquery to get their Min and Max percentile rank and convert it as a CTE
 
 ````sql
 ,Percentile AS(
