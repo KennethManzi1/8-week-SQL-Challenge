@@ -297,7 +297,7 @@ ORDER BY [Month year min], [Month Year Max]
 
 ### 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
 
-
+- Based on the data, we can see that lots of the customers like to shop retail products, are very active and 
 
 
 **Answer:**
