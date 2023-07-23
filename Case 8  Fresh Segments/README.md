@@ -135,7 +135,7 @@ Average composition can be calculated by dividing the composition column by the 
 
 5. Provide a possible reason why the max average composition might change from month to month? Could it signal something is not quite right with the overall business model for Fresh Segments?
 
-View my Solution [here] 
+View my Solution [here](https://github.com/KennethManzi1/8-week-SQL-Challenge/blob/main/Case%208%20%20Fresh%20Segments/D.%20Index%20Analysis.md)
 
 ***
    
