@@ -99,7 +99,7 @@ interestmap AS
 ````
 
 
-- Furthermore in order to solve these problems, we will also need to calculate the average composition and the formula was provided by Danny Ma above. We will use that formula to create a CTE for the average composition
+- Furthermore in order to solve these problems, we will also need to calculate the average composition with the formula that was provided by Danny Ma above. We will use that formula to create a CTE for the average composition
 
 ```SQL
 ,avgcomp AS(
