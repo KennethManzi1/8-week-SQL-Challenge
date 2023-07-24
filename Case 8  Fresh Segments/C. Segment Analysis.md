@@ -141,18 +141,24 @@ ORDER BY [Maximum Composition] DESC
 - Now we will get the bottom 10 interests by ordering the composition in ascending order
 
 ````sql
+
+SELECT r.*, RANK() OVER(ORDER BY r.interest_id, r.[Maximum Composition]) AS rank
+FROM
+(
 SELECT TOP 10 mt.month_year, mc.interest_id, mp.interest_name, MAX(mt.composition) AS [Maximum Composition]
 FROM monthcounts as mc
 LEFT JOIN interestmetrics AS mt ON mc.interest_id = mt.interest_id
 LEFT JOIN interestmap AS mp on mc.interest_id = mp.id
 GROUP BY mt.month_year, mc.interest_id, mp.interest_name
 ORDER BY [Maximum Composition] 
+)r
 
 ````
 
 **Answer:**
 
-![Screen Shot 2023-07-23 at 1 42 47 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/211b47f5-3bd1-41ce-87b2-ebdb334e95b0)
+![Screen Shot 2023-07-23 at 9 39 15 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/299176c0-a376-40ac-b253-88a89996dd5e)
+
 
 
 ***
