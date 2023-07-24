@@ -187,7 +187,29 @@ ORDER BY [COUNT of Interest] DESC
 
 ### 3. What is the average of the average composition for the top 10 interests for each month?
 
+- Here we will calcuate the average of the average composition using the previous queries from the previous questions.
+
+- The only difference here is finding the average of the average composition for the top 10 interests for each month
+
+
 ````sql
+
+SELECT avg.month_year, ROUND(AVG(avg.[Avg Composition]), 2) AS [Average of Average Composition per month]
+FROM 
+(
+SELECT r.interest_id,  mp.interest_name, r.[Avg Composition], r.month_year, DENSE_RANK() OVER(partition by r.month_year ORDER BY r.[Avg Composition] DESC) AS [Rank]
+FROM
+(
+SELECT *
+FROM avgcomp
+)r
+LEFT JOIN interestmap AS mp ON r.interest_id = mp.id
+WHERE interest_id != 'Null' AND r.month_year IS NOT NULL
+)avg
+WHERE avg.Rank <= 10
+GROUP BY avg.month_year
+ORDER BY [Average of Average Composition per month] DESC
+
 
 
 ````
@@ -195,8 +217,14 @@ ORDER BY [COUNT of Interest] DESC
 
 **Answer:**
 
+![Screen Shot 2023-07-23 at 10 35 36 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/7bac5966-ed89-49de-9422-5096a225a504)
+
+
+
 
 ***
+
+
 
 
 ### 4. What is the 3 month rolling average of the max average composition value from September 2018 to August 2019 and include the previous top ranking interests in the same output shown below.
