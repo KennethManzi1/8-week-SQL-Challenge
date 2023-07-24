@@ -5,6 +5,103 @@
 
 ### The index_value is a measure which can be used to reverse calculate the average composition for Fresh Segments’ clients. Average composition can be calculated by dividing the composition column by the index_value column rounded to 2 decimal places.
 
+We will use the interestmetrics CTE and interestmaps CTE to solve all the problems in D.
+
+
+````sql
+
+WITH interestmetrics AS
+(
+    SELECT *
+    FROM fresh_segments.interest_metrics
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics1
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics2
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics3
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics4
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics5
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics6
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics7
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics8
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics9
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics10
+    UNION ALL
+
+    SELECT *
+    FROM fresh_segments.interest_metrics11
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics12
+    UNION ALL
+
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics13
+    UNION ALL
+
+
+    SELECT *
+    FROM fresh_segments.interest_metrics14   
+
+),
+
+interestmap AS
+(
+    SELECT *
+    FROM fresh_segments.interest_map mp
+    UNION ALL 
+    SELECT *
+    FROM fresh_segments.interest_map2
+
+)
+````
+
+
+***
+
+
 
 ### 1. What is the top 10 interests by the average composition for each month?
 
