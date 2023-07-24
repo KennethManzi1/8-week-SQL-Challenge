@@ -118,18 +118,23 @@ monthcounts AS(
 - We will order by the Maximum composition in descending order to get the top 10 interests with the largest composition
 
 ````sql
+SELECT r.*, RANK() OVER(ORDER BY r.[Maximum Composition] DESC) AS rank
+FROM
+(
 SELECT TOP 10 mt.month_year, mc.interest_id, mp.interest_name, MAX(mt.composition) AS [Maximum Composition]
 FROM monthcounts as mc
 LEFT JOIN interestmetrics AS mt ON mc.interest_id = mt.interest_id
 LEFT JOIN interestmap AS mp on mc.interest_id = mp.id
 GROUP BY mt.month_year, mc.interest_id, mp.interest_name
 ORDER BY [Maximum Composition] DESC
+)r
 ````
 
 **Answer:**
 
+![Screen Shot 2023-07-23 at 9 24 32 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/3ca71e23-5d89-45ee-881e-3893e86c4a44)
 
-![Screen Shot 2023-07-23 at 1 37 42 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/ba7961f0-d4cc-417a-a6fc-f3b5508c62bd)
+
 
 
 - We got the top 10 interests with the largest compositions.
