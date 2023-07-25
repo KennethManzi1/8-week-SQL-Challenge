@@ -131,7 +131,7 @@ FROM
 SELECT r.interest_id,  mp.interest_name, r.[Avg Composition], r.month_year, DENSE_RANK() OVER(partition by r.month_year ORDER BY r.[Avg Composition] DESC) AS [Rank]
 FROM
 (
-SELECT *
+SELECT * 
 FROM avgcomp
 )r
 LEFT JOIN interestmap AS mp ON r.interest_id = mp.id
