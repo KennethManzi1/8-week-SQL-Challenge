@@ -247,7 +247,7 @@ ORDER BY [Average of Average Composition per month] DESC
 ![Screen Shot 2023-07-25 at 2 27 17 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e47b3575-60ab-4f38-bcbe-527065af747d)
 
 
-- Now that we found the Maximum average compositions, the next puzzle we will need to solve is now finding the 3 month rolling average for the maximum compositions between September 2018 and August 2019.
+- Now that we found the Maximum average compositions, the next puzzle we will need to solve is to find the 3 month rolling average for the maximum compositions between September 2018 and August 2019.
 
 - Since Rolling Average is the same as the running average, we will use the AVG() OVER(ORDER BY) function to find the running/rolling averages and since we are looking for the rolling average in the 3 month period between September, we will further update the window function to use 2 preceding to grab the 2 preceding month records before the current month record.
 
