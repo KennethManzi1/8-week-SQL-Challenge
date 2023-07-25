@@ -307,13 +307,15 @@ WHERE month_year NOT IN ('2018-07-01', '2018-7-01', '2018-08-01', '2018-8-01')
 ### 5. Provide a possible reason why the max average composition might change from month to month? Could it signal something is not quite right with the overall business model for Fresh Segments?
 
 
-````sql
-
-
-````
-
 
 **Answer:**
+
+- I believe that the users' interests may have changed as the months went by, and the users are less interested and want to try different things and explore different interests across various segments.
+  
+- As the index composition value decreased, it may mean that the customer no longer cares about the segment and the products.
+  
+- However, we noticed that some of the Max compositions are still very high such as Work comes first travelers for each month which means that the customers are still interested in traveling. 
+
 
 
 ***
