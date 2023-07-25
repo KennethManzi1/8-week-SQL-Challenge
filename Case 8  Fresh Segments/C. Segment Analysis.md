@@ -316,6 +316,7 @@ ORDER BY [Month year min], [Month Year Max]
 - Products to avoid selling would be LED lighting and winter apparels(This may depend on location and the time of the season).
 - For the winter apparels, you wouldn't want to sell those in the summer particularly June - August because customers are more focusing on planning trips, maybe competing for triatholons or other physical activities more so than worrying about winter storms.
 - Around September/October that will change as the weather gets more colder and now customers will start worrying about being prepared for the cold and snow storms as fall approaches.
+- we also need to focus on the interests with high composition value but we need to track this metric to define when customers lose their interest in the topic such as purchasing gym equipments or winter apparels
 
 
 ***
