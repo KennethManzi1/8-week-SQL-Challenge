@@ -229,13 +229,76 @@ ORDER BY [Average of Average Composition per month] DESC
 
 ### 4. What is the 3 month rolling average of the max average composition value from September 2018 to August 2019 and include the previous top ranking interests in the same output shown below.
 
+- This is a 3 or 4 part question as we have to solve and assemble multiple pieces in order to solve the problem.
+
+- The first puzzle we will need to solve for is to find the max average composition and we can create a CTE for this
+
+
+
+
 ````sql
-
-
+,maxavgcomp AS(
+  SELECT month_year, ROUND(MAX([Avg Composition]), 2) AS [Max of Average Composition per month]
+  FROM avgcomp
+  GROUP BY month_year
+)
 ````
+
+![Screen Shot 2023-07-25 at 2 27 17 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/e47b3575-60ab-4f38-bcbe-527065af747d)
+
+
+- Now that we found the Maximum average compositions, the next puzzle we will need to solve is now finding the 3 month rolling average for the maximum compositions between September 2018 and August 2019.
+
+- Since Rolling Average is the same as the running average, we will use the AVG() OVER(ORDER BY) function to find the running/rolling averages and since we are looking for the rolling average in the 3 month period between September, we will further update the window function to use 2 preceding to grab the 2 preceding month records before the current month record.
+
+```SQL
+,rollingavg AS(
+SELECT mi.interest_id, mi.month_year, mp.interest_name, mx.[Max of Average Composition per month], 
+ROUND(AVG(mx.[Max of Average Composition per month]) OVER(ORDER BY mi.month_year ROWS 2 PRECEDING),2) AS [3 month rolling Average]
+FROM interestmetrics AS mi 
+LEFT JOIN interestmap AS mp ON mi.interest_id = mp.id 
+LEFT JOIN avgcomp AS avg ON mi.interest_id = avg.interest_id
+LEFT JOIN maxavgcomp AS mx ON mi.month_year = mx.month_year
+WHERE avg.[Avg Composition] = mx.[Max of Average Composition per month] AND 
+mi.interest_id != 'Null' AND mi.month_year IS NOT NULL
+)
+
+SELECT *
+FROM rollingavg
+```
+
+![Screen Shot 2023-07-25 at 2 30 09 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/99bba167-e81c-470b-a539-792a1aabad1e)
+
+
+- Lastly, our final puzzle will be grabbing the previous interests for the Max avg composition for those 2 months using the Lag function
+
+
+
+
+```SQL
+,prevmonths AS(
+  SELECT onemon.*, LAG([Previous Month Interest name]) OVER(ORDER BY month_year) AS [Previous Two Months Interest Name], LAG([Previous Month Max Average Composition]) OVER(ORDER BY month_year) AS [Previous Two Months Max Average Composition]
+  FROM
+  (
+  SELECT *, lAG(interest_name) OVER(ORDER by month_year) AS [Previous Month Interest name], LAG([Max of Average Composition per month]) OVER(ORDER BY month_year) AS [Previous Month Max Average Composition]
+  FROM rollingavg
+  )onemon
+)
+
+SELECT *
+FROM prevmonths
+WHERE month_year NOT IN ('2018-07-01', '2018-7-01', '2018-08-01', '2018-8-01')
+
+
+```
 
 
 **Answer:**
+
+
+![Screen Shot 2023-07-25 at 2 25 35 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/08290c9e-f11f-4aba-ad40-a50334cae860)  ![Screen Shot 2023-07-25 at 2 25 56 PM](https://github.com/KennethManzi1/8-week-SQL-Challenge/assets/120513764/1492e10c-be15-444f-97c1-4826a2279371)
+
+
 
 
 ***
