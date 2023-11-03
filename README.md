@@ -2,7 +2,7 @@
 
 This repository contains the solution for the 8 case studies in **[#8WeekSQLChallenge](https://8weeksqlchallenge.com)**!
 
-Thanks @DataWithDanny for the excellent SQL case studies!
+Special thanks to @DataWithDanny for the amazing SQL case studies to build the technical SQL skills!
 
 ## Table of Contents
 - [Case Study #1: Danny's Diner](https://github.com/KennethManzi1/8-week-SQL-Challenge/tree/main/Case%201%20Danny's%20Diner)
